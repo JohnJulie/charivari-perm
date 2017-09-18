@@ -1,0 +1,8 @@
+/src/main/webapp/ng
+/bin
+/target
+/src/main/nodejs/node_modules
+
+# e2e
+/src/main/nodejs/e2e/*.js
+/src/main/nodejs/e2e/*.map
