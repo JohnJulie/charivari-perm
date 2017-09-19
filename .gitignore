@@ -2,6 +2,10 @@
 /bin
 /target
 /src/main/nodejs/node_modules
+.classpath
+.project
+.settings/
+.idea/
 
 # e2e
 /src/main/nodejs/e2e/*.js
