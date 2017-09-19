@@ -5,6 +5,13 @@
 	<artifactId>charivari-perm</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
+	<repositories>
+		<repository>
+			<id>node-jsrepo</id>
+			<name>Repo nodeJS</name>
+			<url>https://maven-nodejs-proxy.pvtool.org/</url>
+		</repository>
+	</repositories>
 	<!-- <properties> -->
 	<!-- <hibernate.version>5.1.0.Final</hibernate.version> -->
 	<!-- </properties> -->
@@ -22,10 +29,10 @@
 			<plugin>
 				<groupId>io.wcm.maven.plugins</groupId>
 				<artifactId>nodejs-maven-plugin</artifactId>
-					<version>2.0.4</version>
+				<version>2.0.4</version>
 				<executions>
 					<execution>
-				    		<id>requirejs-optimize</id>
+						<id>requirejs-optimize</id>
 						<phase>process-classes</phase>
 						<goals>
 							<goal>run</goal>
