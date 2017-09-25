@@ -1,0 +1,59 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="charivari-perm-1.0-01.1-createInitialTable" author="juliejohn">
+		<createTable tableName="PERMANENCE">
+			<column type="integer" name="PERMANENCE_ID" autoIncrement="true"></column>
+			<column type="date" name="START_DATE"></column>
+			<column type="date" name="END_DATE"></column>
+			<column type="integer" name="STATUS"></column>
+			<column type="integer" name="FAMILY_ID"></column>
+		</createTable>
+
+		<createTable tableName="FAMILY">
+			<column type="integer" name="FAMILY_ID" autoIncrement="true"></column>
+			<column type="varchar(255)" name="LABEL"></column>
+		</createTable>
+		
+		<createTable tableName="SCHEDULING">
+			<column type="integer" name="SCHEDULING_ID" autoIncrement="true"></column>
+			<column type="integer" name="FAMILY_ID"></column>
+			<column type="integer" name="DURATION"></column>
+			<column type="integer" name="FREQUENCY"></column>
+			<column type="date" name="START_DAY"></column>
+		</createTable>
+
+		<createTable tableName="PERSON">
+			<column type="integer" name="PERSON_ID" autoIncrement="true"></column>
+			<column type="integer" name="FAMILY_ID"></column>
+			<column type="varchar(255)" name="LAST_NAME"></column>
+			<column type="varchar(255)" name="FIRST_NAME"></column>
+			<column type="date" name="BIRTH_DATE" />
+			<column type="varchar(255)" name="PHONE_NUMBER" />
+			<column type="varchar(255)" name="EMAIL" />
+			<column type="text" name="IMAGE_URL" />
+			<column type="integer" name="PERSON_TYPE" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="charivari-perm-1.0-01.2-primaryKey-constraints" author="juliejohn">
+		<addPrimaryKey columnNames="PERMANENCE_ID" constraintName="PK_PERMANENCE_ID" tableName="PERMANENCE" />
+		<addPrimaryKey columnNames="FAMILY_ID" constraintName="PK_FAMILY_ID" tableName="FAMILY" />
+		<addPrimaryKey columnNames="SCHEDULING_ID" constraintName="PK_SCHEDULING_ID" tableName="SCHEDULING" />
+		<addPrimaryKey columnNames="PERSON_ID" constraintName="PK_PERSON_ID" tableName="PERSON" />
+	</changeSet>
+
+	<changeSet id="charivari-perm-1.0-01.3-foreignKey-constraints" author="juliejohn">
+		<addForeignKeyConstraint baseColumnNames="FAMILY_ID"
+			baseTableName="PERMANENCE" constraintName="FK_PERMANENCE_FAMILY"
+			referencedColumnNames="FAMILY_ID" referencedTableName="FAMILY" />
+		<addForeignKeyConstraint baseColumnNames="FAMILY_ID"
+			baseTableName="SCHEDULING" constraintName="FK_SCHEDULING_FAMILY"
+			referencedColumnNames="FAMILY_ID" referencedTableName="FAMILY" />
+		<addForeignKeyConstraint baseColumnNames="FAMILY_ID"
+			baseTableName="PERSON" constraintName="FK_PERSON_FAMILY"
+			referencedColumnNames="FAMILY_ID" referencedTableName="FAMILY" />
+	</changeSet>
+</databaseChangeLog>

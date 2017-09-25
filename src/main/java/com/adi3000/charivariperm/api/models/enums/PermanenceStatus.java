@@ -9,19 +9,28 @@ public enum PermanenceStatus {
 	private final int num;
 	private final String label;
 	
-	PermanenceStatus(int num, String label) {
+	private PermanenceStatus(int num, String label) {
 		this.num = num;
 		this.label = label;
 	}
 	
+	
+	/**
+	 * @return the num
+	 */
 	public int getNum() {
 		return num;
 	}
-	
+
+
+	/**
+	 * @return the label
+	 */
 	public String getLabel() {
 		return label;
 	}
-	
+
+
 	public static PermanenceStatus parse(int id) {
 		PermanenceStatus result = null;
 		for (PermanenceStatus status : PermanenceStatus.values()) {

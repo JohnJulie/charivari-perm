@@ -12,26 +12,35 @@
 			<url>https://maven-nodejs-proxy.pvtool.org/</url>
 		</repository>
 	</repositories>
-	<dependencies>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-server</artifactId>
-			<version>1.8</version>
-		</dependency>
-	</dependencies>
-	<!-- <properties> -->
-	<!-- <hibernate.version>5.1.0.Final</hibernate.version> -->
-	<!-- </properties> -->
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-<!-- 				<version>2.5.1</version> -->
+				<version>2.5.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<changeLogFile>${project.basedir}/src/main/resources/liquibase/db-changelog.xml</changeLogFile>
+					<driver>${dev.charivari.jdbc.driver}</driver>
+					<url>${dev.charivari.jdbc.url}</url>
+					<username>${dev.charivari.jdbc.user}</username>
+					<password>${dev.charivari.jdbc.password}</password>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>42.1.4</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>io.wcm.maven.plugins</groupId>
@@ -47,14 +56,14 @@
 						<configuration>
 							<tasks>
 								<nodeJsTask>
-							        <workingDirectory>${project.basedir}/src/main/nodejs</workingDirectory>
-							        <moduleName>@angular/cli</moduleName>
-							        <executableName>ng</executableName>
-							        <arguments>
-							          <argument>build</argument>
-							        </arguments>
-						        </nodeJsTask>
-						    </tasks>
+									<workingDirectory>${project.basedir}/src/main/nodejs</workingDirectory>
+									<moduleName>@angular/cli</moduleName>
+									<executableName>ng</executableName>
+									<arguments>
+										<argument>build</argument>
+									</arguments>
+								</nodeJsTask>
+							</tasks>
 						</configuration>
 					</execution>
 					<execution>
@@ -66,9 +75,9 @@
 						<configuration>
 							<tasks>
 								<npmInstallTask>
-							        <workingDirectory>${project.basedir}/src/main/nodejs</workingDirectory>
+									<workingDirectory>${project.basedir}/src/main/nodejs</workingDirectory>
 								</npmInstallTask>
-						    </tasks>
+							</tasks>
 						</configuration>
 					</execution>
 				</executions>
