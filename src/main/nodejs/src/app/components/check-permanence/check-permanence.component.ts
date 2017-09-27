@@ -4,7 +4,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-check-permanence',
   templateUrl: './check-permanence.component.html',
-  styleUrls: ['./check-permanence.component.css']
+  styleUrls: ['./check-permanence.component.scss']
 })
 export class CheckPermanenceComponent implements OnInit {
   public actualDate;
