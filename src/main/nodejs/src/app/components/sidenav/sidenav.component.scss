@@ -1,0 +1,24 @@
+$widthSidebar: 300px;
+
+md-sidenav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: $widthSidebar;
+  background-color: #a3d8f5;
+
+  .button-sidenav {
+    border-bottom: solid 1px #ffffff;
+    text-align: center;
+    margin: auto 0;
+    padding: 15px 0;
+    color: #202050;
+  }
+}
+
+.logo {
+  width: 100%;
+  background-color: #ffffff;
+  margin: auto 0;
+}

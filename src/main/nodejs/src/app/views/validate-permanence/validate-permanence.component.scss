@@ -1,0 +1,6 @@
+$widthSidebar: 300px;
+
+.container {
+  padding-left: #{$widthSidebar + 25px};
+  padding-right: 25px;
+}
