@@ -3,15 +3,12 @@ package com.adi3000.charivariperm.api.models;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import com.adi3000.charivariperm.api.models.enums.PermanenceDays;
-
 public class Scheduling {
 	
 	public static final TimeUnit FREQUENCY_UNIT = TimeUnit.DAYS;
 	public static final TimeUnit DURATION_UNIT = TimeUnit.MINUTES;
 
 	private Long id;
-	private PermanenceDays day;
 	private Date startHour;
 	private Integer duration;
 	private Integer frequency;
@@ -26,18 +23,6 @@ public class Scheduling {
 	 */
 	public void setId(Long id) {
 		this.id = id;
-	}
-	/**
-	 * @return the day
-	 */
-	public PermanenceDays getDay() {
-		return day;
-	}
-	/**
-	 * @param day the day to set
-	 */
-	public void setDay(PermanenceDays day) {
-		this.day = day;
 	}
 	/**
 	 * @return the startHour

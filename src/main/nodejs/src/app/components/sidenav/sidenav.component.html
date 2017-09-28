@@ -1,9 +1,17 @@
-<md-sidenav mode="side" position="start" opened="true">
+<md-sidenav #sidenav mode="over" position="start">
   <div class="logo">
     <img class="header-logo" src="assets/images/logo-creche.png">
   </div>
-  <div class="button-sidenav">Permanences</div>
-  <div class="button-sidenav">Planning</div>
-  <div class="button-sidenav">Renplacement</div>
-  <div class="button-sidenav">Compteur</div>
+  <div class="menu">
+    <ul>
+      <li [ngClass]="{'current': activateMenu === 0}" (click)="setActivateTab(sidenav, 0)">Permanences</li>
+      <li [ngClass]="{'current': activateMenu === 1}" (click)="setActivateTab(sidenav, 1)">Planning</li>
+      <li [ngClass]="{'current': activateMenu === 2}" (click)="setActivateTab(sidenav, 2)">Remplacements</li>
+      <li [ngClass]="{'current': activateMenu === 3}" (click)="setActivateTab(sidenav, 3)">Compteurs</li>
+    </ul>
+  </div>
 </md-sidenav>
+<span  (click)="toggleSidenav(sidenav)" class="fa-stack fa-lg">
+  <i class="fa fa-circle fa-stack-2x"></i>
+  <i class="fa fa-bars fa-stack-1x fa-inverse"></i>
+</span>
