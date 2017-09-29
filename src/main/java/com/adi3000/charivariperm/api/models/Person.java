@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -15,6 +17,7 @@ import org.joda.time.LocalDate;
 public class Person {
 	
 	@Id
+	@Column(name = "PERSON_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
@@ -39,6 +42,10 @@ public class Person {
 	
 	@Column(name = "PERSON_TYPE", nullable = false)
 	private Integer personType;
+	
+	@ManyToOne
+	@JoinColumn(name = "FAMILY_ID")
+	private Family family;
 	
 	/**
 	 * @return the id
@@ -135,6 +142,18 @@ public class Person {
 	 */
 	public void setPersonType(Integer personType) {
 		this.personType = personType;
+	}
+		/**
+	 * @return the family
+	 */
+	public Family getFamily() {
+		return family;
+	}
+	/**
+	 * @param family the family to set
+	 */
+	public void setFamily(Family family) {
+		this.family = family;
 	}
 	
 	@Override

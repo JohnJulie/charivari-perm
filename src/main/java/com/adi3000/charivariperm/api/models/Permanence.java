@@ -1,16 +1,43 @@
 package com.adi3000.charivariperm.api.models;
 
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.joda.time.LocalDate;
 
 import com.adi3000.charivariperm.api.models.enums.PermanenceStatus;
 
+@Entity
+@Table(name="PERMANENCE")
 public class Permanence {
 
+	@Id
+	@Column(name = "PERMANENCE_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Date startDate;
-	private Date endDate;
-	private Family parents;
+	
+	@Column(name = "START_DATE")
+	private LocalDate startDate;
+	
+	@Column(name = "END_DATE")
+	private LocalDate endDate;
+	
+	@ManyToOne
+	@JoinColumn(name = "FAMILY_ID")
+	private Family family;
+	
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "STATUS")
 	private PermanenceStatus status;
+	
 	/**
 	 * @return the id
 	 */
@@ -26,38 +53,8 @@ public class Permanence {
 	/**
 	 * @return the startDate
 	 */
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
-	}
-	/**
-	 * @param startDate the startDate to set
-	 */
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-	/**
-	 * @return the endDate
-	 */
-	public Date getEndDate() {
-		return endDate;
-	}
-	/**
-	 * @param endDate the endDate to set
-	 */
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-	/**
-	 * @return the parents
-	 */
-	public Family getParents() {
-		return parents;
-	}
-	/**
-	 * @param parents the parents to set
-	 */
-	public void setParents(Family parents) {
-		this.parents = parents;
 	}
 	/**
 	 * @return the status
@@ -71,5 +68,36 @@ public class Permanence {
 	public void setStatus(PermanenceStatus status) {
 		this.status = status;
 	}
+	/**
+	 * @param startDate the startDate to set
+	 */
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+	/**
+	 * @return the endDate
+	 */
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+	/**
+	 * @param endDate the endDate to set
+	 */
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+	/**
+	 * @return the family
+	 */
+	public Family getFamily() {
+		return family;
+	}
+	/**
+	 * @param family the family to set
+	 */
+	public void setFamily(Family family) {
+		this.family = family;
+	}
+	
 	
 }

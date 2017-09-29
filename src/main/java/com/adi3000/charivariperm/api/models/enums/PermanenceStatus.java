@@ -1,10 +1,10 @@
 package com.adi3000.charivariperm.api.models.enums;
 
 public enum PermanenceStatus {
-	DONE(1, "Ok"),
-	REPLACEMENT(2, "Remplacement"),
-	CANCEL(3, "Pas de remplacement"),
-	NOT_CONFIRMED(4, "A confirmer");
+	DONE(0, "Ok"),
+	REPLACEMENT(1, "Remplacement"),
+	CANCEL(2, "Pas de remplacement"),
+	NOT_CONFIRMED(3, "A confirmer");
 	
 	private final int num;
 	private final String label;

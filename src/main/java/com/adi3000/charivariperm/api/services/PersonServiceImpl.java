@@ -12,6 +12,7 @@ import com.adi3000.charivariperm.api.models.Person;
 @Service("personService")
 @Transactional
 public class PersonServiceImpl implements PersonService {
+	
 	@Autowired
     private PersonDao dao;
      
@@ -34,4 +35,5 @@ public class PersonServiceImpl implements PersonService {
     public void updatePerson(Person person){
         dao.updatePerson(person);
     }
+    
 }

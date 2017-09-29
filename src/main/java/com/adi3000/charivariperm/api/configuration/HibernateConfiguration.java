@@ -1,7 +1,5 @@
 package com.adi3000.charivariperm.api.configuration;
 
-package com.websystique.spring.configuration;
-
 import java.util.Properties;
  
 import javax.sql.DataSource;
