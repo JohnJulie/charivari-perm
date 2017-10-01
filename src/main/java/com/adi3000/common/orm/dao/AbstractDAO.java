@@ -7,11 +7,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.hibernate.Criteria;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.adi3000.common.logger.AbstractLogger;
 
@@ -24,7 +25,7 @@ import com.adi3000.common.logger.AbstractLogger;
  *
  * @param <T>
  */
-public abstract class AbstractDAO<T> extends AbstractLogger implements DAO<T>{
+public class AbstractDAO<T> extends AbstractLogger implements DAO<T>{
     /**
      *
      */
@@ -32,7 +33,7 @@ public abstract class AbstractDAO<T> extends AbstractLogger implements DAO<T>{
     /**
      *
      */
-    @Autowired
+    @Inject
     private transient SessionFactory sessionFactory;
 
     @SuppressWarnings("unchecked")

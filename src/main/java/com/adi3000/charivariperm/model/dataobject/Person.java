@@ -29,7 +29,6 @@ public class Person {
 	private String firstname;
 	
 	@Column(name = "BIRTH_DATE", nullable = true)
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	private LocalDate birthday;
 	
 	@Column(name = "PHONE_NUMBER", nullable = true)
