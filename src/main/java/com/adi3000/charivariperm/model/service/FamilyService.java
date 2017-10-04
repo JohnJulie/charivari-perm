@@ -6,7 +6,7 @@ import com.adi3000.charivariperm.model.dataobject.Family;
 
 public interface FamilyService {
 
-	void saveFamily(Family family);
+	long saveFamily(Family family);
 	
 	List<Family> findAllFamilies();
 	

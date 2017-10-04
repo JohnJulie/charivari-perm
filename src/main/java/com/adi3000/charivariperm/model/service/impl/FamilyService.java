@@ -19,13 +19,15 @@ public class FamilyService implements com.adi3000.charivariperm.model.service.Fa
     private FamilyDao dao;
     
 	@TransactionalUpdate
-    public void saveFamily(Family family) {
+    public long saveFamily(Family family) {
+		long id = Long.MAX_VALUE;
         try {
-			dao.save(family);
+			id = (long) dao.save(family);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return id;
     }
  
 	@TransactionalReadOnly
@@ -33,6 +35,7 @@ public class FamilyService implements com.adi3000.charivariperm.model.service.Fa
         return dao.findAll();
     }
  
+	@TransactionalUpdate
     public void deleteFamilyById(Long id) {
         try {
 			dao.delete(id);
@@ -42,10 +45,12 @@ public class FamilyService implements com.adi3000.charivariperm.model.service.Fa
 		}
     }
  
+    @TransactionalReadOnly
     public Family findById(Long id) {
         return dao.find(id);
     }
  
+    @TransactionalUpdate
     public void updateFamily(Family family){
         try {
 			dao.update(family);
