@@ -6,7 +6,7 @@ import com.adi3000.charivariperm.model.dataobject.Scheduling;
 
 public interface SchedulingService {
 
-	void saveScheduling(Scheduling scheduling);
+	long saveScheduling(Scheduling scheduling);
 	
 	List<Scheduling> findAllSchedulings();
 	

@@ -1,6 +1,6 @@
 package com.adi3000.charivariperm.model.dataobject;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Column;
@@ -22,7 +22,7 @@ public class Scheduling {
 	private Long id;
 	
 	@Column(name = "START_DAY")
-	private LocalDate startHour;
+	private LocalDateTime startHour;
 	
 	@Column(name = "DURATION")
 	private Integer duration;
@@ -49,13 +49,13 @@ public class Scheduling {
 	/**
 	 * @return the startHour
 	 */
-	public LocalDate getStartHour() {
+	public LocalDateTime getStartHour() {
 		return startHour;
 	}
 	/**
 	 * @param startHour the startHour to set
 	 */
-	public void setStartHour(LocalDate startHour) {
+	public void setStartHour(LocalDateTime startHour) {
 		this.startHour = startHour;
 	}
 	/**

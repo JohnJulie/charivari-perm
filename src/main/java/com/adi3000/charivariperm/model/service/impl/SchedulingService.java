@@ -5,32 +5,37 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.adi3000.charivariperm.model.dao.impl.SchedulingDao;
 import com.adi3000.charivariperm.model.dataobject.Scheduling;
 import com.adi3000.common.orm.dao.DAOException;
+import com.adi3000.common.orm.spring.TransactionalReadOnly;
+import com.adi3000.common.orm.spring.TransactionalUpdate;
 
 @Service("schedulingService")
-@Transactional
 public class SchedulingService implements com.adi3000.charivariperm.model.service.SchedulingService {
 
 	@Inject
     private SchedulingDao dao;
-     
-    public void saveScheduling(Scheduling scheduling) {
+    
+	@TransactionalUpdate
+    public long saveScheduling(Scheduling scheduling) {
+		long id = Long.MAX_VALUE;
         try {
-			dao.save(scheduling);
+			id = (long) dao.save(scheduling);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        return id;
     }
  
+	@TransactionalReadOnly
     public List<Scheduling> findAllSchedulings() {
         return dao.findAll();
     }
  
+    @TransactionalUpdate
     public void deleteSchedulingById(Long id) {
         try {
 			dao.delete(id);
@@ -40,10 +45,12 @@ public class SchedulingService implements com.adi3000.charivariperm.model.servic
 		}
     }
  
+    @TransactionalReadOnly
     public Scheduling findById(Long id) {
         return dao.find(id);
     }
  
+    @TransactionalUpdate
     public void updateScheduling(Scheduling scheduling){
         try {
 			dao.update(scheduling);
