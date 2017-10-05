@@ -1,4 +1,4 @@
-import { ParentsModel } from './parents.model';
+import { FamilyModel } from './family.model';
 /**
  * Created by juliepel on 19/09/2017.
  */
@@ -7,5 +7,5 @@ export interface PermanenceModel {
   startDate: string;
   endDate: string;
   status: string;
-  parent: ParentsModel;
+  family: FamilyModel;
 }

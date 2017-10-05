@@ -12,6 +12,11 @@ import { AppComponent } from './app.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 /**
+ * Import Services
+ */
+import { PermanenceService } from './services/permanence/permanence.service';
+
+/**
  * Import Views
  */
 import { ValidatePermanenceComponent } from './views/validate-permanence/validate-permanence.component';
@@ -35,6 +40,7 @@ import { ROUTES } from './app.routes';
     RouterModule.forRoot(ROUTES)
   ],
   providers: [
+    PermanenceService,
     { provide: LOCALE_ID, useValue: 'fr-FR' }
   ],
   bootstrap: [AppComponent]

@@ -15,17 +15,8 @@ export class SidenavComponent implements OnInit {
     this.activateMenu = 0;
   }
     
-  public setActivateTab (sidenav: any, index: number) {
+  public setActivateTab (index: number) {
     this.activateMenu = index;
-    this.toggleSidenav(sidenav);
-  }
-    
-  public toggleSidenav(nav: any) {
-    if (nav.opened) {
-      nav.close();
-    } else {
-      nav.open();  
-    }
   }
 
 }
