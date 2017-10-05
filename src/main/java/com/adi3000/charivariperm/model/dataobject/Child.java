@@ -1,34 +1,16 @@
 package com.adi3000.charivariperm.model.dataobject;
 
-public class Child extends Person{
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-	private Long id;
-	private Person person;
+@Entity
+@DiscriminatorValue(value = "CHILD")
+public class Child extends Person {
+
+	@Column(name = "IMAGE_URL")
 	private String urlImage;
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-	/**
-	 * @return the person
-	 */
-	public Person getPerson() {
-		return person;
-	}
-	/**
-	 * @param person the person to set
-	 */
-	public void setPerson(Person person) {
-		this.person = person;
-	}
+	
 	/**
 	 * @return the urlImage
 	 */

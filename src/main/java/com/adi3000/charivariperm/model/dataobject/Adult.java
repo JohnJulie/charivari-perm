@@ -1,22 +1,19 @@
 package com.adi3000.charivariperm.model.dataobject;
 
-public class Adult extends Person{
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue(value = "ADULT")
+public class Adult extends Person {
 	
-	private Long id;
+	@Column(name = "PHONE_NUMBER")
 	private String phoneNumber;
+	
+	@Column(name = "EMAIL")
 	private String mail;
-	/**
-	 * @return the id
-	 */	
-	public Long getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 	/**
 	 * @return the phoneNumber
 	 */
@@ -41,6 +38,5 @@ public class Adult extends Person{
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	
 	
 }
