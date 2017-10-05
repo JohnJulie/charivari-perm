@@ -51,7 +51,7 @@ public class FamilyServiceTest {
 	public void testSaveFamily() {
 		System.out.print("---testSaveFamily---");
 		Family family = new Family();
-		family.setLabel("Elea, Blandine & Amir");
+		family.setLabel("Armand, France & Bastien");
 		long idFamily = this.familyService.saveFamily(this.myFamilyTest);
 		assertNotNull(idFamily);
 	}
