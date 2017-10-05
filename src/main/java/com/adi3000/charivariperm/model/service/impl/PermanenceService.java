@@ -18,13 +18,15 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
 	@Inject
     private PermanenceDao dao;
      
-    public void savePermanence(Permanence permanence) {
+    public long savePermanence(Permanence permanence) {
+    	long id = Long.MAX_VALUE;
         try {
-			dao.save(permanence);
+			id = (long) dao.save(permanence);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        return id;
     }
  
     public List<Permanence> findAllPermanences() {

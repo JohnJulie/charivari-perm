@@ -106,7 +106,7 @@ public class SchedulindServiceTest {
 	}
 	
 	@Test
-	public void testDeleteFamily() {
+	public void testDeleteScheduling() {
 		System.out.print("---testDeleteScheduling---");
 		this.schedulingService.deleteSchedulingById(this.idScheduling);
 	}

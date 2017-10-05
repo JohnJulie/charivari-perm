@@ -6,7 +6,7 @@ import com.adi3000.charivariperm.model.dataobject.Permanence;
 
 public interface PermanenceService {
 	
-	void savePermanence(Permanence permanence);
+	long savePermanence(Permanence permanence);
 	
 	List<Permanence> findAllPermanences();
 	

@@ -1,6 +1,6 @@
 package com.adi3000.charivariperm.model.dataobject;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,10 +25,10 @@ public class Permanence {
 	private Long id;
 	
 	@Column(name = "START_DATE")
-	private LocalDate startDate;
+	private LocalDateTime startDate;
 	
 	@Column(name = "END_DATE")
-	private LocalDate endDate;
+	private LocalDateTime endDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "FAMILY_ID")
@@ -51,12 +51,6 @@ public class Permanence {
 		this.id = id;
 	}
 	/**
-	 * @return the startDate
-	 */
-	public LocalDate getStartDate() {
-		return startDate;
-	}
-	/**
 	 * @return the status
 	 */
 	public PermanenceStatus getStatus() {
@@ -69,21 +63,27 @@ public class Permanence {
 		this.status = status;
 	}
 	/**
+	 * @return the startDate
+	 */
+	public LocalDateTime getStartDate() {
+		return startDate;
+	}
+	/**
 	 * @param startDate the startDate to set
 	 */
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
 	/**
 	 * @return the endDate
 	 */
-	public LocalDate getEndDate() {
+	public LocalDateTime getEndDate() {
 		return endDate;
 	}
 	/**
 	 * @param endDate the endDate to set
 	 */
-	public void setEndDate(LocalDate endDate) {
+	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
 	/**
