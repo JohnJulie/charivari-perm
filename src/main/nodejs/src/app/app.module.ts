@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { LOCALE_ID } from '@angular/core';
@@ -36,6 +37,7 @@ import { ROUTES } from './app.routes';
   imports: [
     BrowserModule,
     MatSidenavModule,
+    FlexLayoutModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES)
   ],

@@ -4,4 +4,5 @@
 export interface FamilyModel {
   id: number;
   label: string;
+  urlImage: string;
 }

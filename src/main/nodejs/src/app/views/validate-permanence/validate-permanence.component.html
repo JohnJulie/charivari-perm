@@ -1,3 +1,22 @@
 <div class="container">
-  <p>Test</p>
+  <div class="date-container">
+    <div class="actual-date">{{ startDate | date: 'EEEE d MMMM'}}</div>
+    <div class="actual-hours">De {{startHour}} à {{endHour}}</div>
+  </div>
+  <div class="family-container">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxLayout="column" fxLayoutAlign="space-around center">
+        <div>
+          <img class="circle-img" src="assets/images/{{currentPermanence.family.urlImage}}">
+          <div class="fa fa-check fa-4x"></div>
+        </div>
+        <div class="legend-circle">{{currentPermanence.family.label}}</div>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="space-around center">
+        <img class="circle-img" src="assets/images/remplacement.svg">
+        <div class="legend-circle">Remplacement</div>
+      </div>
+    </div>
+  </div>
 </div>
+
