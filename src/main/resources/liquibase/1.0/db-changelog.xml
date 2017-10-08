@@ -56,4 +56,18 @@
 			baseTableName="PERSON" constraintName="FK_PERSON_FAMILY"
 			referencedColumnNames="FAMILY_ID" referencedTableName="FAMILY" />
 	</changeSet>
+	<changeSet id="charivari-perm-1.0-01.3-add-image-table" author="juliejohn">
+		<createTable tableName="IMAGE">
+			<column type="integer" name="IMAGE_ID" autoIncrement="true"></column>
+			<column type="varchar(255)" name="URL"></column>
+		</createTable>
+		<dropColumn tableName="PERSON" columnName="IMAGE_URL"/>
+		<addColumn tableName="PERSON">
+			<column type="integer" name="IMAGE_ID"></column>
+		</addColumn>
+		<addPrimaryKey columnNames="IMAGE_ID" constraintName="PK_IMAGE_ID" tableName="IMAGE" />
+		<addForeignKeyConstraint baseColumnNames="IMAGE_ID"
+			baseTableName="PERSON" constraintName="FK_PERSON_IMAGE"
+			referencedColumnNames="IMAGE_ID" referencedTableName="IMAGE" />
+	</changeSet>
 </databaseChangeLog>
