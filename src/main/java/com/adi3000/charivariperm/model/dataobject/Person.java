@@ -13,7 +13,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 
 @Entity
 @Table(name="PERSON")
@@ -21,10 +20,9 @@ import javax.persistence.TableGenerator;
 @DiscriminatorColumn(name = "PERSON_TYPE")
 public abstract class Person {
 	
-	@TableGenerator(name = "PERSON_GEN", table = "ID_GEN", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize = 1)
 	@Id
 	@Column(name = "PERSON_ID")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "PERSON_GEN")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "LAST_NAME")
