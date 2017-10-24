@@ -1,6 +1,5 @@
 package com.adi3000.charivariperm.model.dataobject;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;

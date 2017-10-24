@@ -1,5 +1,10 @@
 package com.adi3000.charivariperm.model.dao.impl;
 
+import java.util.Date;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.adi3000.charivariperm.model.dataobject.Permanence;
@@ -10,5 +15,19 @@ public class PermanenceDao extends AbstractDAO<Permanence>  implements com.adi30
 
 	private static final long serialVersionUID = -347948511706338936L;
 	
-    
+    public List<Permanence> getPermanenceByDate(Date date) {
+    	Criteria req = getSession().createCriteria(Permanence.class)
+    			.add(
+	    				Restrictions.and(
+							Restrictions.le("startDate", date),
+							Restrictions.ge("endDate", date)
+	    				)
+    				);
+    	@SuppressWarnings("unchecked")
+		List<Permanence> permanences = (List<Permanence>)req.list();
+		
+		return permanences;
+  
+    }
+	
 }

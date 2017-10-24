@@ -5,7 +5,6 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import com.adi3000.charivariperm.common.PersonTypeConst;
-import com.adi3000.charivariperm.model.enumeration.PersonType;
 
 @Entity
 @DiscriminatorValue(value = PersonTypeConst.ADULT_TYPE)

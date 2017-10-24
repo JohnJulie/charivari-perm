@@ -15,5 +15,7 @@ public interface PermanenceService {
 	Permanence findById(Long id);
 	
 	void updatePermanence(Permanence permanence);
+	
+	List<Permanence> getCurrentPermanences();
 
 }

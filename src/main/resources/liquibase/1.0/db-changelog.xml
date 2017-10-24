@@ -70,4 +70,20 @@
 			baseTableName="PERSON" constraintName="FK_PERSON_IMAGE"
 			referencedColumnNames="IMAGE_ID" referencedTableName="IMAGE" />
 	</changeSet>
+	<changeSet id="charivari-perm-1.0-02.01-change-to-datetime" author="adi3000">
+		<dropColumn tableName="PERMANENCE" columnName="START_DATE"/>
+		<dropColumn tableName="PERMANENCE" columnName="END_DATE"/>
+		<dropColumn tableName="SCHEDULING" columnName="START_DAY"/>
+	</changeSet>
+	<changeSet id="charivari-perm-1.0-02.02-change-to-datetime" author="adi3000">
+		<addColumn tableName="PERMANENCE">
+			<column name="START_DATE" type="datetime"></column>
+		</addColumn> 
+		<addColumn tableName="PERMANENCE">
+			<column name="END_DATE" type="datetime"></column>
+		</addColumn> 
+		<addColumn tableName="SCHEDULING">
+			<column name="START_DAY" type="datetime"></column>
+		</addColumn> 
+	</changeSet>
 </databaseChangeLog>

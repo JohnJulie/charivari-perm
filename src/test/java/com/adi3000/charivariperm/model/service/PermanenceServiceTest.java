@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,6 +24,7 @@ import com.adi3000.charivariperm.model.dataobject.Scheduling;
 import com.adi3000.charivariperm.model.enumeration.PermanenceStatus;
 import com.adi3000.charivariperm.model.service.FamilyService;
 import com.adi3000.charivariperm.model.service.PermanenceService;
+import com.adi3000.common.CharivariUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring/application-config.xml" })
@@ -53,8 +57,8 @@ public class PermanenceServiceTest {
 		System.out.print(this.myFamilyTest.getId());
 		
 		this.myPermanenceTest = new Permanence();
-		this.myPermanenceTest.setStartDate(LocalDate.of(2017, 8, 29).atTime(7, 45));
-		this.myPermanenceTest.setEndDate(LocalDate.of(2017, 8, 29).atTime(10, 45));
+		this.myPermanenceTest.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(7, 45)));
+		this.myPermanenceTest.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(10, 45)));
 		this.myPermanenceTest.setFamily(this.myFamilyTest);
 		PermanenceStatus currentStatus = PermanenceStatus.NOT_CONFIRMED;
 		this.myPermanenceTest.setStatus(currentStatus);
@@ -79,8 +83,8 @@ public class PermanenceServiceTest {
 		
 		// Permanence set
 		Permanence permanence = new Permanence();
-		permanence.setStartDate(LocalDate.of(2017, 8, 30).atTime(10, 00));
-		permanence.setEndDate(LocalDate.of(2017, 8, 30).atTime(13, 00));
+		permanence.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(10, 00)));
+		permanence.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(13, 00)));
 		permanence.setFamily(family);
 		permanence.setStatus(PermanenceStatus.DONE);
 		
@@ -108,6 +112,39 @@ public class PermanenceServiceTest {
 	public void testDeletePermanence() {
 		System.out.print("---testDeletePermanence---");
 		this.permanenceService.deletePermanenceById(this.idPermanence);
+	}
+	
+	@Test
+	public void testGetCurrentPermanence() {
+		Family family = new Family();
+		family.setLabel("Noé, Julie & Vianney");
+		family.setId(this.familyService.saveFamily(family));
+		
+		Family family2 = new Family();
+		family2.setLabel("Louison, Nino, Nolwenn & Arnaud");
+		family2.setId(this.familyService.saveFamily(family2));
+		
+		// Permanence set
+		Permanence permanence = new Permanence();
+		permanence.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(10, 00)));
+		permanence.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(13, 00)));
+		permanence.setFamily(family);
+		permanence.setStatus(PermanenceStatus.DONE);
+		this.permanenceService.savePermanence(permanence);
+		
+		Permanence permanence2 = new Permanence();
+		permanence2.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(15, 30)));
+		permanence2.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(18, 30)));
+		permanence2.setFamily(family2);
+		permanence2.setStatus(PermanenceStatus.DONE);
+		this.permanenceService.savePermanence(permanence2);
+		
+		List<Permanence> currentPermanence = this.permanenceService.getCurrentPermanences();
+		System.out.print("family1:");
+		System.out.print(currentPermanence.get(0).getFamily().getLabel());
+		System.out.print("family2:");
+		System.out.print(currentPermanence.get(1).getFamily().getLabel());
+		assertEquals(currentPermanence.size(), 2);
 	}
 	
 }
