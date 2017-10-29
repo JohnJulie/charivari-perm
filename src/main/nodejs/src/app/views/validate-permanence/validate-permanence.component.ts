@@ -13,6 +13,7 @@ import * as _ from 'lodash';
 export class ValidatePermanenceComponent implements OnInit {
 
   public currentPermanence: PermanenceModel;
+  public havePermanence: boolean;
   public startDate: any;
   public endDate: any;
   public startHour: string;
@@ -29,10 +30,15 @@ export class ValidatePermanenceComponent implements OnInit {
       (result: PermanenceModel) => {
           console.log('result:', result);
           this.currentPermanence = result;
-          this.startDate = moment(this.currentPermanence.startDate, 'YYYY-MM-DDTHH:mm:ss');
-          this.endDate = moment(this.currentPermanence.endDate, 'YYYY-MM-DDTHH:mm:ss');
-          this.startHour = _.toString(this.startDate.hours()) + 'h' + _.toString(this.startDate.minutes());
-          this.endHour = _.toString(this.endDate.hours()) + 'h' + _.toString(this.endDate.minutes());
+          if (!_.isEmpty(this.currentPermanence)) {
+            this.havePermanence = true;
+            this.startDate = moment(this.currentPermanence.startDate, 'YYYY-MM-DDTHH:mm:ss');
+            this.endDate = moment(this.currentPermanence.endDate, 'YYYY-MM-DDTHH:mm:ss');
+            this.startHour = _.toString(this.startDate.hours()) + 'h' + _.toString(this.startDate.minutes());
+            this.endHour = _.toString(this.endDate.hours()) + 'h' + _.toString(this.endDate.minutes());
+          } else {
+            this.havePermanence = false;
+          }
       }, (error) => console.log('getCurrentPermanence error:', error)
     )
   }

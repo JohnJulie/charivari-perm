@@ -1,5 +1,8 @@
 package com.adi3000.charivariperm.model.service.impl;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,7 +10,10 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.adi3000.charivariperm.model.dao.impl.SchedulingDao;
+import com.adi3000.charivariperm.model.dataobject.Permanence;
 import com.adi3000.charivariperm.model.dataobject.Scheduling;
+import com.adi3000.charivariperm.model.enumeration.PermanenceStatus;
+import com.adi3000.common.CharivariUtil;
 import com.adi3000.common.orm.dao.DAOException;
 import com.adi3000.common.orm.spring.TransactionalReadOnly;
 import com.adi3000.common.orm.spring.TransactionalUpdate;
@@ -17,6 +23,9 @@ public class SchedulingService implements com.adi3000.charivariperm.model.servic
 
 	@Inject
     private SchedulingDao dao;
+	
+	@Inject
+	private PermanenceService permanenceService;
     
 	@TransactionalUpdate
     public long saveScheduling(Scheduling scheduling) {

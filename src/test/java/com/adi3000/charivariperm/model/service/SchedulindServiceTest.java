@@ -19,6 +19,7 @@ import com.adi3000.charivariperm.model.dataobject.Family;
 import com.adi3000.charivariperm.model.dataobject.Scheduling;
 import com.adi3000.charivariperm.model.service.FamilyService;
 import com.adi3000.charivariperm.model.service.SchedulingService;
+import com.adi3000.common.CharivariUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring/application-config.xml" })
@@ -57,7 +58,7 @@ public class SchedulindServiceTest {
 		this.mySchedulingTest.setFrequency(7);
 		LocalDateTime startDate = LocalDate.of(2017, 8, 29).atTime(7, 45);
 		System.out.print(startDate.toString());
-		this.mySchedulingTest.setStartHour(startDate);
+		this.mySchedulingTest.setStartHour(CharivariUtil.getDateFromLocalDateTime(startDate));
 		this.idScheduling = this.schedulingService.saveScheduling(this.mySchedulingTest);
 		System.out.print(this.idScheduling);
 	}
@@ -83,7 +84,7 @@ public class SchedulindServiceTest {
 		scheduling.setDuration(3);
 		scheduling.setFrequency(7);
 		LocalDateTime startDate = LocalDate.of(2017, 8, 30).atTime(10, 0);
-		scheduling.setStartHour(startDate);
+		scheduling.setStartHour(CharivariUtil.getDateFromLocalDateTime(startDate));
 		
 		long idScheduling = this.schedulingService.saveScheduling(scheduling);
 		assertNotNull(idScheduling);
@@ -99,7 +100,7 @@ public class SchedulindServiceTest {
 	@Test
 	public void testUpdateScheduling() {
 		System.out.print("---testUpdateScheduling---");
-		this.mySchedulingTest.setStartHour(LocalDate.of(2017, 9, 1).atTime(10, 0));
+		this.mySchedulingTest.setStartHour(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 9, 1).atTime(10, 0)));
 		this.schedulingService.updateScheduling(this.mySchedulingTest);
 		Scheduling scheduling = this.schedulingService.findById(this.idScheduling);
 		assertEquals(this.mySchedulingTest, scheduling);

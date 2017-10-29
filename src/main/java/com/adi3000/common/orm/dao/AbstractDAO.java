@@ -117,8 +117,7 @@ public class AbstractDAO<T> extends AbstractLogger implements DAO<T>{
     @Override
     public List<T> findAll() {
         getLogger().debug("Find all objects of class {}", clazz.getName());
-        List<T> dtObjects = new ArrayList<T>();
-        List<T> dbOjects = getSession().createCriteria(clazz)
+        List<T> dtObjects = getSession().createCriteria(clazz)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
         return dtObjects;
     }

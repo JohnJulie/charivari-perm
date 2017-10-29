@@ -11,4 +11,8 @@ public final class CharivariUtil {
 	public static Date getDateFromLocalDateTime(LocalDateTime dateTime) {
 		return Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
 	}
+	
+	public static LocalDateTime getLocalDateTimeFromDate(Date date) {
+		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+	}
 }

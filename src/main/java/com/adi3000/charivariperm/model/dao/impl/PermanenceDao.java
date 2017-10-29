@@ -1,5 +1,8 @@
 package com.adi3000.charivariperm.model.dao.impl;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.adi3000.charivariperm.model.dataobject.Permanence;
+import com.adi3000.charivariperm.model.enumeration.PermanenceStatus;
 import com.adi3000.common.orm.dao.AbstractDAO;
 
 @Repository("permanenceDao")
@@ -28,6 +32,33 @@ public class PermanenceDao extends AbstractDAO<Permanence>  implements com.adi30
 		
 		return permanences;
   
+    }
+    
+    public List<Permanence> getPermanenceByStatus(PermanenceStatus status) {
+    	Criteria req = getSession().createCriteria(Permanence.class)
+    			.add(
+	    				Restrictions.and(
+							Restrictions.eq("status", status)
+	    				)
+    				);
+    	@SuppressWarnings("unchecked")
+		List<Permanence> permanences = (List<Permanence>)req.list();
+		
+		return permanences;
+    }
+    
+    public List<Permanence> getPermanenceByWeek(Date start, Date end) {
+    	Criteria req = getSession().createCriteria(Permanence.class)
+    			.add(
+	    				Restrictions.and(
+							Restrictions.ge("startDate", start),
+							Restrictions.le("endDate", end)
+	    				)
+    				);
+    	@SuppressWarnings("unchecked")
+		List<Permanence> permanences = (List<Permanence>)req.list();
+		
+		return permanences;
     }
 	
 }

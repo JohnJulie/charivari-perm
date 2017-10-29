@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="havePermanence">
   <div class="date-container">
     <div class="actual-date">{{ startDate | date: 'EEEE d MMMM'}}</div>
     <div class="actual-hours">De {{startHour}} à {{endHour}}</div>
@@ -19,4 +19,8 @@
     </div>
   </div>
 </div>
+<div class="container" *ngIf="!havePermanence">
+  <h1>Il n'y a pas de permanence en cours.</h1>
+</div>
+
 
