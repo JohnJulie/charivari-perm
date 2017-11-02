@@ -27,13 +27,16 @@ import { ValidatePermanenceComponent } from './views/validate-permanence/validat
  * Import Routes
  */
 import { ROUTES } from './app.routes';
+import { ChooseReplacementComponent } from './views/choose-replacement/choose-replacement.component';
+import { FamilyService } from './services/family/family.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ValidatePermanenceComponent,
-    SidenavComponent
+    SidenavComponent,
+    ChooseReplacementComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { ROUTES } from './app.routes';
   ],
   providers: [
     PermanenceService,
+    FamilyService,
     { provide: LOCALE_ID, useValue: 'fr-FR' }
   ],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-<div class="container" *ngIf="havePermanence">
+<div class="container">
   <div class="date-container">
     <div class="actual-date">{{ startDate | date: 'EEEE d MMMM'}}</div>
     <div class="actual-hours">De {{ startDate | date: 'shortTime'}} à {{ endDate | date: 'shortTime'}}</div>
@@ -12,15 +12,12 @@
         </div>
         <div class="legend-circle">{{currentPermanence.family.label}}</div>
       </div>
-      <div [routerLink]="['/permanence/' + currentPermanence.id + '/replacement']" fxLayout="column" fxLayoutAlign="space-around center">
+      <div fxLayout="column" fxLayoutAlign="space-around center">
         <img class="circle-img" src="assets/images/remplacement.svg">
         <div class="legend-circle">Remplacement</div>
       </div>
     </div>
   </div>
-</div>
-<div class="container" *ngIf="!havePermanence">
-  <h1>Il n'y a pas de permanence en cours.</h1>
 </div>
 
 
