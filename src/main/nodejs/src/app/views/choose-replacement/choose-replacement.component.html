@@ -4,19 +4,19 @@
     <div class="actual-hours">De {{ startDate | date: 'shortTime'}} à {{ endDate | date: 'shortTime'}}</div>
   </div>
   <div class="family-container">
-    <div fxLayout="row" fxLayoutAlign="space-around center">
-      <div fxLayout="column" fxLayoutAlign="space-around center">
-        <div>
-          <img class="circle-img" src="assets/images/{{currentPermanence.family.urlImage}}">
-          <div class="fa fa-check fa-4x"></div>
+    <md-grid-list class="familygrid" cols="5" rowHeight="115px">
+      <md-grid-tile
+        *ngFor="let grid of familiesGrid"
+        [colspan]="grid.cols"
+        [rowspan]="grid.rows">
+        <div fxLayout="column" fxLayoutAlign="space-around center" (click)="setFamilyToPermanence(grid.family)">
+          <div>
+            <img class="circle-img" src="{{grid.family.image.url}}">
+          </div>
+          <div class="legend-circle">{{grid.family.label}}</div>
         </div>
-        <div class="legend-circle">{{currentPermanence.family.label}}</div>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="space-around center">
-        <img class="circle-img" src="assets/images/remplacement.svg">
-        <div class="legend-circle">Remplacement</div>
-      </div>
-    </div>
+      </md-grid-tile>
+    </md-grid-list>
   </div>
 </div>
 

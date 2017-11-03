@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PermanenceModel } from '../../models/permanence.model';
 import { PermanenceService } from '../../services/permanence/permanence.service';
+import 'rxjs/add/operator/switchMap';
 
 import * as moment from 'moment';
 import * as _ from 'lodash';
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ValidatePermanenceComponent implements OnInit {
 
-  public currentPermanence: PermanenceModel;
+  public currentPermanence: Array<PermanenceModel>;
   public havePermanence: boolean;
   public startDate: any;
   public endDate: any;
@@ -29,29 +30,26 @@ export class ValidatePermanenceComponent implements OnInit {
       this.getCurrentPermanence();
   }
 
-  getCurrentPermanence() {
+  public getCurrentPermanence() {
     this.permanenceService.getCurrentPermanence().subscribe(
-      (result: PermanenceModel) => {
+      (result: Array<PermanenceModel>) => {
           console.log('result:', result);
           this.currentPermanence = result;
-        // const startResult = "1509354000000";
-        // const endResult = "1509364800000";
-        // console.log('start', moment(startResult, 'x'));
-        // console.log('end', moment(endResult, 'x'));
-        // this.startDate = moment(startResult, 'x');
-        // this.endDate = moment(endResult, 'x');
-        //
-        // this.startHour = _.toString(this.startDate.hours()) + 'h' + _.toString(this.startDate.minutes());
-        // this.endHour = _.toString(this.endDate.hours()) + 'h' + _.toString(this.endDate.minutes());
-        this.currentPermanence.id = 5;
           if (!_.isEmpty(this.currentPermanence)) {
+            this.startDate = moment(_.toString(this.currentPermanence[0].startDate), 'x');
+            this.endDate = moment(_.toString(this.currentPermanence[0].endDate), 'x');
             this.havePermanence = true;
-            this.startDate = moment(_.toString(this.currentPermanence.startDate), 'x');
-            this.endDate = moment(_.toString(this.currentPermanence.endDate), 'x');
           } else {
             this.havePermanence = false;
           }
       }, (error) => console.log('getCurrentPermanence error:', error)
+    );
+  }
+
+  public setPermanceToCheck(permanence: PermanenceModel, index: number) {
+    permanence.status = 'DONE';
+    this.permanenceService.updatePermanence(permanence).subscribe(
+      () => this.currentPermanence[index].status = permanence.status
     );
   }
 }

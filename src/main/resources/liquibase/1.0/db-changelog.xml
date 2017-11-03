@@ -86,4 +86,12 @@
 			<column name="START_DAY" type="datetime"></column>
 		</addColumn> 
 	</changeSet>
+	<changeSet id="charivari-perm-1.0-02.3-add-image-column" author="juliejohn">
+		<addColumn tableName="FAMILY">
+			<column type="integer" name="IMAGE_ID"></column>
+		</addColumn>
+		<addForeignKeyConstraint baseColumnNames="IMAGE_ID"
+			baseTableName="FAMILY" constraintName="FK_FAMILY_IMAGE"
+			referencedColumnNames="IMAGE_ID" referencedTableName="IMAGE" />
+	</changeSet>
 </databaseChangeLog>

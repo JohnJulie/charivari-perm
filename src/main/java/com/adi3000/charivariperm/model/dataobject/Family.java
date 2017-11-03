@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +20,10 @@ public class Family {
 	
 	@Column(name = "LABEL", nullable = false)
 	private String label;
+	
+	@ManyToOne
+	@JoinColumn(name = "IMAGE_ID")
+	private Image image;
 	
 	/**
 	 * @return the id
@@ -42,6 +48,18 @@ public class Family {
 	 */
 	public void setLabel(String label) {
 		this.label = label;
+	}
+	/**
+	 * @return the image
+	 */
+	public Image getImage() {
+		return image;
+	}
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(Image image) {
+		this.image = image;
 	}
 	
 }

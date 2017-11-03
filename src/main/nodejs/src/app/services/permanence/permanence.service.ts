@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { PermanenceModel } from '../../models/permanence.model';
 
 @Injectable()
 export class PermanenceService {
@@ -10,21 +11,26 @@ export class PermanenceService {
 
   constructor(private http: HttpClient) { }
 
-    getCurrentPermanence() {
+    getCurrentPermanence(): Observable<Array<PermanenceModel>> {
       const headers = new HttpHeaders({
         'Content-type': 'application/json'
       });
       return this.http.get(this.apiUrl + 'permanence/now', { headers: headers });
-        // return Observable.of({
-        //     'id': 0,
-        //     'startDate': '2017-10-03T07:45:00',
-        //     'endDate': '2017-10-03T10:45:00',
-        //     'status': 'NOT_CONFIRMED',
-        //     'family': {
-        //       'id': 0,
-        //       'label': 'William, Julie & Adrien',
-        //       'urlImage': 'william-logo.jpg'
-        //      }
-        // });
     }
+
+    getPermanence(id): Observable<PermanenceModel> {
+      const headers = new HttpHeaders({
+        'Content-type': 'application/json'
+      });
+      return this.http.get(this.apiUrl + 'permanence/' + id, { headers: headers });
+    }
+
+    updatePermanence(permanence) {
+      const headers = new HttpHeaders({
+        'Content-type': 'application/json'
+      });
+      console.log('permanence 555:', permanence);
+      console.log(this.apiUrl + 'permanence/update');
+      return this.http.put(this.apiUrl + 'permanence/update', permanence, { headers: headers });
+  }
 }

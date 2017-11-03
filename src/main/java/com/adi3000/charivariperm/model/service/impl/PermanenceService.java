@@ -24,6 +24,9 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
 	
 	@Inject
     private PermanenceDao dao;
+	
+	@Inject
+	private SchedulingService schedulingService;
      
 	@TransactionalUpdate
     public long savePermanence(Permanence permanence) {
@@ -88,15 +91,16 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     }
     
     @TransactionalUpdate
-    public void generatePermanencesFamily(Scheduling scheduling){
+    public void generatePermanencesFamily(Long schedulingId){
     	LocalDateTime endPermanence = LocalDate.of(2018, 7, 29).atTime(19,0);
+    	Scheduling scheduling = this.schedulingService.findById(schedulingId);
     	LocalDateTime lastDate = CharivariUtil.getLocalDateTimeFromDate(scheduling.getStartHour());
     	while (endPermanence.isAfter(lastDate)) {
     		Permanence perm = new Permanence();
     		perm.setFamily(scheduling.getFamily());
     		perm.setStatus(PermanenceStatus.NOT_CONFIRMED);
     		perm.setStartDate(CharivariUtil.getDateFromLocalDateTime(lastDate));
-    		perm.setEndDate(CharivariUtil.getDateFromLocalDateTime(lastDate.plusHours(scheduling.getDuration())));
+    		perm.setEndDate(CharivariUtil.getDateFromLocalDateTime(lastDate.plusMinutes(scheduling.getDuration())));
     		this.savePermanence(perm);
 
     		lastDate = lastDate.plusDays(scheduling.getFrequency());

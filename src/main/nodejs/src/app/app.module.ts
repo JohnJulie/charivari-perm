@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { MatSidenavModule } from '@angular/material';
+import { MatSidenavModule, MatGridListModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -29,6 +29,7 @@ import { ValidatePermanenceComponent } from './views/validate-permanence/validat
 import { ROUTES } from './app.routes';
 import { ChooseReplacementComponent } from './views/choose-replacement/choose-replacement.component';
 import { FamilyService } from './services/family/family.service';
+import { FamiliesResolver } from './resolvers/families-resolver';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { FamilyService } from './services/family/family.service';
     BrowserModule,
     HttpClientModule,
     MatSidenavModule,
+    MatGridListModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES)
@@ -49,6 +51,7 @@ import { FamilyService } from './services/family/family.service';
   providers: [
     PermanenceService,
     FamilyService,
+    FamiliesResolver,
     { provide: LOCALE_ID, useValue: 'fr-FR' }
   ],
   bootstrap: [AppComponent]

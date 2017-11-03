@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.adi3000.charivariperm.model.dataobject.Family;
+import com.adi3000.charivariperm.model.dataobject.Image;
 import com.adi3000.charivariperm.model.dataobject.Permanence;
 import com.adi3000.charivariperm.model.dataobject.Scheduling;
 import com.adi3000.charivariperm.model.enumeration.PermanenceStatus;
@@ -31,6 +32,11 @@ import com.adi3000.common.CharivariUtil;
 @Transactional
 public class PermanenceServiceTest {
 
+	@Inject
+	private transient ImageService imageService;
+	private Image myImageTest;
+	@Inject
+	private transient SchedulingService schedulingService;
 	@Inject
 	private transient FamilyService familyService;
 	private Family myFamilyTest;
@@ -47,12 +53,20 @@ public class PermanenceServiceTest {
 		this.permanenceService = permanenceService;
 	}
 	
+	public void setImageService(ImageService imageService) {
+		this.imageService = imageService;
+	}
+	
 	@Before
 	public void setUp () {
 		System.out.print("---@Before---");
+		this.myImageTest = new Image();
+		this.myImageTest.setUrl("asset/unknow.png");
+		this.imageService.saveImage(this.myImageTest);
 		
 		this.myFamilyTest = new Family();
 		this.myFamilyTest.setLabel("William, Julie & Adrien");
+		this.myFamilyTest.setImage(this.myImageTest);
 		this.myFamilyTest.setId(this.familyService.saveFamily(this.myFamilyTest));
 		System.out.print(this.myFamilyTest.getId());
 		
@@ -67,10 +81,12 @@ public class PermanenceServiceTest {
 		Family family = new Family();
 		family.setLabel("Noé, Julie & Vianney");
 		family.setId(this.familyService.saveFamily(family));
+		family.setImage(this.myImageTest);
 		
 		Family family2 = new Family();
 		family2.setLabel("Louison, Nino, Nolwenn & Arnaud");
 		family2.setId(this.familyService.saveFamily(family2));
+		family2.setImage(this.myImageTest);
 		
 		// Permanence set
 		Permanence permanence = new Permanence();
@@ -110,6 +126,7 @@ public class PermanenceServiceTest {
 		// Family set
 		Family family = new Family();
 		family.setLabel("Elea, Blandine & Amir");
+		family.setImage(this.myImageTest);
 		this.familyService.saveFamily(family);
 		
 		// Permanence set
@@ -178,8 +195,11 @@ public class PermanenceServiceTest {
 		scheduling.setStartHour(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(7,45)));
 		scheduling.setDuration(3);
 		scheduling.setFrequency(7);
+		Long schedulingId = this.schedulingService.saveScheduling(scheduling);
+		System.out.print("schedulingId:");
+		System.out.println(schedulingId);
 		
-		this.permanenceService.generatePermanencesFamily(scheduling);
+		this.permanenceService.generatePermanencesFamily(schedulingId);
 		List<Permanence> permanences = this.permanenceService.findAllPermanences();
 		System.out.print("Size:");
 		System.out.println(permanences.size());
