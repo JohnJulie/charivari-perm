@@ -8,4 +8,5 @@ export interface PermanenceModel {
   endDate: string;
   status: string;
   family: FamilyModel;
+  originalFamilyId: number;
 }

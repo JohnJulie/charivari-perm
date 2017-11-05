@@ -38,6 +38,9 @@ public class Permanence {
 	@Column(name = "STATUS")
 	private PermanenceStatus status;
 	
+	@Column(name = "ORIGINAL_FAMILY_ID")
+	private Long originalFamilyId;
+	
 	/**
 	 * @return the id
 	 */
@@ -98,6 +101,17 @@ public class Permanence {
 	public void setFamily(Family family) {
 		this.family = family;
 	}
-	
+	/**
+	 * @return the originalFamilyId
+	 */
+	public Long getOriginalFamilyId() {
+		return originalFamilyId;
+	}
+	/**
+	 * @param originalFamilyId the originalFamilyId to set
+	 */
+	public void setOriginalFamilyId(Long originalFamilyId) {
+		this.originalFamilyId = originalFamilyId;
+	}
 	
 }

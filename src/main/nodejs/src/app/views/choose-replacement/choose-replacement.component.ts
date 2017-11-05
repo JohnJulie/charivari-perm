@@ -42,7 +42,10 @@ export class ChooseReplacementComponent implements OnInit {
     );
     this.activatedRoute.data.subscribe(
       data => {
-        this.families = data['families'];
+        // reorder families to sort by label
+        this.families = _.orderBy(data['families'], ['label'], ['asc']);
+        const anybodyFamily = _.remove(this.families, (n) => { return n.id === 31; });
+        this.families = _.concat(anybodyFamily, this.families);
         _.each(this.families, (family, index) => {
           if (family.id !== 31) {
             this.familiesGrid[index] = {family: family, cols: 1, rows: 1};

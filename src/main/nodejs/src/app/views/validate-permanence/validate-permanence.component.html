@@ -5,14 +5,14 @@
   </div>
   <div class="family-container">
     <div fxLayout="row" fxLayoutAlign="space-around center">
-      <div fxLayout="column" fxLayoutAlign="space-around center" *ngFor="let permanence of currentPermanence; let i = index" (click)="setPermanceToCheck(permanence, i)">
+      <div fxLayout="column" fxLayoutAlign="space-around center" (click)="setPermanceToCheck(currentPermanence)">
         <div>
-          <img class="circle-img" src="{{permanence.family.image.url}}">
-          <div class="fa fa-check fa-4x" *ngIf="permanence.status === 'DONE'"></div>
+          <img class="circle-img" src="{{currentPermanence.family.image.url}}">
+          <div class="fa fa-check fa-4x" *ngIf="currentPermanence.status === 'DONE'"></div>
         </div>
-        <div class="legend-circle">{{permanence.family.label}}</div>
+        <div class="legend-circle">{{currentPermanence.family.label}}</div>
       </div>
-      <div [routerLink]="['/permanence/' + currentPermanence[0].id + '/replacement']" fxLayout="column" fxLayoutAlign="space-around center">
+      <div [routerLink]="['/permanence/' + currentPermanence.id + '/replacement']" fxLayout="column" fxLayoutAlign="space-around center">
         <img class="circle-img" src="assets/images/remplacement.svg">
         <div class="legend-circle">Remplacement</div>
       </div>

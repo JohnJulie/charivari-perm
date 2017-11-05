@@ -74,8 +74,6 @@ public class PermanenceServiceTest {
 		this.myPermanenceTest.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(7, 45)));
 		this.myPermanenceTest.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(10, 45)));
 		this.myPermanenceTest.setFamily(this.myFamilyTest);
-		PermanenceStatus currentStatus = PermanenceStatus.NOT_CONFIRMED;
-		this.myPermanenceTest.setStatus(currentStatus);
 		this.idPermanence = this.permanenceService.savePermanence(this.myPermanenceTest);
 		
 		Family family = new Family();

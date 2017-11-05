@@ -94,4 +94,9 @@
 			baseTableName="FAMILY" constraintName="FK_FAMILY_IMAGE"
 			referencedColumnNames="IMAGE_ID" referencedTableName="IMAGE" />
 	</changeSet>
+	<changeSet id="charivari-perm-1.0-02.4-add-original-family-column" author="juliejohn">
+		<addColumn tableName="PERMANENCE">
+			<column type="integer" name="ORIGINAL_FAMILY_ID"></column>
+		</addColumn>
+	</changeSet>
 </databaseChangeLog>

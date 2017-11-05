@@ -32,6 +32,10 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     public long savePermanence(Permanence permanence) {
     	long id = Long.MAX_VALUE;
         try {
+        	permanence.setOriginalFamilyId(permanence.getFamily().getId());
+        	if (permanence.getStatus() == null) {
+            	permanence.setStatus(PermanenceStatus.NOT_CONFIRMED);
+        	}
 			id = (long) dao.save(permanence);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block

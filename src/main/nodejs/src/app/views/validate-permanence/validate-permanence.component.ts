@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PermanenceModel } from '../../models/permanence.model';
 import { PermanenceService } from '../../services/permanence/permanence.service';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/switchMap';
 
 import * as moment from 'moment';
@@ -14,7 +15,8 @@ import { Router } from '@angular/router';
 })
 export class ValidatePermanenceComponent implements OnInit {
 
-  public currentPermanence: Array<PermanenceModel>;
+  public currentPermanence: PermanenceModel;
+  private currentPermanences: Array<PermanenceModel>;
   public havePermanence: boolean;
   public startDate: any;
   public endDate: any;
@@ -28,16 +30,24 @@ export class ValidatePermanenceComponent implements OnInit {
 
   ngOnInit() {
       this.getCurrentPermanence();
+      Observable.interval(5000 * 60).subscribe(
+        () => {
+          this.getCurrentPermanence();
+        }
+      );
   }
 
   public getCurrentPermanence() {
+    console.log('plop');
     this.permanenceService.getCurrentPermanence().subscribe(
       (result: Array<PermanenceModel>) => {
           console.log('result:', result);
-          this.currentPermanence = result;
-          if (!_.isEmpty(this.currentPermanence)) {
-            this.startDate = moment(_.toString(this.currentPermanence[0].startDate), 'x');
-            this.endDate = moment(_.toString(this.currentPermanence[0].endDate), 'x');
+          this.currentPermanences = result;
+          if (!_.isEmpty(this.currentPermanences)) {
+            const currentPermanences = _.orderBy(this.currentPermanences, ['startDate'], ['desc']);
+            this.currentPermanence = currentPermanences[0];
+            this.startDate = moment(_.toString(this.currentPermanence.startDate), 'x');
+            this.endDate = moment(_.toString(this.currentPermanence.endDate), 'x');
             this.havePermanence = true;
           } else {
             this.havePermanence = false;
@@ -46,10 +56,10 @@ export class ValidatePermanenceComponent implements OnInit {
     );
   }
 
-  public setPermanceToCheck(permanence: PermanenceModel, index: number) {
+  public setPermanceToCheck(permanence: PermanenceModel) {
     permanence.status = 'DONE';
     this.permanenceService.updatePermanence(permanence).subscribe(
-      () => this.currentPermanence[index].status = permanence.status
+      () => this.currentPermanence.status = permanence.status
     );
   }
 }
