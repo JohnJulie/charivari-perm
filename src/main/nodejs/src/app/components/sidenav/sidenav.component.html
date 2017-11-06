@@ -4,8 +4,8 @@
   </div>
   <div class="menu">
     <ul>
-      <li [ngClass]="{'current': activateMenu === 0}" (click)="setActivateTab(0)">Permanences</li>
-      <li [ngClass]="{'current': activateMenu === 1}" (click)="setActivateTab(1)">Planning</li>
+      <li [ngClass]="{'current': activateMenu === 0}" (click)="setActivateTab(0)" [routerLink]="'/'">Permanences</li>
+      <li [ngClass]="{'current': activateMenu === 1}" (click)="setActivateTab(1)" [routerLink]="'/planning'">Planning</li>
       <li [ngClass]="{'current': activateMenu === 2}" (click)="setActivateTab(2)">Remplacements</li>
       <li [ngClass]="{'current': activateMenu === 3}" (click)="setActivateTab(3)">Compteurs</li>
     </ul>

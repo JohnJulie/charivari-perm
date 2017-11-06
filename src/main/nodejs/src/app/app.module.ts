@@ -30,6 +30,7 @@ import { ROUTES } from './app.routes';
 import { ChooseReplacementComponent } from './views/choose-replacement/choose-replacement.component';
 import { FamilyService } from './services/family/family.service';
 import { FamiliesResolver } from './resolvers/families-resolver';
+import { PlanningPermanenceComponent } from './views/planning-permanence/planning-permanence.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { FamiliesResolver } from './resolvers/families-resolver';
     AppComponent,
     ValidatePermanenceComponent,
     SidenavComponent,
-    ChooseReplacementComponent
+    ChooseReplacementComponent,
+    PlanningPermanenceComponent
   ],
   imports: [
     BrowserModule,

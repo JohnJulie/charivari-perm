@@ -1,5 +1,7 @@
 package com.adi3000.charivariperm.api;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -54,6 +56,15 @@ public class RestApiService {
 	@Produces(value={MediaType.APPLICATION_JSON})
 	public Permanence getPermanenceById(@PathParam("permanenceId") Long permanenceId){
 		return permanenceService.findById(permanenceId);
+	}
+	
+	@GET
+	@Path("/permanence/from/{fromDate}/to/{toDate}")
+	@Produces(value={MediaType.APPLICATION_JSON})
+	public List<Permanence> getPermanenceByDates(@PathParam("fromDate") String fromDate, @PathParam("toDate") String toDate){
+		LocalDateTime startDate = LocalDate.parse(fromDate).atTime(00, 00, 00);
+		LocalDateTime endDate = LocalDate.parse(toDate).atTime(23, 59, 59);
+		return permanenceService.getWeekPermanences(startDate, endDate);
 	}
 	
 	@PUT

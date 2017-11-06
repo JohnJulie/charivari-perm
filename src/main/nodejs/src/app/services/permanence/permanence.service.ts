@@ -32,5 +32,12 @@ export class PermanenceService {
       console.log('permanence 555:', permanence);
       console.log(this.apiUrl + 'permanence/update');
       return this.http.put(this.apiUrl + 'permanence/update', permanence, { headers: headers });
-  }
+    }
+
+    getWeekPermanence(fromDate, toDate): Observable<Array<PermanenceModel>> {
+      const headers = new HttpHeaders({
+        'Content-type': 'application/json'
+      });
+      return this.http.get(this.apiUrl + 'permanence/from/' + fromDate + '/to/' + toDate, { headers: headers });
+    }
 }

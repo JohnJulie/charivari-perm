@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="date-container">
+    <button (click)="getWeekPermanence(nowWeek)">Semaine en cours</button>
+
+    <button class="fa fa-arrow-left" (click)="getWeekPermanence(currentWeek - 1)"></button>
+    <div class="actual-date">Du {{ currentMonday }} au {{ currentSunday }}</div>
+    <button class="fa fa-arrow-right" (click)="getWeekPermanence(currentWeek + 1)"></button>
+  </div>
+  <div class="family-container">
+
+  </div>
+</div>

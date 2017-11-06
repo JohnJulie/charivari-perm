@@ -3,11 +3,13 @@
  */
 import { Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import {ValidatePermanenceComponent } from './views/validate-permanence/validate-permanence.component'
+import { ValidatePermanenceComponent } from './views/validate-permanence/validate-permanence.component'
 import { ChooseReplacementComponent } from './views/choose-replacement/choose-replacement.component';
 import { FamiliesResolver } from './resolvers/families-resolver';
+import { PlanningPermanenceComponent } from './views/planning-permanence/planning-permanence.component';
 
 export const ROUTES: Routes = [
   { path: '', component: ValidatePermanenceComponent },
-  { path: 'permanence/:id/replacement', component: ChooseReplacementComponent, resolve: { families: FamiliesResolver } }
+  { path: 'permanence/:id/replacement', component: ChooseReplacementComponent, resolve: { families: FamiliesResolver } },
+  { path: 'planning', component: PlanningPermanenceComponent }
 ];
