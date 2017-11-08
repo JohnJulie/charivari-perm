@@ -31,7 +31,7 @@ export class ChooseReplacementComponent implements OnInit {
   ngOnInit() {
 
     this.permanenceId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.familiesGrid = new Array(16);
+
     this.permanenceService.getPermanence(this.permanenceId).subscribe(
       result => {
         this.permanence = result;
@@ -43,6 +43,7 @@ export class ChooseReplacementComponent implements OnInit {
     this.activatedRoute.data.subscribe(
       data => {
         // reorder families to sort by label
+        this.familiesGrid = new Array(data['families'].length);
         this.families = _.orderBy(data['families'], ['label'], ['asc']);
         const anybodyFamily = _.remove(this.families, (n) => { return n.id === 31; });
         this.families = _.concat(anybodyFamily, this.families);
@@ -50,7 +51,7 @@ export class ChooseReplacementComponent implements OnInit {
           if (family.id !== 31) {
             this.familiesGrid[index] = {family: family, cols: 1, rows: 1};
           } else {
-            this.familiesGrid[index] = {family: family, cols: 5, rows: 1};
+            this.familiesGrid[index] = {family: family, cols: 6, rows: 1};
           }
         });
         console.log('this.familiesGrid:', this.familiesGrid);
@@ -64,7 +65,8 @@ export class ChooseReplacementComponent implements OnInit {
     permanence.family = family;
     permanence.status = 'REPLACEMENT';
     this.permanenceService.updatePermanence(permanence).subscribe(
-      () => this.router.navigate([''])
+      //todo: if perm
+      () => this.router.navigate(['permanence/' + this.permanenceId])
     );
   }
 

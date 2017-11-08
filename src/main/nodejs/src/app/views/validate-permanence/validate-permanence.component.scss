@@ -4,6 +4,9 @@ $dark-color: #000;
 .container {
   padding-left: #{$widthSidebar + 25px};
   padding-right: 25px;
+  h1 {
+    text-align: center;
+  }
 }
 
 .absolute {
@@ -12,6 +15,11 @@ $dark-color: #000;
 
 .relative {
   position: relative;
+  .check {
+    position: absolute;
+    bottom: 1px;
+    left: -5px;
+  }
 }
 
 .date-container {

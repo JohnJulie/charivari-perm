@@ -3,6 +3,7 @@ import { PermanenceService } from '../../services/permanence/permanence.service'
 import * as moment from 'moment';
 import * as _ from 'lodash';
 import { PermanenceModel } from '../../models/permanence.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-planning-permanence',
@@ -16,25 +17,32 @@ export class PlanningPermanenceComponent implements OnInit {
   public currentSunday: string;
   public nowWeek: number;
   public permanences: any;
+  public permanenceId: string;
+
   constructor(
     private permanenceService: PermanenceService
   ) { }
 
   ngOnInit() {
+
     this.nowWeek = moment().week();
-    this.permanences = [
-      { label: 'Lundi', perms: [] },
-      { label: 'Mardi', perms: [] },
-      { label: 'Mercredi', perms: [] },
-      { label: 'Jeudi', perms: [] },
-      { label: 'Vendredi', perms: [] }
-    ];
     _.each(this.permanences, perm => perm = new Array());
     this.currentWeek = this.nowWeek;
     this.getWeekPermanence(this.currentWeek);
   }
 
+  public reinitPermanences() {
+    this.permanences = [
+      { label: 'Lundi', perms: [{label: 'De 7h45 à 10h45', families: []}, {label: 'De 10h à 13h', families: []}, {label: 'De 15h30 à 18h30', families: []}] },
+      { label: 'Mardi', perms: [{label: 'De 7h45 à 10h45', families: []}, {label: 'De 10h à 13h', families: []}, {label: 'De 15h30 à 18h30', families: []}] },
+      { label: 'Mercredi', perms: [{label: 'De 7h45 à 10h45', families: []}, {label: 'De 10h à 13h', families: []}, {label: 'De 15h30 à 18h30', families: []}] },
+      { label: 'Jeudi', perms: [{label: 'De 7h45 à 10h45', families: []}, {label: 'De 10h à 13h', families: []}, {label: 'De 15h30 à 18h30', families: []}] },
+      { label: 'Vendredi', perms: [{label: 'De 7h45 à 10h45', families: []}, {label: 'De 10h à 13h', families: []}, {label: 'De 15h30 à 18h30', families: []}] }
+    ];
+  }
+
   public getWeekPermanence(whichWeek) {
+    this.reinitPermanences();
     this.currentWeek = whichWeek;
     const startDate = moment().weeks(whichWeek).weekday(1).format('YYYY-MM-DD');
     this.currentMonday = moment().weeks(whichWeek).weekday(1).format('DD/MM/YYYY');
@@ -45,10 +53,18 @@ export class PlanningPermanenceComponent implements OnInit {
         _.each(result,
           (perm) => {
             const index = moment(perm.startDate).day() - 1;
-            this.permanences[index].perms.push(perm);
+            const startHour = moment(perm.startDate).format('HH:mm');
+            if (startHour === '07:45') {
+              this.permanences[index].perms[0].families.push(perm);
+            } else if (startHour === '10:00') {
+              this.permanences[index].perms[1].families.push(perm);
+            } else if (startHour === '15:30') {
+              this.permanences[index].perms[2].families.push(perm);
+            }
+
           }
         );
-        console.log('this.permanences:', this.permanences);
+
       }
     );
 

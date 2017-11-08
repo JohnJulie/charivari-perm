@@ -6,9 +6,9 @@
   <div class="family-container">
     <div fxLayout="row" fxLayoutAlign="space-around center">
       <div fxLayout="column" fxLayoutAlign="space-around center" (click)="setPermanceToCheck(currentPermanence)">
-        <div>
+        <div class="relative">
           <img class="circle-img" src="{{currentPermanence.family.image.url}}">
-          <div class="fa fa-check fa-4x" *ngIf="currentPermanence.status === 'DONE'"></div>
+          <div class="fa fa-check fa-4x check" *ngIf="currentPermanence.status === 'DONE'"></div>
         </div>
         <div class="legend-circle">{{currentPermanence.family.label}}</div>
       </div>

@@ -6,7 +6,7 @@ import 'rxjs/add/operator/switchMap';
 
 import * as moment from 'moment';
 import * as _ from 'lodash';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-validate-permanence',
@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class ValidatePermanenceComponent implements OnInit {
 
+  public permanenceId: string;
   public currentPermanence: PermanenceModel;
   private currentPermanences: Array<PermanenceModel>;
   public havePermanence: boolean;
@@ -25,16 +26,32 @@ export class ValidatePermanenceComponent implements OnInit {
 
   constructor(
     private permanenceService: PermanenceService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
-      this.getCurrentPermanence();
-      Observable.interval(5000 * 60).subscribe(
-        () => {
-          this.getCurrentPermanence();
-        }
-      );
+      if (this.activatedRoute.snapshot.paramMap.get('id')) {
+        this.permanenceId = this.activatedRoute.snapshot.paramMap.get('id');
+        this.permanenceService.getPermanence(this.permanenceId).subscribe(
+          (result: PermanenceModel) => {
+
+              this.currentPermanence = result;
+              this.startDate = moment(_.toString(this.currentPermanence.startDate), 'x');
+              this.endDate = moment(_.toString(this.currentPermanence.endDate), 'x');
+              this.havePermanence = true;
+
+          }, (error) => console.log('getCurrentPermanence error:', error)
+        );
+      } else {
+        this.permanenceId = null;
+        this.getCurrentPermanence();
+        Observable.interval(5000 * 60).subscribe(
+          () => {
+            this.getCurrentPermanence();
+          }
+        );
+      }
   }
 
   public getCurrentPermanence() {

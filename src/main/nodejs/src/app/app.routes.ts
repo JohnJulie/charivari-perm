@@ -10,6 +10,7 @@ import { PlanningPermanenceComponent } from './views/planning-permanence/plannin
 
 export const ROUTES: Routes = [
   { path: '', component: ValidatePermanenceComponent },
+  { path: 'permanence/:id', component: ValidatePermanenceComponent },
   { path: 'permanence/:id/replacement', component: ChooseReplacementComponent, resolve: { families: FamiliesResolver } },
   { path: 'planning', component: PlanningPermanenceComponent }
 ];
