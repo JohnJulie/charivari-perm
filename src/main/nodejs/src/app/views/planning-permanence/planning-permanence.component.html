@@ -12,7 +12,7 @@
       <div fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let perm of permanence.perms">
         <div fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let p of perm.families">
           <div [routerLink]="['/permanence/' + p.id]" class="relative">
-            <img class="circle-img" src="{{p.family.image.url}}">
+            <img class="circle-img" [ngClass]="(p.family.id === p.originalFamilyId) ? '' : 'replacement'" src="{{p.family.image.url}}">
             <div class="fa fa-check fa-2x check" *ngIf="p.status === 'DONE'"></div>
             <!--<div class="fa fa-check fa-4x" *ngIf="currentPermanence.status === 'DONE'"></div>-->
           </div>

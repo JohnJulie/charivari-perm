@@ -50,18 +50,21 @@ export class PlanningPermanenceComponent implements OnInit {
     this.currentSunday = moment().weeks(whichWeek).weekday(7).format('DD/MM/YYYY');
     this.permanenceService.getWeekPermanence(startDate, endDate).subscribe(
       (result) => {
+        console.log('result:', result);
         _.each(result,
           (perm) => {
             const index = moment(perm.startDate).day() - 1;
             const startHour = moment(perm.startDate).format('HH:mm');
-            if (startHour === '07:45') {
-              this.permanences[index].perms[0].families.push(perm);
-            } else if (startHour === '10:00') {
-              this.permanences[index].perms[1].families.push(perm);
-            } else if (startHour === '15:30') {
-              this.permanences[index].perms[2].families.push(perm);
+            const endHour = moment(perm.endDate).format('HH:mm');
+            if (index < 5 && index >= 0 ) {
+              if (startHour === '07:45' || endHour === '10:45') {
+                this.permanences[index].perms[0].families.push(perm);
+              } else if (startHour === '10:00' || endHour === '13:00') {
+                this.permanences[index].perms[1].families.push(perm);
+              } else if (startHour === '15:30' || endHour === '18:30') {
+                this.permanences[index].perms[2].families.push(perm);
+              }
             }
-
           }
         );
 

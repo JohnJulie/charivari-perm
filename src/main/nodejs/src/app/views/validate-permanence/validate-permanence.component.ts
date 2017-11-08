@@ -35,10 +35,11 @@ export class ValidatePermanenceComponent implements OnInit {
         this.permanenceId = this.activatedRoute.snapshot.paramMap.get('id');
         this.permanenceService.getPermanence(this.permanenceId).subscribe(
           (result: PermanenceModel) => {
-
-              this.currentPermanence = result;
-              this.startDate = moment(_.toString(this.currentPermanence.startDate), 'x');
-              this.endDate = moment(_.toString(this.currentPermanence.endDate), 'x');
+            console.log('result perm:', result);
+              this.currentPermanences = [result];
+              console.log('this.currentPermanences:', this.currentPermanences);
+              this.startDate = moment(_.toString(this.currentPermanences[0].startDate), 'x');
+              this.endDate = moment(_.toString(this.currentPermanences[0].endDate), 'x');
               this.havePermanence = true;
 
           }, (error) => console.log('getCurrentPermanence error:', error)
@@ -76,7 +77,9 @@ export class ValidatePermanenceComponent implements OnInit {
   public setPermanceToCheck(permanence: PermanenceModel) {
     permanence.status = 'DONE';
     this.permanenceService.updatePermanence(permanence).subscribe(
-      () => this.currentPermanence.status = permanence.status
+      () => {
+        _.find(this.currentPermanences, ['id', permanence.id]).status = 'DONE';
+      }
     );
   }
 }

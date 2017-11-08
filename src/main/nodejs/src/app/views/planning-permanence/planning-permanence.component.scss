@@ -69,10 +69,15 @@ $dark-color: #000;
     height: 100px;
     width: 100px;
     border-radius: 50%;
-    border: solid 3px $dark-color;
+    border: solid 2px $dark-color;
     color: $dark-color;;
     padding: 10px;
+    &.replacement {
+      border-color: #ffffff;
+    }
   }
+
+
 
   .legend-circle {
     margin-top: 10px;
