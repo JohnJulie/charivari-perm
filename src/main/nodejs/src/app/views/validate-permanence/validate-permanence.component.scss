@@ -22,6 +22,20 @@ $dark-color: #000;
   }
 }
 
+.btn {
+  margin-bottom: 10px;
+  padding: 15px;
+  border: none;
+}
+
+.btn-prev {
+  background: none;
+}
+
+.btn-now {
+  background-color: #d1ecfa;
+}
+
 .date-container {
   height: 40vh;
   display: flex;

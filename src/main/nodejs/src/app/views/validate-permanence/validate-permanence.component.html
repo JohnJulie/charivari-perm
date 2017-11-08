@@ -1,6 +1,7 @@
 <div class="container" *ngIf="havePermanence">
   <div class="date-container">
     <div class="actual-date">{{ startDate | date: 'EEEE d MMMM'}}</div>
+    <button class="btn btn-now" [routerLink]="['']">Permanence(s) en cours</button>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-around center"  class="family-container">
     <div *ngFor="let perm of currentPermanences">
