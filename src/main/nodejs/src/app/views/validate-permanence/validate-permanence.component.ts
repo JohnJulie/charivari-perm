@@ -31,6 +31,9 @@ export class ValidatePermanenceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.permanenceService.getReplacement().subscribe(
+      (result) => console.log('result:', result)
+    );
       if (this.activatedRoute.snapshot.paramMap.get('id')) {
         this.permanenceId = this.activatedRoute.snapshot.paramMap.get('id');
         this.permanenceService.getPermanence(this.permanenceId).subscribe(

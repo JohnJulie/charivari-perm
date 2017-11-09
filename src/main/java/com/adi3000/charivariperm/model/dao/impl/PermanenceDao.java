@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.adi3000.charivariperm.model.dataobject.Permanence;
 import com.adi3000.charivariperm.model.enumeration.PermanenceStatus;
+import com.adi3000.common.CharivariUtil;
 import com.adi3000.common.orm.dao.AbstractDAO;
 
 @Repository("permanenceDao")
@@ -53,6 +54,21 @@ public class PermanenceDao extends AbstractDAO<Permanence>  implements com.adi30
 	    				Restrictions.and(
 							Restrictions.ge("startDate", start),
 							Restrictions.le("endDate", end)
+	    				)
+    				);
+    	@SuppressWarnings("unchecked")
+		List<Permanence> permanences = (List<Permanence>)req.list();
+		
+		return permanences;
+    }
+    
+    public List<Permanence> getReplacementPermanence() {
+    	Date now = CharivariUtil.getDateFromLocalDateTime(LocalDateTime.now());
+    	Criteria req = getSession().createCriteria(Permanence.class)
+    			.add(
+	    				Restrictions.and(
+							Restrictions.neProperty("family.id", "originalFamilyId"),
+							Restrictions.ge("endDate", now)
 	    				)
     				);
     	@SuppressWarnings("unchecked")

@@ -81,5 +81,11 @@ public class RestApiService {
 		permanenceService.generatePermanencesFamily(schedulingId);
 	}
 	
+	@GET
+	@Path("/permanence/replacement")
+	@Produces(value={MediaType.APPLICATION_JSON})
+	public List<Permanence> getPermanenceByDates(){
+		return permanenceService.getReplacement();
+	}
 	
 }

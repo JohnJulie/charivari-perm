@@ -16,5 +16,7 @@ public interface PermanenceDao extends DAO<Permanence> {
 	public List<Permanence> getPermanenceByStatus(PermanenceStatus status);
 	
 	public List<Permanence> getPermanenceByWeek(Date startDate, Date endDate);
+	
+	public List<Permanence> getReplacementPermanence();
     
 }

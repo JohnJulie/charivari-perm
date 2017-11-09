@@ -110,4 +110,9 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     		lastDate = lastDate.plusDays(scheduling.getFrequency());
     	}
     }
+    
+    @TransactionalReadOnly
+    public List<Permanence> getReplacement() {
+    	return dao.getReplacementPermanence();
+    }
 }

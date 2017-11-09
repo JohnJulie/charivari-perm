@@ -113,14 +113,14 @@ public class PermanenceServiceTest {
 	
 	@Test
 	public void testFindAllPermanence() {
-		System.out.print("---testFindAllPermanence---");
+		System.out.println("---testFindAllPermanence---");
 		List<Permanence> permanences = this.permanenceService.findAllPermanences();
 		assertFalse(permanences.isEmpty());
 	}
 	
 	@Test
 	public void testSavePermanence() {
-		System.out.print("---testSavePermanence---");
+		System.out.println("---testSavePermanence---");
 		// Family set
 		Family family = new Family();
 		family.setLabel("Elea, Blandine & Amir");
@@ -140,14 +140,14 @@ public class PermanenceServiceTest {
 	
 	@Test
 	public void testFindPermanence() {
-		System.out.print("---testFindPermanence---");
+		System.out.println("---testFindPermanence---");
 		Permanence permanence = this.permanenceService.findById(this.idPermanence);
 		assertNotNull(permanence);
 	}
 	
 	@Test
 	public void testUpdatePermanence() {
-		System.out.print("---testUpdatePermanence---");
+		System.out.println("---testUpdatePermanence---");
 		this.myPermanenceTest.setStatus(PermanenceStatus.DONE);
 		this.permanenceService.updatePermanence(this.myPermanenceTest);
 		Permanence permanence = this.permanenceService.findById(this.idPermanence);
@@ -156,27 +156,27 @@ public class PermanenceServiceTest {
 	
 	@Test
 	public void testDeletePermanence() {
-		System.out.print("---testDeletePermanence---");
+		System.out.println("---testDeletePermanence---");
 		this.permanenceService.deletePermanenceById(this.idPermanence);
 	}
 	
 	@Test
 	public void testGetCurrentPermanence() {
-		System.out.print("---testGetCurrentPermanence---");
+		System.out.println("---testGetCurrentPermanence---");
 		List<Permanence> currentPermanence = this.permanenceService.getCurrentPermanences();
-		assertEquals(currentPermanence.size(), 2);
+		assertEquals(currentPermanence.size(), 0);
 	}
 	
 	@Test
 	public void testGetEmptyPermanences() {
-		System.out.print("---testGetEmptyPermanences---");
+		System.out.println("---testGetEmptyPermanences---");
 		List<Permanence> toReplacePermanence = this.permanenceService.getEmptyPermanences();
 		assertEquals(toReplacePermanence.size(), 2);
 	}
 	
 	@Test
 	public void testGetWeekPermanences() {
-		System.out.print("---testGetEmptyPermanences---");
+		System.out.println("---testGetEmptyPermanences---");
 		LocalDateTime startDate = LocalDate.of(2017, 8, 28).atTime(7,0);
 		LocalDateTime endDate = LocalDate.of(2017, 9, 3).atTime(19,0);
 		List<Permanence> weekPermanences = this.permanenceService.getWeekPermanences(startDate, endDate);
@@ -187,7 +187,7 @@ public class PermanenceServiceTest {
 	
 	@Test
 	public void testGeneratePermanencesFamily() {
-		System.out.print("---testSetPermanencesFamily---");
+		System.out.println("---testSetPermanencesFamily---");
 		Scheduling scheduling = new Scheduling();
 		scheduling.setFamily(this.myFamilyTest);
 		scheduling.setStartHour(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(7,45)));
@@ -202,5 +202,30 @@ public class PermanenceServiceTest {
 		System.out.print("Size:");
 		System.out.println(permanences.size());
 		assertTrue(permanences.size() > 10);
+	}
+	
+	@Test
+	public void testGetReplacementPermanence() {
+		System.out.println("---testGetReplacementPermanence---");
+		Family family2 = new Family();
+		family2.setLabel("Elea, Blandine, Amir");
+		family2.setId(this.familyService.saveFamily(family2));
+		family2.setImage(this.myImageTest);
+		
+		// Permanence set
+		Permanence permanence = new Permanence();
+		permanence.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 11, 12).atTime(10, 00)));
+		permanence.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 11, 12).atTime(13, 00)));
+		permanence.setFamily(this.myFamilyTest);
+		permanence.setStatus(PermanenceStatus.NOT_CONFIRMED);
+		this.permanenceService.savePermanence(permanence);
+		
+		permanence.setFamily(family2);
+		this.permanenceService.updatePermanence(permanence);;
+		
+		List<Permanence> permanences = this.permanenceService.getReplacement();
+		System.out.print("Size:");
+		System.out.println(permanences.size());
+		assertEquals(permanences.size(), 1);
 	}
 }
