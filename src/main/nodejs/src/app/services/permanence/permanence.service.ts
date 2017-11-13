@@ -41,10 +41,17 @@ export class PermanenceService {
       return this.http.get(this.apiUrl + 'permanence/from/' + fromDate + '/to/' + toDate, { headers: headers });
     }
 
-    getReplacement(): Observable<Array<PermanenceModel>> {
+    getPermanenceBySlot(date, slot) {
       const headers = new HttpHeaders({
         'Content-type': 'application/json'
       });
-      return this.http.get(this.apiUrl + 'permanence/replacement', { headers: headers });
+      return this.http.get(this.apiUrl + 'permanence/date/' + date + '/slot/' + slot, { headers: headers });
+    }
+
+    getReplacements(): Observable<Array<PermanenceModel>> {
+      const headers = new HttpHeaders({
+        'Content-type': 'application/json'
+      });
+      return this.http.get(this.apiUrl + 'permanence/replacements', { headers: headers });
     }
 }

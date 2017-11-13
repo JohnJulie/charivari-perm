@@ -31,31 +31,26 @@ export class ValidatePermanenceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.permanenceService.getReplacement().subscribe(
-      (result) => console.log('result:', result)
-    );
-      if (this.activatedRoute.snapshot.paramMap.get('id')) {
-        this.permanenceId = this.activatedRoute.snapshot.paramMap.get('id');
-        this.permanenceService.getPermanence(this.permanenceId).subscribe(
-          (result: PermanenceModel) => {
-            console.log('result perm:', result);
-              this.currentPermanences = [result];
-              console.log('this.currentPermanences:', this.currentPermanences);
-              this.startDate = moment(_.toString(this.currentPermanences[0].startDate), 'x');
-              this.endDate = moment(_.toString(this.currentPermanences[0].endDate), 'x');
-              this.havePermanence = true;
+    if (this.activatedRoute.snapshot.paramMap.get('id')) {
+      this.permanenceId = this.activatedRoute.snapshot.paramMap.get('id');
+      this.permanenceService.getPermanence(this.permanenceId).subscribe(
+        (result: PermanenceModel) => {
+            this.currentPermanences = [result];
+            this.startDate = moment(_.toString(this.currentPermanences[0].startDate), 'x');
+            this.endDate = moment(_.toString(this.currentPermanences[0].endDate), 'x');
+            this.havePermanence = true;
 
-          }, (error) => console.log('getCurrentPermanence error:', error)
-        );
-      } else {
-        this.permanenceId = null;
-        this.getCurrentPermanence();
-        Observable.interval(5000 * 60).subscribe(
-          () => {
-            this.getCurrentPermanence();
-          }
-        );
-      }
+        }, (error) => console.log('getCurrentPermanence error:', error)
+      );
+    } else {
+      this.permanenceId = null;
+      this.getCurrentPermanence();
+      Observable.interval(5000 * 60).subscribe(
+        () => {
+          this.getCurrentPermanence();
+        }
+      );
+    }
   }
 
   public getCurrentPermanence() {

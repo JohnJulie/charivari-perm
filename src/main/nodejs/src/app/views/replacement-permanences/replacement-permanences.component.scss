@@ -1,0 +1,60 @@
+$widthSidebar: 300px;
+$dark-color: #000;
+
+.container {
+  padding-left: #{$widthSidebar + 25px};
+  padding-right: 25px;
+}
+.title-container {
+  height: 10vh;
+}
+.add-replacement {
+  height: 20vh;
+  .datepicker {
+    width: 200px;
+  }
+  select {
+    font-size: 1.1em;
+  }
+}
+
+.family-container {
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: overlay;
+  .content {
+    height: 100%;
+  }
+
+  > div {
+    width: 100%;
+    font-weight: bold;
+    color: $dark-color;
+  }
+  .toreplace {
+    background-color: lightpink;
+  }
+  .replacement-list {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .title-list {
+    margin-bottom: 15px;
+  }
+  .circle-img {
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    border: solid 2px $dark-color;
+    color: $dark-color;;
+    padding: 10px;
+    background-color: #ffffff;
+  }
+
+  .legend-circle {
+    margin-top: 10px;
+    font-size: 1.5em;
+  }
+}
