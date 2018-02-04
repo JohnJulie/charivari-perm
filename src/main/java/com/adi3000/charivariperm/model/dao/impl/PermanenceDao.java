@@ -35,6 +35,21 @@ public class PermanenceDao extends AbstractDAO<Permanence>  implements com.adi30
   
     }
     
+    public List<Permanence> getPermanenceBySlot(Date startDate, Date endDate) {
+    	Criteria req = getSession().createCriteria(Permanence.class)
+    			.add(
+	    				Restrictions.or(
+							Restrictions.eq("startDate", startDate),
+							Restrictions.eq("endDate", endDate)
+	    				)
+    				);
+    	@SuppressWarnings("unchecked")
+		List<Permanence> permanences = (List<Permanence>)req.list();
+		
+		return permanences;
+  
+    }
+    
     public List<Permanence> getPermanenceByStatus(PermanenceStatus status) {
     	Criteria req = getSession().createCriteria(Permanence.class)
     			.add(

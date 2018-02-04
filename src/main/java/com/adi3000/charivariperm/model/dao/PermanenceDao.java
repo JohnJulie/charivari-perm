@@ -18,5 +18,7 @@ public interface PermanenceDao extends DAO<Permanence> {
 	public List<Permanence> getPermanenceByWeek(Date startDate, Date endDate);
 	
 	public List<Permanence> getReplacementPermanence();
+	
+	public List<Permanence> getPermanenceBySlot(Date startDate, Date endDate);
     
 }

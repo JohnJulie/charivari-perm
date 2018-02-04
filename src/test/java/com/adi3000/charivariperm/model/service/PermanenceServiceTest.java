@@ -186,6 +186,34 @@ public class PermanenceServiceTest {
 	}
 	
 	@Test
+	public void testGetPermanencesBySlot() {
+		System.out.println("---testGetPermanencesBySlot---");
+		// Permanence set
+		Permanence permanence = new Permanence();
+		permanence.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 11, 13).atTime(7, 45)));
+		permanence.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 11, 13).atTime(9, 15)));
+		permanence.setFamily(this.myFamilyTest);
+		this.permanenceService.savePermanence(permanence);
+		
+		// Family set
+		Family family = new Family();
+		family.setLabel("Arya, Rachel & Jérôme");
+		family.setImage(this.myImageTest);
+		this.familyService.saveFamily(family);
+		Permanence perm2 = new Permanence();
+		perm2.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 11, 13).atTime(7, 45)));
+		perm2.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 11, 13).atTime(10, 45)));
+		perm2.setFamily(family);
+		this.permanenceService.savePermanence(perm2);
+				
+		LocalDate startDate = LocalDate.of(2017, 11, 13);
+		List<Permanence> toReplace = this.permanenceService.getPermanenceToReplace(startDate, "0");
+		System.out.println("Size:");
+		System.out.println(toReplace.size());
+		assertEquals(toReplace.size(), 2);
+	}
+	
+	@Test
 	public void testGeneratePermanencesFamily() {
 		System.out.println("---testSetPermanencesFamily---");
 		Scheduling scheduling = new Scheduling();

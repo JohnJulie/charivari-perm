@@ -26,6 +26,8 @@ public interface PermanenceService {
 	
 	List<Permanence> getWeekPermanences(LocalDateTime startDate, LocalDateTime endDate);
 	
+	List<Permanence> getPermanenceToReplace(LocalDate date, String slot);
+	
 	void generatePermanencesFamily(Long schedulingId);
 	
 	List<Permanence> getReplacement();

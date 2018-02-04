@@ -115,4 +115,21 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     public List<Permanence> getReplacement() {
     	return dao.getReplacementPermanence();
     }
+    
+    @TransactionalReadOnly
+    public List<Permanence> getPermanenceToReplace(LocalDate dateToReplace, String slot) {
+    	Date startToDate;
+    	Date endToDate; 
+    	if (slot.equals("0")) {
+    		startToDate = CharivariUtil.getDateFromLocalDateTime(dateToReplace.atTime(7, 45));
+    		endToDate = CharivariUtil.getDateFromLocalDateTime(dateToReplace.atTime(10, 45));
+    	} else if (slot.equals("1")) {
+    		startToDate = CharivariUtil.getDateFromLocalDateTime(dateToReplace.atTime(10, 00));
+    		endToDate = CharivariUtil.getDateFromLocalDateTime(dateToReplace.atTime(13, 00));
+    	} else {
+    		startToDate = CharivariUtil.getDateFromLocalDateTime(dateToReplace.atTime(15, 30));
+    		endToDate = CharivariUtil.getDateFromLocalDateTime(dateToReplace.atTime(18, 30));
+    	}
+    	return dao.getPermanenceBySlot(startToDate, endToDate);
+    }
 }

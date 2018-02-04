@@ -67,6 +67,14 @@ public class RestApiService {
 		return permanenceService.getWeekPermanences(startDate, endDate);
 	}
 	
+	@GET
+	@Path("/permanence/date/{date}/slot/{slot}")
+	@Produces(value={MediaType.APPLICATION_JSON})
+	public List<Permanence> getPermanenceBySlot(@PathParam("date") String date, @PathParam("slot") String slot){
+		LocalDate dateToReplace = LocalDate.parse(date);
+		return permanenceService.getPermanenceToReplace(dateToReplace, slot);
+	}
+	
 	@PUT
 	@Path("/permanence/update")
 	@Produces(value={MediaType.APPLICATION_JSON})
@@ -82,7 +90,7 @@ public class RestApiService {
 	}
 	
 	@GET
-	@Path("/permanence/replacement")
+	@Path("/permanence/replacements")
 	@Produces(value={MediaType.APPLICATION_JSON})
 	public List<Permanence> getPermanenceByDates(){
 		return permanenceService.getReplacement();
