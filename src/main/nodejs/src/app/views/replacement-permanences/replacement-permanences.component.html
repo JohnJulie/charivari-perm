@@ -31,14 +31,14 @@
     <form [formGroup]="replacementForm" novalidate>
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <h2>Nouvelle demande:</h2>
-        <my-date-picker name="date" class="datepicker" formControlName="date" [locale]="'fr'" [options]="myDatePickerOptions"></my-date-picker>
-        <select name="slot" formControlName="slot">
+        <my-date-picker name="date" [placeholder]="'Choisir une date'" class="datepicker" formControlName="date" [locale]="'fr'" [options]="myDatePickerOptions"></my-date-picker>
+        <select name="slot" formControlName="slot" class="select-slot">
           <option value=null>Choisir un créneau</option>
           <option value="0">De 07:45 à 10:45</option>
           <option value="1">De 10:00 à 13:00</option>
           <option value="2">De 15:30 à 18:30</option>
         </select>
-        <button (click)="searchPermanence()">Valider</button>
+        <button class="btn-validate" (click)="searchPermanence()" [disabled]="!replacementForm.valid">Valider</button>
       </div>
     </form>
   </div>

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FamilyModel } from '../../models/family.model';
 import { FamilyService } from '../../services/family/family.service';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, ParamMap, Params, Router } from '@angular/router';
 import { PermanenceService } from '../../services/permanence/permanence.service';
 import { PermanenceModel } from '../../models/permanence.model';
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import { CurrentStateService } from '../../services/shared-data/current-state.service';
 
 @Component({
   selector: 'app-choose-replacement',
@@ -20,16 +21,23 @@ export class ChooseReplacementComponent implements OnInit {
   public permanenceId: string;
   public startDate: any;
   public endDate: any;
+  public previousUrl: string;
 
   constructor(
     private familyService: FamilyService,
     private permanenceService: PermanenceService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router,
+    private currentStateService: CurrentStateService
+  ) {}
 
   ngOnInit() {
-
+    this.currentStateService.state.subscribe(
+      currentState => {
+        console.log('currentState:', currentState);
+        this.previousUrl = currentState;
+      }
+    );
     this.permanenceId = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.permanenceService.getPermanence(this.permanenceId).subscribe(
@@ -66,7 +74,7 @@ export class ChooseReplacementComponent implements OnInit {
     permanence.status = 'REPLACEMENT';
     this.permanenceService.updatePermanence(permanence).subscribe(
       //todo: if perm
-      () => this.router.navigate(['permanence/' + this.permanenceId])
+      () => this.router.navigate([this.previousUrl])
     );
   }
 

@@ -97,8 +97,22 @@ export class ReplacementPermanencesComponent implements OnInit {
             perm.originalFamilyImage = _.find(this.families, ['id', perm.originalFamilyId]).image.url;
             this.choosePermanence.push(perm);
           });
-          const dialogRef = this.dialog.open(DialogComponent, { data: { permanences: this.choosePermanence }, width: '250px'});
-          dialogRef.afterClosed().subscribe();
+          const dialogRef = this.dialog.open(DialogComponent, { data: { permanences: this.choosePermanence }, width: '450px', height: '250px' });
+          dialogRef.afterClosed().subscribe(
+            (toReplace) => {
+              const permToReplace = _.omit(toReplace, ['originalFamilyImage']);
+              if (!_.find(this.replacements, ['id', permToReplace.id])) {
+                permToReplace.family = _.find(this.families, ['id', 31]);
+                this.permanenceService.updatePermanence(permToReplace).subscribe(
+                  () => {
+                    permToReplace.originalFamilyImage = _.find(this.families, ['id', permToReplace.originalFamilyId]).image.url;
+                    this.replacements.push(permToReplace);
+                    this.replacements = _.orderBy(this.replacements, ['startDate', 'endStart'], ['asc', 'asc']);
+                  }
+                );
+              }
+            }
+          );
         }
       }
     );

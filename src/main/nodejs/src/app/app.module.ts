@@ -39,6 +39,7 @@ import { ROUTES } from './app.routes';
  */
 import { FamiliesResolver } from './resolvers/families-resolver';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { CurrentStateService } from './services/shared-data/current-state.service';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     PermanenceService,
     FamilyService,
     FamiliesResolver,
+    CurrentStateService,
     { provide: LOCALE_ID, useValue: 'fr-FR' }
   ],
   bootstrap: [AppComponent],

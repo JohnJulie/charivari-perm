@@ -12,8 +12,8 @@
       </div>
 
       <div  fxLayout="row" fxLayoutAlign="center center">
-        <div (click)="setPermanceToCheck(perm)">
-          <div class="relative">
+        <div>
+          <div class="relative" (click)="setPermanceToCheck(perm)">
             <img class="circle-img" src="{{perm.family.image.url}}">
             <div class="fa fa-check fa-4x check" *ngIf="perm.status === 'DONE'"></div>
           </div>

@@ -20,8 +20,8 @@ export class DialogComponent implements OnInit {
     console.log('dialog:', this.permanencesToReplace);
   }
 
-  closeDialog() {
-    this.dialogRef.close();
+  closeDialog(toReplace) {
+    this.dialogRef.close(toReplace);
   }
 
 }

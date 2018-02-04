@@ -6,14 +6,47 @@ $dark-color: #000;
   padding-right: 25px;
 }
 .title-container {
-  height: 10vh;
+  height: 20vh;
+  position: relative;
+  h2 {
+    position: absolute;
+    top: 50%; left: 50%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+    font-size: 1.5em;
+    font-weight: bold;
+
+  }
 }
 .add-replacement {
-  height: 20vh;
+  height: 10vh;
+  border-top: solid #000000 2px;
+  padding: 10px;
+
+  h2 {
+    font-size: 1.1em;
+  }
   .datepicker {
     width: 200px;
   }
   select {
+    font-size: 1.1em;
+  }
+  .select-slot {
+    top: auto;
+    bottom: 100%;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    height: 34px;
+    padding-left: 10px;
+    color: #555;
+  }
+
+  .btn-validate {
+    border-radius: 4px;
+    padding: 6px 20px;
+    background-color: #d1fadf;
+    border: solid #CCC 1px;
+    height: 34px;
     font-size: 1.1em;
   }
 }

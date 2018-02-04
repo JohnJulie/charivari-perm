@@ -10,7 +10,8 @@ import { PlanningPermanenceComponent } from './views/planning-permanence/plannin
 import { ReplacementPermanencesComponent } from './views/replacement-permanences/replacement-permanences.component';
 
 export const ROUTES: Routes = [
-  { path: '', component: ValidatePermanenceComponent },
+  { path: '', redirectTo: 'permanence', pathMatch: 'full' },
+  { path: 'permanence', component: ValidatePermanenceComponent },
   { path: 'permanence/:id', component: ValidatePermanenceComponent },
   { path: 'permanence/:id/replacement', component: ChooseReplacementComponent, resolve: { families: FamiliesResolver } },
   { path: 'planning', component: PlanningPermanenceComponent },
