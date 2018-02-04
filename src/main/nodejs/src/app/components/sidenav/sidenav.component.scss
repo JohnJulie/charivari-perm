@@ -1,0 +1,27 @@
+$widthSidebar: 300px;
+
+md-sidenav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: $widthSidebar;
+  background-color: #d1ecfa;
+  
+  .current {
+  	background-color: #d1fadf;
+  }
+
+  ul > li {
+    text-align: center;
+    margin: auto 0;
+    padding: 15px 0;
+    color: #202050;
+  }
+}
+
+.logo {
+  width: 100%;
+  background-color: #ffffff;
+  text-align: center;
+}

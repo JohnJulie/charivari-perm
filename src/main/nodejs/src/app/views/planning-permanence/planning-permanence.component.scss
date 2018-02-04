@@ -1,0 +1,86 @@
+$widthSidebar: 300px;
+$dark-color: #000;
+
+.container {
+  padding-left: #{$widthSidebar + 25px};
+  padding-right: 25px;
+}
+
+.btn {
+  margin-bottom: 10px;
+  padding: 15px;
+  border: none;
+}
+
+.btn-prev {
+  background: none;
+}
+
+.btn-now {
+  background-color: #d1ecfa;
+}
+
+.relative {
+  position: relative;
+  .check {
+    position: absolute;
+    bottom: 1px;
+    left: 1px;
+  }
+}
+
+.date-container {
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  color: $dark-color;;
+  padding-top: 50px;
+  .actual-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 0 10px 0;
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  .actual-hours {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+}
+
+.family-container {
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 80px;
+  > div {
+    width: 100%;
+    font-weight: bold;
+    color: $dark-color;
+  }
+  .circle-img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: solid 2px $dark-color;
+    color: $dark-color;;
+    padding: 10px;
+    &.replacement {
+      border-color: #ffffff;
+    }
+  }
+
+
+
+  .legend-circle {
+    margin-top: 10px;
+    font-size: 1.5em;
+  }
+}
