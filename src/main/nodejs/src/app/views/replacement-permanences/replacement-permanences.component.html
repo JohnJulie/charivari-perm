@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="title-container">
+    <h2>Remplacements à venir</h2>
+  </div>
+  <div class="family-container">
+    <div class="content">
+      <div fxLayout="column" fxLayoutAlign="start stretch">
+        <div fxLayout="row" class="title-list" fxLayoutAlign="space-between center">
+          <div>Perm' de</div>
+          <div>Date</div>
+          <div>Créneau</div>
+          <div>Remplacer par</div>
+          <div>Modifier</div>
+        </div>
+        <div  fxLayout="row" fxLayoutAlign="space-between center" class="replacement-list" [ngClass]="replacement.family.id == 31 ? 'toreplace' : ''" *ngFor="let replacement of replacements">
+          <div>
+            <img class="circle-img" src="{{replacement.originalFamilyImage}}">
+          </div>
+          <div>{{ replacement.startDate | date: 'dd/MM/yyyy'}}</div>
+          <div>De {{replacement.startDate | date: 'shortTime'}} à {{replacement.endDate | date: 'shortTime'}}</div>
+          <div>
+            <img class="circle-img" src="{{replacement.family.image.url}}">
+          </div>
+          <div class="fa fa-pencil-square-o fa-2x" [routerLink]="['/permanence/' + replacement.id + '/replacement']"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="add-replacement">
+
+    <form [formGroup]="replacementForm" novalidate>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <h2>Nouvelle demande:</h2>
+        <my-date-picker name="date" [placeholder]="'Choisir une date'" class="datepicker" formControlName="date" [locale]="'fr'" [options]="myDatePickerOptions"></my-date-picker>
+        <select name="slot" formControlName="slot" class="select-slot">
+          <option value=null>Choisir un créneau</option>
+          <option value="0">De 07:45 à 10:45</option>
+          <option value="1">De 10:00 à 13:00</option>
+          <option value="2">De 15:30 à 18:30</option>
+        </select>
+        <button class="btn-validate" (click)="searchPermanence()" [disabled]="!replacementForm.valid">Valider</button>
+      </div>
+    </form>
+  </div>
+</div>

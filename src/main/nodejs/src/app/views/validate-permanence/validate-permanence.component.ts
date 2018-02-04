@@ -7,6 +7,7 @@ import 'rxjs/add/operator/switchMap';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CurrentStateService } from '../../services/shared-data/current-state.service';
 
 @Component({
   selector: 'app-validate-permanence',
@@ -23,39 +24,39 @@ export class ValidatePermanenceComponent implements OnInit {
   public endDate: any;
   public startHour: string;
   public endHour: string;
+  public previousUrl: string;
 
   constructor(
     private permanenceService: PermanenceService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private currentStateService: CurrentStateService
   ) { }
 
   ngOnInit() {
-    this.permanenceService.getReplacement().subscribe(
-      (result) => console.log('result:', result)
+    this.currentStateService.state.subscribe(
+      (state => this.previousUrl = state)
     );
-      if (this.activatedRoute.snapshot.paramMap.get('id')) {
-        this.permanenceId = this.activatedRoute.snapshot.paramMap.get('id');
-        this.permanenceService.getPermanence(this.permanenceId).subscribe(
-          (result: PermanenceModel) => {
-            console.log('result perm:', result);
-              this.currentPermanences = [result];
-              console.log('this.currentPermanences:', this.currentPermanences);
-              this.startDate = moment(_.toString(this.currentPermanences[0].startDate), 'x');
-              this.endDate = moment(_.toString(this.currentPermanences[0].endDate), 'x');
-              this.havePermanence = true;
+    if (this.activatedRoute.snapshot.paramMap.get('id')) {
+      this.permanenceId = this.activatedRoute.snapshot.paramMap.get('id');
+      this.permanenceService.getPermanence(this.permanenceId).subscribe(
+        (result: PermanenceModel) => {
+            this.currentPermanences = [result];
+            this.startDate = moment(_.toString(this.currentPermanences[0].startDate), 'x');
+            this.endDate = moment(_.toString(this.currentPermanences[0].endDate), 'x');
+            this.havePermanence = true;
 
-          }, (error) => console.log('getCurrentPermanence error:', error)
-        );
-      } else {
-        this.permanenceId = null;
-        this.getCurrentPermanence();
-        Observable.interval(5000 * 60).subscribe(
-          () => {
-            this.getCurrentPermanence();
-          }
-        );
-      }
+        }, (error) => console.log('getCurrentPermanence error:', error)
+      );
+    } else {
+      this.permanenceId = null;
+      this.getCurrentPermanence();
+      Observable.interval(5000 * 60).subscribe(
+        () => {
+          this.getCurrentPermanence();
+        }
+      );
+    }
   }
 
   public getCurrentPermanence() {
@@ -78,11 +79,14 @@ export class ValidatePermanenceComponent implements OnInit {
   }
 
   public setPermanceToCheck(permanence: PermanenceModel) {
-    permanence.status = 'DONE';
-    this.permanenceService.updatePermanence(permanence).subscribe(
-      () => {
-        _.find(this.currentPermanences, ['id', permanence.id]).status = 'DONE';
-      }
-    );
+    if (moment(permanence.endDate).isSameOrBefore(moment())) {
+      permanence.status = 'DONE';
+      this.permanenceService.updatePermanence(permanence).subscribe(
+        () => {
+          _.find(this.currentPermanences, ['id', permanence.id]).status = 'DONE';
+          this.router.navigate([this.previousUrl]);
+        }
+      );
+    }
   }
 }
