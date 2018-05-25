@@ -15,10 +15,16 @@ public interface PermanenceDao extends DAO<Permanence> {
 	
 	public List<Permanence> getPermanenceByStatus(PermanenceStatus status);
 	
+	public List<Permanence> getPermanenceByNotStatus(PermanenceStatus status);
+	
 	public List<Permanence> getPermanenceByWeek(Date startDate, Date endDate);
+	
+	public List<Permanence> getPermanenceByDate(Date startDate, Date endDate);
 	
 	public List<Permanence> getReplacementPermanence();
 	
 	public List<Permanence> getPermanenceBySlot(Date startDate, Date endDate);
+	
+	public List<Permanence> getOpenedPermanences();
     
 }

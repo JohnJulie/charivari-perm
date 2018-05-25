@@ -41,6 +41,9 @@ public class Permanence {
 	@Column(name = "ORIGINAL_FAMILY_ID")
 	private Long originalFamilyId;
 	
+	@Column(name = "IS_OPEN")
+	private Boolean isOpen;
+	
 	/**
 	 * @return the id
 	 */
@@ -112,6 +115,18 @@ public class Permanence {
 	 */
 	public void setOriginalFamilyId(Long originalFamilyId) {
 		this.originalFamilyId = originalFamilyId;
+	}
+	/**
+	 * @return the isOpen
+	 */
+	public Boolean getIsOpen() {
+		return isOpen;
+	}
+	/**
+	 * @param isOpen the isOpen to set
+	 */
+	public void setIsOpen(Boolean isOpen) {
+		this.isOpen = isOpen;
 	}
 	
 }

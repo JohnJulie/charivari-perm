@@ -1,0 +1,7 @@
+$widthSidebar: 300px;
+$dark-color: #000;
+
+.container {
+  padding-left: #{$widthSidebar + 25px};
+  padding-right: 25px;
+}

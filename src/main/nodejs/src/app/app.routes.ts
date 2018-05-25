@@ -8,6 +8,8 @@ import { ChooseReplacementComponent } from './views/choose-replacement/choose-re
 import { FamiliesResolver } from './resolvers/families-resolver';
 import { PlanningPermanenceComponent } from './views/planning-permanence/planning-permanence.component';
 import { ReplacementPermanencesComponent } from './views/replacement-permanences/replacement-permanences.component';
+import { CounterPermanenceComponent } from './views/counter-permanence/counter-permanence.component';
+import { ParametersComponent } from './views/parameters/parameters.component';
 
 export const ROUTES: Routes = [
   { path: '', redirectTo: 'permanence', pathMatch: 'full' },
@@ -15,5 +17,7 @@ export const ROUTES: Routes = [
   { path: 'permanence/:id', component: ValidatePermanenceComponent },
   { path: 'permanence/:id/replacement', component: ChooseReplacementComponent, resolve: { families: FamiliesResolver } },
   { path: 'planning', component: PlanningPermanenceComponent },
-  { path: 'replacements', component: ReplacementPermanencesComponent, resolve: { families: FamiliesResolver } }
+  { path: 'replacements', component: ReplacementPermanencesComponent, resolve: { families: FamiliesResolver } },
+  { path: 'counter', component: CounterPermanenceComponent },
+  { path: 'parameters', component: ParametersComponent }
 ];

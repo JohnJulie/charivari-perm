@@ -96,4 +96,19 @@ public class RestApiService {
 		return permanenceService.getReplacement();
 	}
 	
+	@PUT
+	@Path("/permanence/close")
+	@Produces(value= {MediaType.APPLICATION_JSON})
+	public void closePermanences(String date) {
+		LocalDate startDate = LocalDate.parse(date);
+		permanenceService.validateMonthPermanences(startDate);
+	}
+	
+	@GET
+	@Path("permanence/tovalidate")
+	@Produces(value= {MediaType.APPLICATION_JSON})
+	public List<LocalDate> getMonthToValidate() {
+		return permanenceService.getNotClosedPermanences();
+	}
+	
 }
