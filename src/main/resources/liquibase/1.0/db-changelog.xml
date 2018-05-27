@@ -99,4 +99,14 @@
 			<column type="integer" name="ORIGINAL_FAMILY_ID"></column>
 		</addColumn>
 	</changeSet>
+	<changeSet id="charivari-perm-1.0-02.5-add-is-open-column" author="juliejohn">
+		<addColumn tableName="PERMANENCE">
+			<column type="boolean" name="IS_OPEN"></column>
+		</addColumn>
+		<addDefaultValue
+            tableName="PERMANENCE"
+            columnDataType="boolean"
+            columnName="IS_OPEN"
+            defaultValueBoolean="true"/>
+	</changeSet>
 </databaseChangeLog>

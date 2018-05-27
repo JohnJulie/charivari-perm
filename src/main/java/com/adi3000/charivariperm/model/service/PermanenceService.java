@@ -14,6 +14,8 @@ public interface PermanenceService {
 	
 	List<Permanence> findAllPermanences();
 	
+	List<Permanence> findAllOpenedPermanences();
+	
 	void deletePermanenceById(Long id);
 	
 	Permanence findById(Long id);
@@ -31,4 +33,8 @@ public interface PermanenceService {
 	void generatePermanencesFamily(Long schedulingId);
 	
 	List<Permanence> getReplacement();
+	
+	void validateMonthPermanences(LocalDate date);
+	
+	List<LocalDate> getNotClosedPermanences();
 }

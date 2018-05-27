@@ -54,4 +54,20 @@ export class PermanenceService {
       });
       return this.http.get(this.apiUrl + 'permanence/replacements', { headers: headers });
     }
+
+    validateMonth(date) {
+      const headers = new HttpHeaders({
+        'Content-type': 'application/json'
+      });
+      console.log('validateMonth:', date);
+      console.log(this.apiUrl + 'permanence/close');
+      return this.http.put(this.apiUrl + 'permanence/close', date, { headers: headers });
+    }
+
+    getMonthToValidate() {
+      const headers = new HttpHeaders({
+        'Content-type': 'application/json'
+      });
+      return this.http.get(this.apiUrl + 'permanence/tovalidate', { headers: headers });
+    }
 }

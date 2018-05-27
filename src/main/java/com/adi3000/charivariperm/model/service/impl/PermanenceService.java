@@ -2,13 +2,19 @@ package com.adi3000.charivariperm.model.service.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalField;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
+import org.springframework.format.datetime.joda.LocalDateParser;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.adi3000.charivariperm.model.dao.impl.PermanenceDao;
 import com.adi3000.charivariperm.model.dataobject.Permanence;
@@ -48,6 +54,11 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     public List<Permanence> findAllPermanences() {
         return dao.findAll();
     }
+	
+	@TransactionalReadOnly
+    public List<Permanence> findAllOpenedPermanences() {
+        return dao.getOpenedPermanences();
+    }
  
 	@TransactionalUpdate
     public void deletePermanenceById(Long id) {
@@ -67,6 +78,7 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     @TransactionalUpdate
     public void updatePermanence(Permanence permanence){
         try {
+        	Logger.getGlobal().info("upadate perm " + permanence.getStartDate().toString());
 			dao.update(permanence);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
@@ -103,12 +115,42 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     		Permanence perm = new Permanence();
     		perm.setFamily(scheduling.getFamily());
     		perm.setStatus(PermanenceStatus.NOT_CONFIRMED);
+    		perm.setIsOpen(true);
     		perm.setStartDate(CharivariUtil.getDateFromLocalDateTime(lastDate));
     		perm.setEndDate(CharivariUtil.getDateFromLocalDateTime(lastDate.plusMinutes(scheduling.getDuration())));
     		this.savePermanence(perm);
 
     		lastDate = lastDate.plusDays(scheduling.getFrequency());
     	}
+    }
+    
+    @TransactionalReadOnly
+    public List<LocalDate> getNotClosedPermanences() {
+    	List<Permanence> permanenceNotClosed = dao.getOpenedPermanences();
+    	List<LocalDate> monthToValidate = new ArrayList<>();
+    	LocalDate date = null;
+    	LocalDate currentDate = LocalDate.now();
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/YYYY");
+    	for (Permanence permanence : permanenceNotClosed) {
+    		date = CharivariUtil.getLocalDateTimeFromDate(permanence.getStartDate()).toLocalDate();
+    		if (date.getMonthValue() != currentDate.getMonthValue()) {
+    			boolean onList = false;
+    			for (LocalDate dateOnList : monthToValidate) {
+    				if (dateOnList.format(formatter).equals(date.format(formatter))) {
+    					onList = true;
+    				}
+    			}
+    			if (!onList) {
+    				monthToValidate.add(date);
+    			}
+    		}
+		}
+    	// Create HashSet from ArrayList.
+        HashSet<LocalDate> set = new HashSet<>(monthToValidate);
+
+        // Create ArrayList from the set.
+        ArrayList<LocalDate> toReturn = new ArrayList<>(set);
+    	return toReturn;
     }
     
     @TransactionalReadOnly
@@ -132,4 +174,19 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     	}
     	return dao.getPermanenceBySlot(startToDate, endToDate);
     }
+    
+    @TransactionalUpdate
+    public void validateMonthPermanences(LocalDate date) {
+    	Integer year = date.getYear();
+    	Integer month = date.getMonthValue();
+    	LocalDate firstDay = LocalDate.of(year, month, 1);
+    	Date firstDayOfMonth = CharivariUtil.getDateFromLocalDateTime(LocalDate.of(year, month, 1).atTime(0, 0));
+    	Date lastDayOfMonth = CharivariUtil.getDateFromLocalDateTime(LocalDate.of(year, month, firstDay.lengthOfMonth()).atTime(23, 59));
+    	List<Permanence> toUpdate = dao.getPermanenceByDate(firstDayOfMonth, lastDayOfMonth);
+    	for (Permanence permanence : toUpdate) {
+			permanence.setIsOpen(false);
+			updatePermanence(permanence);
+		}
+    }
+    
 }

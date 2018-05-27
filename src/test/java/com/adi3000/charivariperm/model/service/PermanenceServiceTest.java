@@ -74,6 +74,7 @@ public class PermanenceServiceTest {
 		this.myPermanenceTest.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(7, 45)));
 		this.myPermanenceTest.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(10, 45)));
 		this.myPermanenceTest.setFamily(this.myFamilyTest);
+		this.myPermanenceTest.setIsOpen(true);
 		this.idPermanence = this.permanenceService.savePermanence(this.myPermanenceTest);
 		
 		Family family = new Family();
@@ -92,6 +93,7 @@ public class PermanenceServiceTest {
 		permanence.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(13, 00)));
 		permanence.setFamily(family);
 		permanence.setStatus(PermanenceStatus.HELP);
+		permanence.setIsOpen(true);
 		this.permanenceService.savePermanence(permanence);
 		
 		Permanence permanence2 = new Permanence();
@@ -99,6 +101,7 @@ public class PermanenceServiceTest {
 		permanence2.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(18, 30)));
 		permanence2.setFamily(family2);
 		permanence2.setStatus(PermanenceStatus.HELP);
+		permanence2.setIsOpen(true);
 		this.permanenceService.savePermanence(permanence2);
 		
 		Permanence permanence3 = new Permanence();
@@ -106,6 +109,7 @@ public class PermanenceServiceTest {
 		permanence3.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 9, 5).atTime(18, 30)));
 		permanence3.setFamily(family2);
 		permanence3.setStatus(PermanenceStatus.REPLACEMENT);
+		permanence3.setIsOpen(true);
 		this.permanenceService.savePermanence(permanence3);
 		
 		System.out.print(this.idPermanence);
@@ -115,6 +119,13 @@ public class PermanenceServiceTest {
 	public void testFindAllPermanence() {
 		System.out.println("---testFindAllPermanence---");
 		List<Permanence> permanences = this.permanenceService.findAllPermanences();
+		assertFalse(permanences.isEmpty());
+	}
+	
+	@Test
+	public void testFindAllOpenedPermanences() {
+		System.out.println("---testFindAllOpenedPermanences---");
+		List<Permanence> permanences = this.permanenceService.findAllOpenedPermanences();
 		assertFalse(permanences.isEmpty());
 	}
 	
@@ -132,6 +143,7 @@ public class PermanenceServiceTest {
 		permanence.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(10, 00)));
 		permanence.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(13, 00)));
 		permanence.setFamily(family);
+		permanence.setIsOpen(true);
 		permanence.setStatus(PermanenceStatus.DONE);
 		
 		long idPerm = this.permanenceService.savePermanence(permanence);
@@ -193,6 +205,7 @@ public class PermanenceServiceTest {
 		permanence.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 11, 13).atTime(7, 45)));
 		permanence.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 11, 13).atTime(9, 15)));
 		permanence.setFamily(this.myFamilyTest);
+		permanence.setIsOpen(true);
 		this.permanenceService.savePermanence(permanence);
 		
 		// Family set
@@ -204,6 +217,7 @@ public class PermanenceServiceTest {
 		perm2.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 11, 13).atTime(7, 45)));
 		perm2.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 11, 13).atTime(10, 45)));
 		perm2.setFamily(family);
+		perm2.setIsOpen(true);
 		this.permanenceService.savePermanence(perm2);
 				
 		LocalDate startDate = LocalDate.of(2017, 11, 13);
@@ -242,18 +256,49 @@ public class PermanenceServiceTest {
 		
 		// Permanence set
 		Permanence permanence = new Permanence();
-		permanence.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 11, 12).atTime(10, 00)));
-		permanence.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 11, 12).atTime(13, 00)));
+		permanence.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2018, 7, 12).atTime(10, 00)));
+		permanence.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2018, 7, 12).atTime(13, 00)));
 		permanence.setFamily(this.myFamilyTest);
 		permanence.setStatus(PermanenceStatus.NOT_CONFIRMED);
+		permanence.setIsOpen(true);
 		this.permanenceService.savePermanence(permanence);
 		
 		permanence.setFamily(family2);
-		this.permanenceService.updatePermanence(permanence);;
+		this.permanenceService.updatePermanence(permanence);
 		
 		List<Permanence> permanences = this.permanenceService.getReplacement();
 		System.out.print("Size:");
 		System.out.println(permanences.size());
 		assertEquals(permanences.size(), 1);
+	}
+	
+	@Test
+	public void testValidateMonthPermanences() {
+		System.out.println("---testGetReplacementPermanence---");
+		Family family2 = new Family();
+		family2.setLabel("Elea, Blandine, Amir");
+		family2.setId(this.familyService.saveFamily(family2));
+		family2.setImage(this.myImageTest);
+		
+		Long permanenceId;
+		
+		// Permanence set
+		Permanence permanence = new Permanence();
+		permanence.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2018, 1, 12).atTime(10, 00)));
+		permanence.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2018, 1, 12).atTime(13, 00)));
+		permanence.setFamily(this.myFamilyTest);
+		permanence.setStatus(PermanenceStatus.NOT_CONFIRMED);
+		permanence.setIsOpen(true);
+		permanenceId = this.permanenceService.savePermanence(permanence);
+		
+		permanence.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2018, 1, 13).atTime(10, 00)));
+		permanence.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2018, 1, 13).atTime(13, 00)));
+		this.permanenceService.savePermanence(permanence);
+		
+		this.permanenceService.validateMonthPermanences(LocalDate.of(2018, 1, 1));
+		
+		Permanence permanenceToTest = this.permanenceService.findById(permanenceId);
+		
+		assertEquals(permanenceToTest.getIsOpen(), false);
 	}
 }

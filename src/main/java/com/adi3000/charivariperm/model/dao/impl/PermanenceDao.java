@@ -63,7 +63,36 @@ public class PermanenceDao extends AbstractDAO<Permanence>  implements com.adi30
 		return permanences;
     }
     
+    public List<Permanence> getPermanenceByNotStatus(PermanenceStatus status) {
+    	Criteria req = getSession().createCriteria(Permanence.class)
+    			.add(
+	    				Restrictions.and(
+							Restrictions.ne("status", status),
+							Restrictions.lt("startDate", new Date())
+	    				)
+    				);
+    	@SuppressWarnings("unchecked")
+		List<Permanence> permanences = (List<Permanence>)req.list();
+		
+		return permanences;
+    }
+    
     public List<Permanence> getPermanenceByWeek(Date start, Date end) {
+    	Criteria req = getSession().createCriteria(Permanence.class)
+    			.add(
+	    				Restrictions.and(
+							Restrictions.ge("startDate", start),
+							Restrictions.le("endDate", end),
+							Restrictions.ne("status", PermanenceStatus.CANCEL)
+	    				)
+    				);
+    	@SuppressWarnings("unchecked")
+		List<Permanence> permanences = (List<Permanence>)req.list();
+		
+		return permanences;
+    }
+    
+    public List<Permanence> getPermanenceByDate(Date start, Date end) {
     	Criteria req = getSession().createCriteria(Permanence.class)
     			.add(
 	    				Restrictions.and(
@@ -84,6 +113,19 @@ public class PermanenceDao extends AbstractDAO<Permanence>  implements com.adi30
 	    				Restrictions.and(
 							Restrictions.neProperty("family.id", "originalFamilyId"),
 							Restrictions.ge("endDate", now)
+	    				)
+    				);
+    	@SuppressWarnings("unchecked")
+		List<Permanence> permanences = (List<Permanence>)req.list();
+		
+		return permanences;
+    }
+    
+    public List<Permanence> getOpenedPermanences() {
+    	Criteria req = getSession().createCriteria(Permanence.class)
+    			.add(
+	    				Restrictions.and(
+	    					Restrictions.eq("isOpen", true)
 	    				)
     				);
     	@SuppressWarnings("unchecked")

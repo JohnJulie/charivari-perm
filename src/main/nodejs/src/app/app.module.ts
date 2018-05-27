@@ -40,6 +40,8 @@ import { ROUTES } from './app.routes';
 import { FamiliesResolver } from './resolvers/families-resolver';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { CurrentStateService } from './services/shared-data/current-state.service';
+import { CounterPermanenceComponent } from './views/counter-permanence/counter-permanence.component';
+import { ParametersComponent } from './views/parameters/parameters.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { CurrentStateService } from './services/shared-data/current-state.servic
     ChooseReplacementComponent,
     PlanningPermanenceComponent,
     ReplacementPermanencesComponent,
-    DialogComponent
+    DialogComponent,
+    CounterPermanenceComponent,
+    ParametersComponent
   ],
   imports: [
     BrowserModule,
