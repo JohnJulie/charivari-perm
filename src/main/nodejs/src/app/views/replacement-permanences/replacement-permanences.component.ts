@@ -45,8 +45,10 @@ export class ReplacementPermanencesComponent implements OnInit {
       satHighlight: true,
       disableWeekends: true,
       showWeekNumbers: true,
-      editableDateField: false
+      editableDateField: false,
+      disableUntil: {year: moment().year(), month: moment().month() + 1, day: moment().date() - 1}
     };
+    console.log('moment().date():', moment().month());
     this.replacementForm = this.fb.group({
       date: [null, Validators.required],
       slot: [null, Validators.required]
@@ -72,7 +74,7 @@ export class ReplacementPermanencesComponent implements OnInit {
 
   public searchPermanence() {
     const dateFormDatepicker = this.replacementForm.value.date;
-    const date = dateFormDatepicker.date.year + '-' + dateFormDatepicker.date.month + '-' + dateFormDatepicker.date.day;
+    const date = moment(dateFormDatepicker.formatted).format('YYYY-MM-DD');
     this.permanenceService.getPermanenceBySlot(
       date,
       this.replacementForm.value.slot
