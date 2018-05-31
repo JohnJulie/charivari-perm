@@ -50,6 +50,10 @@ public class SchedulindServiceTest {
 		this.myFamilyTest = new Family();
 		this.myFamilyTest.setLabel("Tano, Olivia");
 		this.myFamilyTest.setId(this.familyService.saveFamily(this.myFamilyTest));
+		LocalDateTime startDateContract = LocalDate.of(2017, 8, 29).atTime(7, 45);
+		this.myFamilyTest.setStartDateContract(CharivariUtil.getDateFromLocalDateTime(startDateContract));
+		LocalDateTime endtDateContract = LocalDate.of(2018, 7, 27).atTime(18, 30);
+		this.myFamilyTest.setStartDateContract(CharivariUtil.getDateFromLocalDateTime(endtDateContract));
 		System.out.print(this.myFamilyTest.getId());
 		
 		this.mySchedulingTest = new Scheduling();
@@ -67,7 +71,7 @@ public class SchedulindServiceTest {
 	public void testFindAllScheduling() {
 		System.out.print("---testFindAllScheduling---");
 		List<Scheduling> schedulings = this.schedulingService.findAllSchedulings();
-		assertTrue(schedulings.isEmpty());
+		assertFalse(schedulings.isEmpty());
 	}
 	
 	@Test
@@ -76,6 +80,10 @@ public class SchedulindServiceTest {
 		// Family set
 		Family family = new Family();
 		family.setLabel("Elea, Blandine & Amir");
+		LocalDateTime startDateContract = LocalDate.of(2017, 8, 29).atTime(7, 45);
+		family.setStartDateContract(CharivariUtil.getDateFromLocalDateTime(startDateContract));
+		LocalDateTime endtDateContract = LocalDate.of(2018, 7, 27).atTime(18, 30);
+		family.setStartDateContract(CharivariUtil.getDateFromLocalDateTime(endtDateContract));
 		this.familyService.saveFamily(family);
 		
 		// Scheduling set
