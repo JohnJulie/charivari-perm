@@ -109,4 +109,18 @@
             columnName="IS_OPEN"
             defaultValueBoolean="true"/>
 	</changeSet>
+	<changeSet id="charivari-perm-1.0-02.6-add-holidays-table" author="juliejohn">
+		<createTable tableName="HOLIDAYS">
+			<column type="integer" name="HOLIDAYS_ID" autoIncrement="true"></column>
+			<column type="date" name="START_DATE"></column>
+			<column type="date" name="END_DATE"></column>
+		</createTable>
+		<addPrimaryKey columnNames="HOLIDAYS_ID" constraintName="PK_HOLIDAYS_ID" tableName="HOLIDAYS" />
+		<addColumn tableName="FAMILY">
+			<column type="date" name="START_DATE_CONTRACT"></column>
+		</addColumn>
+		<addColumn tableName="FAMILY">
+			<column type="date" name="END_DATE_CONTRACT"></column>
+		</addColumn>
+	</changeSet>
 </databaseChangeLog>

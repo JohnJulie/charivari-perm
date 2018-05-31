@@ -15,9 +15,9 @@
 	
 	<bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-        <property name="url" value="jdbc:postgresql://localhost:5432/charivari-perm-test" />
-        <property name="username" value="charivari-perm-test" />
-        <property name="password" value="charivari-perm-test" />
+        <property name="url" value="jdbc:postgresql://adi-server.local:7733/charivari-perm-test" />
+        <property name="username" value="charivari-perm" />
+        <property name="password" value="charivari-perm" />
 	</bean>
 	<bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
 		<property name="dataSource" ref="datasource" />
