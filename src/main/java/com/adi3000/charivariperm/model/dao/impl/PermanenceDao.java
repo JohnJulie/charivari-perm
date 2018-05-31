@@ -133,5 +133,28 @@ public class PermanenceDao extends AbstractDAO<Permanence>  implements com.adi30
 		
 		return permanences;
     }
-	
+    
+    public List<Permanence> getPermanencesByFamily(Long originalFamilyId) {
+    	Date now = CharivariUtil.getDateFromLocalDateTime(LocalDateTime.now());
+    	Criteria req = getSession().createCriteria(Permanence.class)
+    			.add(Restrictions.disjunction()
+    					.add(
+		    				Restrictions.and(
+		    					Restrictions.eq("originalFamilyId", originalFamilyId),
+		    					Restrictions.le("endDate", now)
+		    				)
+	    				)
+    					.add(
+		    				Restrictions.and(
+		    					Restrictions.eq("family.id", originalFamilyId),
+		    					Restrictions.eq("status", PermanenceStatus.DONE),
+		    					Restrictions.le("endDate", now)
+		    				)
+	    				)
+    				);
+    	@SuppressWarnings("unchecked")
+		List<Permanence> permanences = (List<Permanence>)req.list();
+		
+		return permanences;
+    }	
 }

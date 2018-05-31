@@ -62,7 +62,6 @@ export class ChooseReplacementComponent implements OnInit {
             this.familiesGrid[index] = {family: family, cols: 6, rows: 1};
           }
         });
-        console.log('this.familiesGrid:', this.familiesGrid);
       }, error => console.log('resolve family error:', error)
     );
   }

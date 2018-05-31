@@ -111,4 +111,11 @@ public class RestApiService {
 		return permanenceService.getNotClosedPermanences();
 	}
 	
+	@GET
+	@Path("count/{familyId}")
+	@Produces(value={MediaType.APPLICATION_JSON})
+	public List<Permanence> getPermCountByFamily(@PathParam("familyId") Long familyId){
+		return permanenceService.getPermCountByFamily(familyId);
+	}
+	
 }

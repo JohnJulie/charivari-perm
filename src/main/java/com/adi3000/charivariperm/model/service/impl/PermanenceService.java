@@ -189,4 +189,9 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
 		}
     }
     
+    @TransactionalReadOnly
+    public List<Permanence> getPermCountByFamily(Long familyId) {
+    	return dao.getPermanencesByFamily(familyId);
+    }
+    
 }

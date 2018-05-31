@@ -37,4 +37,6 @@ public interface PermanenceService {
 	void validateMonthPermanences(LocalDate date);
 	
 	List<LocalDate> getNotClosedPermanences();
+	
+	List<Permanence> getPermCountByFamily(Long familyId);
 }

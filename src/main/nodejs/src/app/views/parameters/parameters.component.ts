@@ -31,7 +31,12 @@ export class ParametersComponent implements OnInit {
   }
 
   public validateMonth() {
-    this.permanenceService.validateMonth(this.selectedMonth.format('YYYY-MM-DD')).subscribe();
+    this.permanenceService.validateMonth(this.selectedMonth.format('YYYY-MM-DD')).subscribe(
+      (res) => {
+        _.remove(this.monthToClose, this.selectedMonth);
+        this.selectedMonth = null;
+      }
+    );
   }
 
 }

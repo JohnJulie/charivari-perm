@@ -70,4 +70,11 @@ export class PermanenceService {
       });
       return this.http.get(this.apiUrl + 'permanence/tovalidate', { headers: headers });
     }
+
+    getCountPermByFamily(familyId) {
+      const headers = new HttpHeaders({
+        'Content-type': 'application/json'
+      });
+      return this.http.get(this.apiUrl + 'count/' + familyId, { headers: headers });
+}
 }

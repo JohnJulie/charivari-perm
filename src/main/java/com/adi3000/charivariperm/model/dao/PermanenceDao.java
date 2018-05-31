@@ -26,5 +26,7 @@ public interface PermanenceDao extends DAO<Permanence> {
 	public List<Permanence> getPermanenceBySlot(Date startDate, Date endDate);
 	
 	public List<Permanence> getOpenedPermanences();
+	
+	public List<Permanence> getPermanencesByFamily(Long originalFamilyId);
     
 }

@@ -18,6 +18,6 @@ export const ROUTES: Routes = [
   { path: 'permanence/:id/replacement', component: ChooseReplacementComponent, resolve: { families: FamiliesResolver } },
   { path: 'planning', component: PlanningPermanenceComponent },
   { path: 'replacements', component: ReplacementPermanencesComponent, resolve: { families: FamiliesResolver } },
-  { path: 'counter', component: CounterPermanenceComponent },
+  { path: 'counter', component: CounterPermanenceComponent, resolve: { families: FamiliesResolver } },
   { path: 'parameters', component: ParametersComponent }
 ];
