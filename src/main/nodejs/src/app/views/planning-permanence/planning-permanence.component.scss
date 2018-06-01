@@ -4,6 +4,27 @@ $dark-color: #000;
 .container {
   padding-left: #{$widthSidebar + 25px};
   padding-right: 25px;
+
+  .title-container {
+    height: 20vh;
+    position: relative;
+    h2 {
+      position: absolute;
+      top: 50%; left: 50%; /* à 50%/50% du parent référent */
+      transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+      font-size: 1.5em;
+      font-weight: bold;
+
+    }
+  }
+
+  .rempalcement-container {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: overlay;
+  }
 }
 
 .btn {
@@ -30,7 +51,6 @@ $dark-color: #000;
 }
 
 .date-container {
-  height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,7 +75,6 @@ $dark-color: #000;
 }
 
 .family-container {
-  height: 30vh;
   display: flex;
   align-items: center;
   justify-content: center;

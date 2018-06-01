@@ -48,7 +48,6 @@ export class ReplacementPermanencesComponent implements OnInit {
       editableDateField: false,
       disableUntil: {year: moment().year(), month: moment().month() + 1, day: moment().date() - 1}
     };
-    console.log('moment().date():', moment().month());
     this.replacementForm = this.fb.group({
       date: [null, Validators.required],
       slot: [null, Validators.required]
@@ -93,13 +92,13 @@ export class ReplacementPermanencesComponent implements OnInit {
             );
           }
         } else if (result.length > 1) {
-          console.log('here!');
           this.choosePermanence = [];
           _.each(result, (perm) => {
             perm.originalFamilyImage = _.find(this.families, ['id', perm.originalFamilyId]).image.url;
             this.choosePermanence.push(perm);
           });
-          const dialogRef = this.dialog.open(DialogComponent, { data: { permanences: this.choosePermanence }, width: '450px', height: '250px' });
+          const dialogRef = this.dialog.open(DialogComponent,
+            { data: { permanences: this.choosePermanence }, width: '450px', height: '250px' });
           dialogRef.afterClosed().subscribe(
             (toReplace) => {
               const permToReplace = _.omit(toReplace, ['originalFamilyImage']);

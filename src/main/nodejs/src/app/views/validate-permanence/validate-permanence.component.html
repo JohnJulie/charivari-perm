@@ -1,34 +1,41 @@
-<div class="container" *ngIf="havePermanence">
-  <div class="date-container">
-    <div class="actual-date">{{ startDate | date: 'EEEE d MMMM'}}</div>
-    <button class="btn btn-now" [routerLink]="['']">Permanence(s) en cours</button>
+<div class="container">
+  <div class="title-container">
+    <h2>Valider sa permanence</h2>
   </div>
-  <div fxLayout="row" fxLayoutAlign="space-around center"  class="family-container">
-    <div *ngFor="let perm of currentPermanences">
-      <div class="titlePerm" fxLayout="column" fxLayoutAlign="space-around center">
-        <span *ngIf="perm.family.id === perm.originalFamilyId">Permanence de {{perm.family.label}}:</span>
-        <span *ngIf="perm.family.id !== perm.originalFamilyId">Remplacé par {{perm.family.label}}:</span>
-        <span class="hour"> De {{perm.startDate | date: 'shortTime'}} à {{perm.endDate | date: 'shortTime'}}</span>
-      </div>
-
-      <div  fxLayout="row" fxLayoutAlign="center center">
-        <div>
-          <div class="relative" (click)="setPermanceToCheck(perm)">
-            <img class="circle-img" src="{{perm.family.image.url}}">
-            <div class="fa fa-check fa-4x check" *ngIf="perm.status === 'DONE'"></div>
-          </div>
-          <!--<div class="legend-circle">{{perm.family.label}}</div>-->
+  <div class="validate-container" *ngIf="havePermanence">
+    <div class="date-container">
+      <div class="actual-date">{{ startDate | date: 'EEEE d MMMM'}}</div>
+      <button class="btn btn-now" [routerLink]="['']">Permanence(s) en cours</button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center" class="family-container">
+      <div *ngFor="let perm of currentPermanences">
+        <div class="titlePerm" fxLayout="column" fxLayoutAlign="space-around center">
+          <span *ngIf="perm.family.id === perm.originalFamilyId">Permanence de {{perm.family.label}}:</span>
+          <span *ngIf="perm.family.id !== perm.originalFamilyId">Remplacé par {{perm.family.label}}:</span>
+          <span class="hour"> De {{perm.startDate | date: 'shortTime'}} à {{perm.endDate | date: 'shortTime'}}</span>
         </div>
-        <div [routerLink]="['/permanence/' + perm.id + '/replacement']" fxLayout="column" fxLayoutAlign="space-around center">
-          <img class="circle-img" src="assets/images/remplacement.svg">
-          <!--<div class="legend-circle">Remplacement</div>-->
+
+        <div  fxLayout="row" fxLayoutAlign="center center">
+          <div>
+            <div class="relative" (click)="setPermanceToCheck(perm)">
+              <img class="circle-img" src="{{perm.family.image.url}}">
+              <div class="fa fa-check fa-4x check" *ngIf="perm.status === 'DONE'"></div>
+            </div>
+            <!--<div class="legend-circle">{{perm.family.label}}</div>-->
+          </div>
+          <div [routerLink]="['/permanence/' + perm.id + '/replacement']" fxLayout="column" fxLayoutAlign="space-around center">
+            <img class="circle-img" src="assets/images/remplacement.svg">
+            <!--<div class="legend-circle">Remplacement</div>-->
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="container" *ngIf="!havePermanence">
-  <h1>Il n'y a pas de permanence en cours.</h1>
+
+  <div class="validate-container" fxLayout="column" fxLayoutAlign="center center" *ngIf="!havePermanence">
+    <img src="assets/images/pause.png">
+    <h1>Il n'y a pas de permanence en cours.</h1>
+  </div>
 </div>
 
 

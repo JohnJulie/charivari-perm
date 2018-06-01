@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import { FamilyService } from '../../services/family/family.service';
 import { FamilyModel } from '../../models/family.model';
 import { ActivatedRoute } from '@angular/router';
+import { CurrentStateService } from '../../services/shared-data/current-state.service';
 
 @Component({
   selector: 'app-counter-permanence',
@@ -21,10 +22,12 @@ export class CounterPermanenceComponent implements OnInit {
 
   constructor(
     private permanenceService: PermanenceService,
+    private stateService: CurrentStateService,
     private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.stateService.updateState(3);
     this.colNumber = 5;
     this.familyCount = [];
     this.activatedRoute.data.subscribe(

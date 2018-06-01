@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="title-container">
+    <h2>Décompte des permanences</h2>
+  </div>
   <div class="family-container" *ngIf="familyCount.length === families.length-1" (window:resize)="onResize($event)">
     <md-grid-list class="familygrid" cols="{{colNumber}}" rowHeight="140px">
       <md-grid-tile
