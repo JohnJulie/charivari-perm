@@ -93,7 +93,7 @@ public class PermanenceServiceTest {
 		this.idPermanence = this.permanenceService.savePermanence(this.myPermanenceTest);
 		
 		Family family = new Family();
-		family.setLabel("Noé, Julie & Vianney");
+		family.setLabel("Noï¿½, Julie & Vianney");
 		family.setId(this.familyService.saveFamily(family));
 		family.setImage(this.myImageTest);
 		
@@ -225,7 +225,7 @@ public class PermanenceServiceTest {
 		
 		// Family set
 		Family family = new Family();
-		family.setLabel("Arya, Rachel & Jérôme");
+		family.setLabel("Arya, Rachel & J\uFFFDr\uFFFDme");
 		family.setImage(this.myImageTest);
 		this.familyService.saveFamily(family);
 		Permanence perm2 = new Permanence();
