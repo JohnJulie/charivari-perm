@@ -93,7 +93,7 @@ public class PermanenceServiceTest {
 		this.idPermanence = this.permanenceService.savePermanence(this.myPermanenceTest);
 		
 		Family family = new Family();
-		family.setLabel("No�, Julie & Vianney");
+		family.setLabel("No\uFFFD, Julie & Vianney");
 		family.setId(this.familyService.saveFamily(family));
 		family.setImage(this.myImageTest);
 		
