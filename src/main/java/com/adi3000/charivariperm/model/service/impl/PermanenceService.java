@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 import com.adi3000.charivariperm.model.dao.impl.PermanenceDao;
 import com.adi3000.charivariperm.model.dataobject.Permanence;
 import com.adi3000.charivariperm.model.dataobject.Scheduling;
+import com.adi3000.charivariperm.model.dataobject.Family;
+import com.adi3000.charivariperm.model.dataobject.Holidays;
 import com.adi3000.charivariperm.model.enumeration.PermanenceStatus;
 import com.adi3000.common.CharivariUtil;
 import com.adi3000.common.orm.dao.DAOException;
@@ -33,6 +35,10 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
 	
 	@Inject
 	private SchedulingService schedulingService;
+	@Inject
+	private FamilyService familyService;
+	@Inject
+	private HolidaysService holidaysService; 
      
 	@TransactionalUpdate
     public long savePermanence(Permanence permanence) {
@@ -108,18 +114,32 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     
     @TransactionalUpdate
     public void generatePermanencesFamily(Long schedulingId){
-    	LocalDateTime endPermanence = LocalDate.of(2018, 7, 29).atTime(19,0);
+    	List<Holidays> holidays = this.holidaysService.findAllHolidays();
     	Scheduling scheduling = this.schedulingService.findById(schedulingId);
+    	Family family = this.familyService.findById(scheduling.getFamily().getId());
+    	LocalDateTime endPermanence = CharivariUtil.getLocalDateTimeFromDate(family.getEndDateContract());
     	LocalDateTime lastDate = CharivariUtil.getLocalDateTimeFromDate(scheduling.getStartHour());
     	while (endPermanence.isAfter(lastDate)) {
-    		Permanence perm = new Permanence();
-    		perm.setFamily(scheduling.getFamily());
-    		perm.setStatus(PermanenceStatus.NOT_CONFIRMED);
-    		perm.setIsOpen(true);
-    		perm.setStartDate(CharivariUtil.getDateFromLocalDateTime(lastDate));
-    		perm.setEndDate(CharivariUtil.getDateFromLocalDateTime(lastDate.plusMinutes(scheduling.getDuration())));
-    		this.savePermanence(perm);
-
+    		boolean onHolidays = false;
+    		for(Holidays holiday : holidays ) {
+    			LocalDateTime startHoliday = CharivariUtil.getLocalDateTimeFromDate(holiday.getStartDate());
+    			LocalDateTime endHoliday = CharivariUtil.getLocalDateTimeFromDate(holiday.getEndDate());
+    			if (
+    					(lastDate.isAfter(startHoliday) && lastDate.isBefore(endHoliday)) ||
+    					(lastDate.plusMinutes(scheduling.getDuration()).isAfter(startHoliday) && lastDate.plusMinutes(scheduling.getDuration()).isBefore(endHoliday))
+    					) {
+    				onHolidays = true;
+    			}
+    		}
+    		if (!onHolidays) {
+    			Permanence perm = new Permanence();
+        		perm.setFamily(family);
+        		perm.setStatus(PermanenceStatus.NOT_CONFIRMED);
+        		perm.setIsOpen(true);
+        		perm.setStartDate(CharivariUtil.getDateFromLocalDateTime(lastDate));
+        		perm.setEndDate(CharivariUtil.getDateFromLocalDateTime(lastDate.plusMinutes(scheduling.getDuration())));
+        		this.savePermanence(perm);
+    		}
     		lastDate = lastDate.plusDays(scheduling.getFrequency());
     	}
     }

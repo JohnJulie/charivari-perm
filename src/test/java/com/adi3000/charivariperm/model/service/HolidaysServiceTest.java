@@ -41,10 +41,10 @@ public class HolidaysServiceTest {
 	public void setUp () {
 		System.out.print("---@Before---");
 		this.winterHolidays = new Holidays();
-		LocalDateTime startDateContract = LocalDate.of(2017, 12, 25).atTime(7, 45);
-		this.winterHolidays.setStartDate(CharivariUtil.getDateFromLocalDateTime(startDateContract));
-		LocalDateTime endtDateContract = LocalDate.of(2018, 1, 2).atTime(18, 30);
-		this.winterHolidays.setEndDate(CharivariUtil.getDateFromLocalDateTime(endtDateContract));
+		LocalDateTime startDateHoliday = LocalDate.of(2017, 12, 25).atTime(7, 45);
+		this.winterHolidays.setStartDate(CharivariUtil.getDateFromLocalDateTime(startDateHoliday));
+		LocalDateTime endtDateHoliday = LocalDate.of(2018, 1, 2).atTime(18, 30);
+		this.winterHolidays.setEndDate(CharivariUtil.getDateFromLocalDateTime(endtDateHoliday));
 		this.idValue = this.holidaysService.saveHolidays(this.winterHolidays);
 		this.winterHolidays.setId(this.idValue);
 		System.out.print(this.idValue);

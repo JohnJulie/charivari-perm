@@ -54,7 +54,7 @@ public class FamilyServiceTest {
 		LocalDateTime startDateContract = LocalDate.of(2017, 8, 29).atTime(7, 45);
 		this.myFamilyTest.setStartDateContract(CharivariUtil.getDateFromLocalDateTime(startDateContract));
 		LocalDateTime endtDateContract = LocalDate.of(2018, 7, 27).atTime(18, 30);
-		this.myFamilyTest.setStartDateContract(CharivariUtil.getDateFromLocalDateTime(endtDateContract));
+		this.myFamilyTest.setEndDateContract(CharivariUtil.getDateFromLocalDateTime(endtDateContract));
 		this.idValue = this.familyService.saveFamily(this.myFamilyTest);
 		this.myFamilyTest.setId(this.idValue);
 		System.out.print(this.idValue);
