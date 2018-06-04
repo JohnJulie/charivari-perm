@@ -16,8 +16,10 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Component;
 
 import com.adi3000.charivariperm.model.dataobject.Family;
+import com.adi3000.charivariperm.model.dataobject.Holidays;
 import com.adi3000.charivariperm.model.dataobject.Permanence;
 import com.adi3000.charivariperm.model.service.FamilyService;
+import com.adi3000.charivariperm.model.service.impl.HolidaysService;
 import com.adi3000.charivariperm.model.service.impl.PermanenceService;
 
 @Component
@@ -28,6 +30,8 @@ public class RestApiService {
 	private FamilyService familyService;
 	@Inject
 	private PermanenceService permanenceService;
+	@Inject
+	private HolidaysService holidaysService;
 	
 	
 	@GET
@@ -80,6 +84,22 @@ public class RestApiService {
 	@Produces(value={MediaType.APPLICATION_JSON})
 	public void updatePermanence(Permanence permanence){
 		permanenceService.updatePermanence(permanence);
+	}
+	
+	@GET
+	@Path("/holidays")
+	@Produces(value={MediaType.APPLICATION_JSON})
+	public List<Holidays> getHolidays(){
+		return holidaysService.findAllHolidays();
+	}
+	
+	@POST
+	@Path("/holidays/from/{fromDate}/to/{toDate}")
+	@Produces(value={MediaType.APPLICATION_JSON})
+	public void saveHolidays(@PathParam("fromDate") String fromDate, @PathParam("toDate") String toDate){
+		LocalDateTime startDate = LocalDate.parse(fromDate).atTime(00, 00, 00);
+		LocalDateTime endDate = LocalDate.parse(toDate).atTime(23, 59, 59);
+		holidaysService.generateHolidaysFromDates(startDate, endDate);
 	}
 	
 	@POST

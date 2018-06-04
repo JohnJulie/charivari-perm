@@ -1,5 +1,7 @@
 package com.adi3000.charivariperm.model.dataobject;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +26,12 @@ public class Family {
 	@ManyToOne
 	@JoinColumn(name = "IMAGE_ID")
 	private Image image;
+	
+	@Column(name = "START_DATE_CONTRACT")
+	private Date startDateContract;
+	
+	@Column(name = "END_DATE_CONTRACT")
+	private Date endDateContract;
 	
 	/**
 	 * @return the id
@@ -60,6 +68,30 @@ public class Family {
 	 */
 	public void setImage(Image image) {
 		this.image = image;
+	}
+	/**
+	 * @return the startDateContract
+	 */
+	public Date getStartDateContract() {
+		return startDateContract;
+	}
+	/**
+	 * @param startDateContract the startDateContract to set
+	 */
+	public void setStartDateContract(Date startDateContract) {
+		this.startDateContract = startDateContract;
+	}
+	/**
+	 * @return the endDateContract
+	 */
+	public Date getEndDateContract() {
+		return endDateContract;
+	}
+	/**
+	 * @param endDateContract the endDateContract to set
+	 */
+	public void setEndDateContract(Date endDateContract) {
+		this.endDateContract = endDateContract;
 	}
 	
 }

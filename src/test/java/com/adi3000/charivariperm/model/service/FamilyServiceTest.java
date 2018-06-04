@@ -2,6 +2,8 @@ package com.adi3000.charivariperm.model.service;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.adi3000.charivariperm.model.dataobject.Family;
 import com.adi3000.charivariperm.model.dataobject.Image;
 import com.adi3000.charivariperm.model.service.FamilyService;
+import com.adi3000.common.CharivariUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring/application-config.xml" })
@@ -48,6 +51,10 @@ public class FamilyServiceTest {
 		this.myFamilyTest = new Family();
 		this.myFamilyTest.setLabel("William, Julie & John");
 		this.myFamilyTest.setImage(this.myImageTest);
+		LocalDateTime startDateContract = LocalDate.of(2017, 8, 29).atTime(7, 45);
+		this.myFamilyTest.setStartDateContract(CharivariUtil.getDateFromLocalDateTime(startDateContract));
+		LocalDateTime endtDateContract = LocalDate.of(2018, 7, 27).atTime(18, 30);
+		this.myFamilyTest.setEndDateContract(CharivariUtil.getDateFromLocalDateTime(endtDateContract));
 		this.idValue = this.familyService.saveFamily(this.myFamilyTest);
 		this.myFamilyTest.setId(this.idValue);
 		System.out.print(this.idValue);
