@@ -22,6 +22,7 @@ import com.adi3000.charivariperm.model.dataobject.Family;
 import com.adi3000.charivariperm.model.dataobject.Image;
 import com.adi3000.charivariperm.model.dataobject.Permanence;
 import com.adi3000.charivariperm.model.dataobject.Scheduling;
+import com.adi3000.charivariperm.model.dataobject.Holidays;
 import com.adi3000.charivariperm.model.enumeration.PermanenceStatus;
 import com.adi3000.charivariperm.model.service.FamilyService;
 import com.adi3000.charivariperm.model.service.PermanenceService;
@@ -40,6 +41,9 @@ public class PermanenceServiceTest {
 	@Inject
 	private transient FamilyService familyService;
 	private Family myFamilyTest;
+	@Inject
+	private transient HolidaysService holidaysService;
+	private Holidays winterHolidays;
 	@Inject
 	private transient PermanenceService permanenceService;
 	private Permanence myPermanenceTest;
@@ -64,9 +68,20 @@ public class PermanenceServiceTest {
 		this.myImageTest.setUrl("asset/unknow.png");
 		this.imageService.saveImage(this.myImageTest);
 		
+		this.winterHolidays = new Holidays();
+		LocalDateTime startDateHoliday = LocalDate.of(2017, 12, 25).atTime(7, 45);
+		this.winterHolidays.setStartDate(CharivariUtil.getDateFromLocalDateTime(startDateHoliday));
+		LocalDateTime endtDateHoliday = LocalDate.of(2018, 1, 2).atTime(18, 30);
+		this.winterHolidays.setEndDate(CharivariUtil.getDateFromLocalDateTime(endtDateHoliday));
+		this.winterHolidays.setId(this.holidaysService.saveHolidays(this.winterHolidays));
+		
 		this.myFamilyTest = new Family();
 		this.myFamilyTest.setLabel("William, Julie & Adrien");
 		this.myFamilyTest.setImage(this.myImageTest);
+		LocalDateTime startDateContract = LocalDate.of(2017, 8, 29).atTime(7, 45);
+		this.myFamilyTest.setStartDateContract(CharivariUtil.getDateFromLocalDateTime(startDateContract));
+		LocalDateTime endtDateContract = LocalDate.of(2018, 6, 1).atTime(18, 30);
+		this.myFamilyTest.setEndDateContract(CharivariUtil.getDateFromLocalDateTime(endtDateContract));
 		this.myFamilyTest.setId(this.familyService.saveFamily(this.myFamilyTest));
 		System.out.print(this.myFamilyTest.getId());
 		
@@ -78,7 +93,7 @@ public class PermanenceServiceTest {
 		this.idPermanence = this.permanenceService.savePermanence(this.myPermanenceTest);
 		
 		Family family = new Family();
-		family.setLabel("Noé, Julie & Vianney");
+		family.setLabel("No\uFFFD, Julie & Vianney");
 		family.setId(this.familyService.saveFamily(family));
 		family.setImage(this.myImageTest);
 		
@@ -210,7 +225,7 @@ public class PermanenceServiceTest {
 		
 		// Family set
 		Family family = new Family();
-		family.setLabel("Arya, Rachel & Jérôme");
+		family.setLabel("Arya, Rachel & J\uFFFDr\uFFFDme");
 		family.setImage(this.myImageTest);
 		this.familyService.saveFamily(family);
 		Permanence perm2 = new Permanence();
@@ -240,6 +255,21 @@ public class PermanenceServiceTest {
 		System.out.println(schedulingId);
 		
 		this.permanenceService.generatePermanencesFamily(schedulingId);
+		
+		System.out.print("test holiday generation:");
+		LocalDateTime startDate = LocalDate.of(2017, 12, 26).atTime(7, 45);
+		LocalDateTime endDate = LocalDate.of(2018, 1, 2).atTime(18, 30);
+		List<Permanence> holidayPerm = this.permanenceService.getWeekPermanences(startDate, endDate);
+		System.out.println(holidayPerm.size());
+		assertEquals(holidayPerm.size(), 0);
+		
+		System.out.print("test contract generation:");
+		LocalDateTime startDateContractTest = LocalDate.of(2018, 6, 4).atTime(7, 45);
+		LocalDateTime endDateContractTest = LocalDate.of(2018, 6, 8).atTime(18, 30);
+		List<Permanence> contractPerm = this.permanenceService.getWeekPermanences(startDateContractTest, endDateContractTest);
+		System.out.println(contractPerm.size());
+		assertEquals(contractPerm.size(), 0);
+
 		List<Permanence> permanences = this.permanenceService.findAllPermanences();
 		System.out.print("Size:");
 		System.out.println(permanences.size());

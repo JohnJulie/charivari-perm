@@ -13,11 +13,30 @@
 		</repository>
 	</repositories>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springframework.version>4.3.11.RELEASE</springframework.version>
 		<hibernate.version>5.1.10.Final</hibernate.version>
 		<liquibase.version>3.5.3</liquibase.version>
 		<jersey.version>2.25.1</jersey.version>
 	</properties>
+	<distributionManagement>
+		<repository>
+			<id>release</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://code.adi3000.com/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://code.adi3000.com/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<scm>
+		<url>https://github.com/JohnJulie/charivari-perm.git</url>
+		<connection>scm:git:https://github.com/JohnJulie/charivari-perm.git</connection>
+		<developerConnection>scm:git:https://github.com/JohnJulie/charivari-perm.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
 	<dependencies>
 
 		<!-- Spring -->
@@ -207,7 +226,7 @@
 				<version>2.0.4</version>
 				<executions>
 					<execution>
-						<id>requirejs-optimize</id>
+						<id>ng-build</id>
 						<phase>process-classes</phase>
 						<goals>
 							<goal>run</goal>
