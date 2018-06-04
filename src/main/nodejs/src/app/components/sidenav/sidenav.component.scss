@@ -1,4 +1,4 @@
-$widthSidebar: 300px;
+$widthSidebar: 200px;
 
 md-sidenav {
   position: fixed;
@@ -7,7 +7,7 @@ md-sidenav {
   bottom: 0;
   width: $widthSidebar;
   background-color: #d1ecfa;
-  
+
   .current {
   	background-color: #d1fadf;
   }

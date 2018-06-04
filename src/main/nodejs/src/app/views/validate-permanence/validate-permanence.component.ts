@@ -25,6 +25,7 @@ export class ValidatePermanenceComponent implements OnInit {
   public startHour: string;
   public endHour: string;
   public previousUrl: string;
+  public showCurrentButton: boolean;
 
   constructor(
     private permanenceService: PermanenceService,
@@ -35,7 +36,11 @@ export class ValidatePermanenceComponent implements OnInit {
 
   ngOnInit() {
     this.currentStateService.state.subscribe(
-      (state => this.previousUrl = state)
+      (state => {
+        this.previousUrl = state;
+        this.showCurrentButton = !_.isEmpty(this.previousUrl) && this.previousUrl !== 'permanence';
+        console.log('this.previousUrl:', this.previousUrl, _.isEmpty(this.previousUrl), this.showCurrentButton);
+      })
     );
     if (this.activatedRoute.snapshot.paramMap.get('id')) {
       this.permanenceId = this.activatedRoute.snapshot.paramMap.get('id');
@@ -60,7 +65,6 @@ export class ValidatePermanenceComponent implements OnInit {
   }
 
   public getCurrentPermanence() {
-    console.log('plop');
     this.permanenceService.getCurrentPermanence().subscribe(
       (result: Array<PermanenceModel>) => {
           console.log('result:', result);

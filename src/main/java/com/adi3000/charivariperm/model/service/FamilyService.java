@@ -10,6 +10,8 @@ public interface FamilyService {
 	
 	List<Family> findAllFamilies();
 	
+	List<Family> findAllFamiliesWithCurrentContract();
+	
 	void deleteFamilyById(Long id);
 	
 	Family findById(Long id);

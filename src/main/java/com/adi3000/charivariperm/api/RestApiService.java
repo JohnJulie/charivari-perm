@@ -45,7 +45,7 @@ public class RestApiService {
 	@Path("/families")
 	@Produces(value={MediaType.APPLICATION_JSON})
 	public List<Family> getFamilies(){
-		return familyService.findAllFamilies();
+		return familyService.findAllFamiliesWithCurrentContract();
 	}
 	
 	@GET

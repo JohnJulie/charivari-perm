@@ -1,4 +1,4 @@
-$widthSidebar: 300px;
+$widthSidebar: 200px;
 $dark-color: #000;
 
 .container {
@@ -6,7 +6,7 @@ $dark-color: #000;
   padding-right: 25px;
 
   .title-container {
-    height: 20vh;
+    height: 15vh;
     position: relative;
     h2 {
       position: absolute;
@@ -14,7 +14,6 @@ $dark-color: #000;
       transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
       font-size: 1.5em;
       font-weight: bold;
-
     }
   }
 

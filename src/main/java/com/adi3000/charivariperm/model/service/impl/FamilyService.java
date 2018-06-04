@@ -34,6 +34,11 @@ public class FamilyService implements com.adi3000.charivariperm.model.service.Fa
     public List<Family> findAllFamilies() {
         return dao.findAll();
     }
+	
+	@TransactionalReadOnly
+    public List<Family> findAllFamiliesWithCurrentContract() {
+        return dao.findAllWithCurrentContract();
+    }
  
 	@TransactionalUpdate
     public void deleteFamilyById(Long id) {

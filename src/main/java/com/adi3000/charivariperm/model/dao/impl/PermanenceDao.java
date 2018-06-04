@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.adi3000.charivariperm.model.dataobject.Family;
 import com.adi3000.charivariperm.model.dataobject.Permanence;
 import com.adi3000.charivariperm.model.enumeration.PermanenceStatus;
 import com.adi3000.common.CharivariUtil;
@@ -134,20 +135,22 @@ public class PermanenceDao extends AbstractDAO<Permanence>  implements com.adi30
 		return permanences;
     }
     
-    public List<Permanence> getPermanencesByFamily(Long originalFamilyId) {
+    public List<Permanence> getPermanencesByFamily(Family family) {
     	Date now = CharivariUtil.getDateFromLocalDateTime(LocalDateTime.now());
     	Criteria req = getSession().createCriteria(Permanence.class)
     			.add(Restrictions.disjunction()
     					.add(
 		    				Restrictions.and(
-		    					Restrictions.eq("originalFamilyId", originalFamilyId),
+		    					Restrictions.eq("originalFamilyId", family.getId()),
+		    					Restrictions.ge("startDate", family.getStartDateContract()),
 		    					Restrictions.le("endDate", now)
 		    				)
 	    				)
     					.add(
 		    				Restrictions.and(
-		    					Restrictions.eq("family.id", originalFamilyId),
+		    					Restrictions.eq("family.id", family.getId()),
 		    					Restrictions.eq("status", PermanenceStatus.DONE),
+		    					Restrictions.ge("startDate", family.getStartDateContract()),
 		    					Restrictions.le("endDate", now)
 		    				)
 	    				)

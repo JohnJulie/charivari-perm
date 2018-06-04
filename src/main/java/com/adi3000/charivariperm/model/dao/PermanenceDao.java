@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+import com.adi3000.charivariperm.model.dataobject.Family;
 import com.adi3000.charivariperm.model.dataobject.Permanence;
 import com.adi3000.charivariperm.model.enumeration.PermanenceStatus;
 import com.adi3000.common.orm.dao.DAO;
@@ -27,6 +28,6 @@ public interface PermanenceDao extends DAO<Permanence> {
 	
 	public List<Permanence> getOpenedPermanences();
 	
-	public List<Permanence> getPermanencesByFamily(Long originalFamilyId);
+	public List<Permanence> getPermanencesByFamily(Family family);
     
 }

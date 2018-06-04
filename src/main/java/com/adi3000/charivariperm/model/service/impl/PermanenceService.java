@@ -95,7 +95,6 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     @TransactionalReadOnly
     public List<Permanence> getCurrentPermanences() {
     	LocalDateTime now = LocalDateTime.now();
-    	// LocalDateTime now = LocalDate.of(2017, 8, 29).atTime(10, 15);
     	return dao.getPermanenceByDate(CharivariUtil.getDateFromLocalDateTime(now));
     }
     
@@ -211,7 +210,8 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     
     @TransactionalReadOnly
     public List<Permanence> getPermCountByFamily(Long familyId) {
-    	return dao.getPermanencesByFamily(familyId);
+    	Family family = this.familyService.findById(familyId);
+    	return dao.getPermanencesByFamily(family);
     }
     
 }
