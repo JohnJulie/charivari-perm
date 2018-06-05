@@ -2,21 +2,20 @@ $widthSidebar: 200px;
 $dark-color: #000;
 
 .container {
-  padding-left: #{$widthSidebar + 25px};
-  padding-right: 25px;
-}
-.title-container {
-  height: 15vh;
-  position: relative;
-  h2 {
-    position: absolute;
-    top: 50%; left: 50%; /* à 50%/50% du parent référent */
-    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
-    font-size: 1.5em;
-    font-weight: bold;
+  .title-container {
+    height: 15vh;
+    position: relative;
+    h2 {
+      position: absolute;
+      top: 50%; left: 50%; /* à 50%/50% du parent référent */
+      transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+      font-size: 1.5em;
+      font-weight: bold;
 
+    }
   }
 }
+
 .add-replacement {
   height: 10vh;
   border-top: solid #000000 2px;

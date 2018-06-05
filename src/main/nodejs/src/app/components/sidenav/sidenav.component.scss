@@ -1,27 +1,32 @@
 $widthSidebar: 200px;
+$heightMenu: 60px;
 
-md-sidenav {
+md-toolbar {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
-  width: $widthSidebar;
-  background-color: #d1ecfa;
+  height: $heightMenu;
+  width: 100%;
+  vertical-align: middle;
 
   .current {
-  	background-color: #d1fadf;
+  	border-bottom: #000000 solid;
   }
 
-  ul > li {
+  div {
     text-align: center;
-    margin: auto 0;
-    padding: 15px 0;
-    color: #202050;
+    padding: 10px 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 1.2em;
+    &:focus {
+      outline: none;
+    }
   }
 }
 
 .logo {
-  width: 100%;
   background-color: #ffffff;
   text-align: center;
 }

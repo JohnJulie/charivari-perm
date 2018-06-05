@@ -83,7 +83,8 @@ export class ValidatePermanenceComponent implements OnInit {
   }
 
   public setPermanceToCheck(permanence: PermanenceModel) {
-    if (moment(permanence.endDate).isSameOrBefore(moment())) {
+    if (moment(permanence.endDate).isSameOrBefore(moment()) ||
+      (moment(permanence.startDate).isSameOrBefore(moment()) && moment(permanence.endDate).isSameOrAfter(moment()))) {
       permanence.status = 'DONE';
       this.permanenceService.updatePermanence(permanence).subscribe(
         () => {
