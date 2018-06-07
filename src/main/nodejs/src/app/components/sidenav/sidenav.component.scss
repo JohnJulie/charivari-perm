@@ -1,27 +1,49 @@
 $widthSidebar: 200px;
+$heightMenu: 70px;
+$dark-color: #000;
 
-md-sidenav {
+md-toolbar {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
-  width: $widthSidebar;
+  height: $heightMenu;
+  width: 100%;
+  vertical-align: middle;
   background-color: #d1ecfa;
 
-  .current {
-  	background-color: #d1fadf;
+  .menu {
+  	display: flex;
+  	width: 100%;
+  	flex-direction: row;
+  	align-items: center;
+  	justify-content: center;
+  	div {
+	    text-align: center;
+	    padding: 10px 0;
+	    padding-left: 10px;
+	    padding-right: 10px;
+	    font-size: 1.2em;
+	    &:focus {
+	      outline: none;
+	    }
+	  }
   }
 
-  ul > li {
-    text-align: center;
-    margin: auto 0;
-    padding: 15px 0;
-    color: #202050;
+  .current {
+  	border-bottom: #000000 solid;
   }
+
+
 }
 
 .logo {
-  width: 100%;
-  background-color: #ffffff;
-  text-align: center;
+	margin-top: 52px;
+	.circle-img {
+	    height: 100%;
+	    width: 100%;
+	    border-radius: 50%;
+	    border: solid 2px $dark-color;
+	    color: $dark-color;
+	  }
 }

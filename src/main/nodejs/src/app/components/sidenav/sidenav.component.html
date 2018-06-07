@@ -1,14 +1,12 @@
-<md-sidenav #sidenav mode="side" position="start" opened="true">
+<md-toolbar>
   <div class="logo">
-    <img class="header-logo" src="assets/images/logo-creche.png">
+    <img class="circle-img" src="assets/images/logo-creche.png">
   </div>
   <div class="menu">
-    <ul>
-      <li [ngClass]="{'current': activateMenu === 0}" (click)="setActivateTab('permanence', 0)" [routerLink]="'/permanence'">Permanences</li>
-      <li [ngClass]="{'current': activateMenu === 1}" (click)="setActivateTab('planning', 1)" [routerLink]="'/planning'">Planning</li>
-      <li [ngClass]="{'current': activateMenu === 2}" (click)="setActivateTab('replacements', 2)" [routerLink]="'/replacements'">Remplacements</li>
-      <li [ngClass]="{'current': activateMenu === 3}" (click)="setActivateTab('counter', 3)" [routerLink]="'/counter'">Compteurs</li>
-      <li [ngClass]="{'current': activateMenu === 4}" (click)="setActivateTab('parameters', 4)" [routerLink]="'/parameters'">Paramètres</li>
-    </ul>
+	  <div [ngClass]="{'current': activateMenu === 0}" (click)="setActivateTab('permanence', 0)" [routerLink]="'/permanence'">Permanences</div>
+	  <div [ngClass]="{'current': activateMenu === 1}" (click)="setActivateTab('planning', 1)" [routerLink]="'/planning'">Planning</div>
+	  <div [ngClass]="{'current': activateMenu === 2}" (click)="setActivateTab('replacements', 2)" [routerLink]="'/replacements'">Remplacements</div>
+	  <div [ngClass]="{'current': activateMenu === 3}" (click)="setActivateTab('counter', 3)" [routerLink]="'/counter'">Compteurs</div>
+	  <div [ngClass]="{'current': activateMenu === 4}" (click)="setActivateTab('parameters', 4)" [routerLink]="'/parameters'">Paramètres</div>
   </div>
-</md-sidenav>
+</md-toolbar>

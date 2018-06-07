@@ -2,9 +2,6 @@ $widthSidebar: 200px;
 $dark-color: #000;
 
 .container {
-  padding-left: #{$widthSidebar + 25px};
-  padding-right: 25px;
-
   .title-container {
     height: 15vh;
     position: relative;
@@ -54,8 +51,7 @@ $dark-color: #000;
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  color: $dark-color;;
-  padding-top: 50px;
+  color: $dark-color;
   .actual-date {
     display: flex;
     align-items: center;

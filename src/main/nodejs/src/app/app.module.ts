@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { MatSidenavModule, MatGridListModule, MatDialogModule } from '@angular/material';
+import { MatToolbarModule, MatGridListModule, MatDialogModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -58,7 +58,7 @@ import { ParametersComponent } from './views/parameters/parameters.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    MatSidenavModule,
+    MatToolbarModule,
     MatGridListModule,
     MyDatePickerModule,
     MatDialogModule,
