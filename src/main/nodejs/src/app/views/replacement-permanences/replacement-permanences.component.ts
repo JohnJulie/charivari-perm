@@ -61,7 +61,9 @@ export class ReplacementPermanencesComponent implements OnInit {
       (replacements: Array<PermanenceModel>) => {
         this.replacements = [];
         _.each(replacements, (replacement) => {
-          replacement.originalFamilyImage = _.find(this.families, ['id', replacement.originalFamilyId]).image.url;
+          console.log('this.families:', this.families, replacement);
+          replacement.originalFamilyImage = _.find(this.families, ['id', replacement.originalFamilyId]) ?
+            _.find(this.families, ['id', replacement.originalFamilyId]).image.url : 'assets/images/personne.png';
           if (replacement.originalFamilyId !== replacement.family.id) {
             this.replacements.push(replacement);
           }
@@ -73,7 +75,8 @@ export class ReplacementPermanencesComponent implements OnInit {
 
   public searchPermanence() {
     const dateFormDatepicker = this.replacementForm.value.date;
-    const date = moment(dateFormDatepicker.formatted).format('YYYY-MM-DD');
+    const date = moment(dateFormDatepicker.formatted, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log('date:', this.replacementForm.value.date, moment(dateFormDatepicker.formatted, 'DD/MM/YYYY'), moment(dateFormDatepicker.formatted, 'DD/MM/YYYY').format());
     this.permanenceService.getPermanenceBySlot(
       date,
       this.replacementForm.value.slot
