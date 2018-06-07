@@ -32,5 +32,4 @@ public class FamilyDao extends AbstractDAO<Family>  implements com.adi3000.chari
 		
 		return families;
 	}
-	
 }

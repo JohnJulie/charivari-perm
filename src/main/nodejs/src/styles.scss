@@ -1,5 +1,5 @@
 $blue: #d1ecfa;
-$heightMenu: 60px;
+$heightMenu: 70px;
 
 /* You can add global styles to this file, and also import other style files */
 html {
@@ -63,6 +63,7 @@ table {
 }
 
 .container {
-  padding-top: #{$heightMenu + 25px};
+  padding-top: #{$heightMenu};
+  height: 100vh;
 }
 

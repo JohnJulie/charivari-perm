@@ -20,20 +20,19 @@ $dark-color: #000;
   }
 
   .validate-container {
-    height: 80vh;
+    height: 60vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    //align-items: center;
+    //justify-content: center;
     flex-direction: column;
 
     .date-container {
-      height: 20vh;
+      height: 10vh;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      color: $dark-color;;
-      padding-top: 50px;
+      color: $dark-color;
       .actual-date {
         display: flex;
         align-items: center;
@@ -55,8 +54,8 @@ $dark-color: #000;
     .family-container {
       height: 60vh;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      //align-items: center;
+      //justify-content: center;
       padding-bottom: 80px;
       > div {
         width: 100%;

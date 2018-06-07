@@ -14,79 +14,83 @@ $dark-color: #000;
 
     }
   }
-}
 
-.add-replacement {
-  height: 10vh;
-  border-top: solid #000000 2px;
-  padding: 10px;
+  .family-container {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: overlay;
+    padding: 0 20px;
+    .content {
+      height: 100%;
+    }
 
-  h2 {
-    font-size: 1.1em;
-  }
-  .datepicker {
-    width: 200px;
-  }
-  select {
-    font-size: 1.1em;
-  }
-  .select-slot {
-    top: auto;
-    bottom: 100%;
-    border: 1px solid #CCC;
-    border-radius: 4px;
-    height: 34px;
-    padding-left: 10px;
-    color: #555;
-  }
+    > div {
+      width: 100%;
+      font-weight: bold;
+      color: $dark-color;
+    }
+    .toreplace {
+      background-color: lightpink;
+    }
+    .replacement-list {
+      padding-right: 10px;
+      padding-left: 10px;
+    }
+    .title-list {
+      margin-bottom: 15px;
+    }
+    .circle-img {
+      height: 75px;
+      width: 75px;
+      border-radius: 50%;
+      border: solid 2px $dark-color;
+      color: $dark-color;;
+      padding: 10px;
+      background-color: #ffffff;
+    }
 
-  .btn-validate {
-    border-radius: 4px;
-    padding: 6px 20px;
-    background-color: #d1fadf;
-    border: solid #CCC 1px;
-    height: 34px;
-    font-size: 1.1em;
-  }
-}
-
-.family-container {
-  height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow-y: overlay;
-  .content {
-    height: 100%;
+    .legend-circle {
+      margin-top: 10px;
+      font-size: 1.5em;
+    }
   }
 
-  > div {
+  .add-replacement {
+    position: fixed;
+    left: 0;
+    bottom: 0;
     width: 100%;
-    font-weight: bold;
-    color: $dark-color;
-  }
-  .toreplace {
-    background-color: lightpink;
-  }
-  .replacement-list {
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-  .title-list {
-    margin-bottom: 15px;
-  }
-  .circle-img {
-    height: 75px;
-    width: 75px;
-    border-radius: 50%;
-    border: solid 2px $dark-color;
-    color: $dark-color;;
-    padding: 10px;
-    background-color: #ffffff;
-  }
+    border-top: solid #000000 2px;
+    padding: 20px;
 
-  .legend-circle {
-    margin-top: 10px;
-    font-size: 1.5em;
+    h2 {
+      font-size: 1.1em;
+    }
+    .datepicker {
+      width: 200px;
+    }
+    select {
+      font-size: 1.1em;
+    }
+    .select-slot {
+      top: auto;
+      bottom: 100%;
+      border: 1px solid #CCC;
+      border-radius: 4px;
+      height: 34px;
+      padding-left: 10px;
+      color: #555;
+    }
+
+    .btn-validate {
+      border-radius: 4px;
+      padding: 6px 20px;
+      background-color: #d1fadf;
+      border: solid #CCC 1px;
+      height: 34px;
+      font-size: 1.1em;
+    }
   }
 }

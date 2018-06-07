@@ -1,5 +1,5 @@
 $widthSidebar: 200px;
-$heightMenu: 60px;
+$heightMenu: 70px;
 $dark-color: #000;
 
 md-toolbar {
@@ -11,8 +11,7 @@ md-toolbar {
   width: 100%;
   vertical-align: middle;
   background-color: #d1ecfa;
-  margin-top: 20px;
-  
+
   .menu {
   	display: flex;
   	width: 100%;
@@ -35,11 +34,11 @@ md-toolbar {
   	border-bottom: #000000 solid;
   }
 
- 
+
 }
 
 .logo {
-	margin-top: 10px;
+	margin-top: 52px;
 	.circle-img {
 	    height: 100%;
 	    width: 100%;
