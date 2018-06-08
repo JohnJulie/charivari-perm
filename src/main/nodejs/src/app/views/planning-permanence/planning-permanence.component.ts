@@ -3,7 +3,7 @@ import { PermanenceService } from '../../services/permanence/permanence.service'
 import * as moment from 'moment';
 import * as _ from 'lodash';
 import { PermanenceModel } from '../../models/permanence.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-planning-permanence',
@@ -20,7 +20,8 @@ export class PlanningPermanenceComponent implements OnInit {
   public permanenceId: string;
 
   constructor(
-    private permanenceService: PermanenceService
+    private permanenceService: PermanenceService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -71,5 +72,11 @@ export class PlanningPermanenceComponent implements OnInit {
       }
     );
 
+  }
+
+  public goToPerm(perm) {
+    if (perm.status !== 'DONE') {
+      this.router.navigate(['/permanence/' + perm.id]);
+    }
   }
 }
