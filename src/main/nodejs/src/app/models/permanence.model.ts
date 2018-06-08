@@ -9,4 +9,5 @@ export interface PermanenceModel {
   status: string;
   family: FamilyModel;
   originalFamilyId: number;
+  isOpen: boolean;
 }

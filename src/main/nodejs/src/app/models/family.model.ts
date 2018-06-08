@@ -6,4 +6,6 @@ export interface FamilyModel {
   id: number;
   label: string;
   image: ImageModel;
+  startDateContract: string;
+  endDateContract: string;
 }

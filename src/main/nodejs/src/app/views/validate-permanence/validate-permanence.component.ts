@@ -1,8 +1,10 @@
+
+import {interval as observableInterval} from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { PermanenceModel } from '../../models/permanence.model';
 import { PermanenceService } from '../../services/permanence/permanence.service';
 import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/switchMap';
+
 
 import * as moment from 'moment';
 import * as _ from 'lodash';
@@ -56,7 +58,7 @@ export class ValidatePermanenceComponent implements OnInit {
     } else {
       this.permanenceId = null;
       this.getCurrentPermanence();
-      Observable.interval(5000 * 60).subscribe(
+      observableInterval(5000 * 60).subscribe(
         () => {
           this.getCurrentPermanence();
         }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PermanenceModel } from '../../models/permanence.model';
@@ -11,18 +11,18 @@ export class PermanenceService {
 
   constructor(private http: HttpClient) { }
 
-    getCurrentPermanence(): Observable<Array<PermanenceModel>> {
+    getCurrentPermanence(): Observable<PermanenceModel[]> {
       const headers = new HttpHeaders({
         'Content-type': 'application/json'
       });
-      return this.http.get(this.apiUrl + 'permanence/now', { headers: headers });
+      return this.http.get<PermanenceModel[]>(this.apiUrl + 'permanence/now', { headers: headers });
     }
 
     getPermanence(id): Observable<PermanenceModel> {
       const headers = new HttpHeaders({
         'Content-type': 'application/json'
       });
-      return this.http.get(this.apiUrl + 'permanence/' + id, { headers: headers });
+      return this.http.get<PermanenceModel>(this.apiUrl + 'permanence/' + id, { headers: headers });
     }
 
     updatePermanence(permanence) {
@@ -34,11 +34,11 @@ export class PermanenceService {
       return this.http.put(this.apiUrl + 'permanence/update', permanence, { headers: headers });
     }
 
-    getWeekPermanence(fromDate, toDate): Observable<Array<PermanenceModel>> {
+    getWeekPermanence(fromDate, toDate): Observable<PermanenceModel[]> {
       const headers = new HttpHeaders({
         'Content-type': 'application/json'
       });
-      return this.http.get(this.apiUrl + 'permanence/from/' + fromDate + '/to/' + toDate, { headers: headers });
+      return this.http.get<PermanenceModel[]>(this.apiUrl + 'permanence/from/' + fromDate + '/to/' + toDate, { headers: headers });
     }
 
     getPermanenceBySlot(date, slot) {
@@ -48,11 +48,11 @@ export class PermanenceService {
       return this.http.get(this.apiUrl + 'permanence/date/' + date + '/slot/' + slot, { headers: headers });
     }
 
-    getReplacements(): Observable<Array<PermanenceModel>> {
+    getReplacements(): Observable<PermanenceModel[]> {
       const headers = new HttpHeaders({
         'Content-type': 'application/json'
       });
-      return this.http.get(this.apiUrl + 'permanence/replacements', { headers: headers });
+      return this.http.get<PermanenceModel[]>(this.apiUrl + 'permanence/replacements', { headers: headers });
     }
 
     validateMonth(date) {

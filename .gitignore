@@ -2,6 +2,7 @@
 /bin
 /target
 /src/main/nodejs/node_modules
+/node_modules
 .classpath
 .project
 .settings/

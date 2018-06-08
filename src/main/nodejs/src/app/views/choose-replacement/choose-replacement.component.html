@@ -4,8 +4,8 @@
     <div class="actual-hours">De {{ startDate | date: 'shortTime'}} à {{ endDate | date: 'shortTime'}}</div>
   </div>
   <div class="family-container">
-    <md-grid-list class="familygrid" cols="6" rowHeight="115px">
-      <md-grid-tile
+    <mat-grid-list class="familygrid" [cols]="6" [rowHeight]="115">
+      <mat-grid-tile
         *ngFor="let grid of familiesGrid"
         [colspan]="grid.cols"
         [rowspan]="grid.rows">
@@ -15,8 +15,8 @@
           </div>
           <div class="legend-circle">{{grid.family.label}}</div>
         </div>
-      </md-grid-tile>
-    </md-grid-list>
+      </mat-grid-tile>
+    </mat-grid-list>
   </div>
 </div>
 

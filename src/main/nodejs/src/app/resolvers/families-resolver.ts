@@ -7,7 +7,7 @@ import { FamilyModel } from '../models/family.model';
 import { FamilyService } from '../services/family/family.service';
 
 @Injectable()
-export class FamiliesResolver implements Resolve<Array<FamilyModel>> {
+export class FamiliesResolver implements Resolve<FamilyModel[]> {
   constructor(private familyService: FamilyService) {
   }
   resolve() {

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { MatToolbarModule, MatGridListModule, MatDialogModule } from '@angular/material';
+import { MatToolbarModule, MatDialogModule, MatGridListModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -33,6 +33,8 @@ import { ValidatePermanenceComponent } from './views/validate-permanence/validat
  * Import Routes
  */
 import { ROUTES } from './app.routes';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
 /**
  * Import Resolvers
@@ -42,6 +44,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { CurrentStateService } from './services/shared-data/current-state.service';
 import { CounterPermanenceComponent } from './views/counter-permanence/counter-permanence.component';
 import { ParametersComponent } from './views/parameters/parameters.component';
+
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [

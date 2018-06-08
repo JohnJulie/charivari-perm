@@ -3,8 +3,8 @@
     <h2>Décompte des permanences</h2>
   </div>
   <div class="family-container" *ngIf="familyCount.length === families.length-1" (window:resize)="onResize($event)">
-    <md-grid-list class="familygrid" cols="{{colNumber}}" rowHeight="140px">
-      <md-grid-tile
+    <mat-grid-list class="familygrid" [cols]="colNumber" [rowHeight]="140">
+      <mat-grid-tile
         *ngFor="let grid of familyCount"
         [colspan]="1"
         [rowspan]="1">
@@ -15,7 +15,7 @@
           <div class="legend-circle bold">{{grid.count}}</div>
           <div class="legend-circle">{{grid.family.label}}</div>
         </div>
-      </md-grid-tile>
-    </md-grid-list>
+      </mat-grid-tile>
+    </mat-grid-list>
   </div>
 </div>

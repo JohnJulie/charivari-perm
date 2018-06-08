@@ -88,7 +88,8 @@ export class ReplacementPermanencesComponent implements OnInit {
             permToReplace.family = _.find(this.families, ['id', 31]);
             this.permanenceService.updatePermanence(permToReplace).subscribe(
               () => {
-                permToReplace.originalFamilyImage = _.find(this.families, ['id', permToReplace.originalFamilyId]).image.url;
+                permToReplace.originalFamilyImage = _.find(this.families, ['id', permToReplace.originalFamilyId]) ?
+                  _.find(this.families, ['id', permToReplace.originalFamilyId]).image.url : permToReplace.family.image.url;
                 this.replacements.push(permToReplace);
                 this.replacements = _.orderBy(this.replacements, ['startDate', 'endStart'], ['asc', 'asc']);
               }
