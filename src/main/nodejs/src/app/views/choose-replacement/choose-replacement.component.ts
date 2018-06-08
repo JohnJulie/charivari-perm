@@ -68,7 +68,6 @@ export class ChooseReplacementComponent implements OnInit {
 
   public setFamilyToPermanence(family: FamilyModel) {
     const permanence = this.permanence;
-    console.log('family:', family);
     permanence.family = family;
     permanence.status = 'REPLACEMENT';
     this.permanenceService.updatePermanence(permanence).subscribe(
