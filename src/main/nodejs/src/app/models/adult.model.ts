@@ -1,4 +1,4 @@
-import { FamilyModel } from './family.model';
+import { FamilyModel } from '../shared/models/family.model';
 
  /**
  * Created by juliepel on 19/09/2017.

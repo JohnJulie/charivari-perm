@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PermanenceModel } from '../../models/permanence.model';
-import { PermanenceService } from '../../services/permanence/permanence.service';
-import { FamilyModel } from '../../models/family.model';
+import { PermanenceModel } from '../../shared/models/permanence.model';
+import { PermanenceService } from '../../shared/services/permanence/permanence.service';
+import { FamilyModel } from '../../shared/models/family.model';
 import { ActivatedRoute } from '@angular/router';
 import { IMyDpOptions } from 'mydatepicker';
 import { MatDialog } from '@angular/material';

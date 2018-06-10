@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { PermanenceModel } from '../../models/permanence.model';
+import { PermanenceModel } from '../../shared/models/permanence.model';
 
 @Component({
   selector: 'app-dialog',

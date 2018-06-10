@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PermanenceService } from '../../services/permanence/permanence.service';
+import { PermanenceService } from '../../shared/services/permanence/permanence.service';
 
 import * as moment from 'moment';
 import * as _ from 'lodash';

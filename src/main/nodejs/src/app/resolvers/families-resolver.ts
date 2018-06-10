@@ -3,8 +3,8 @@
  */
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { FamilyModel } from '../models/family.model';
-import { FamilyService } from '../services/family/family.service';
+import { FamilyModel } from '../shared/models/family.model';
+import { FamilyService } from '../shared/services/family/family.service';
 
 @Injectable()
 export class FamiliesResolver implements Resolve<FamilyModel[]> {

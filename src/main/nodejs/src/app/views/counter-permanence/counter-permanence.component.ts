@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PermanenceService } from '../../services/permanence/permanence.service';
-import { PermanenceModel } from '../../models/permanence.model';
+import { PermanenceService } from '../../shared/services/permanence/permanence.service';
+import { PermanenceModel } from '../../shared/models/permanence.model';
 import * as moment from 'moment';
 import * as _ from 'lodash';
-import { FamilyService } from '../../services/family/family.service';
-import { FamilyModel } from '../../models/family.model';
+import { FamilyService } from '../../shared/services/family/family.service';
+import { FamilyModel } from '../../shared/models/family.model';
 import { ActivatedRoute } from '@angular/router';
 import { CurrentStateService } from '../../services/shared-data/current-state.service';
 

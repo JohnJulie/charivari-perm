@@ -1,8 +1,8 @@
 
 import {interval as observableInterval} from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { PermanenceModel } from '../../models/permanence.model';
-import { PermanenceService } from '../../services/permanence/permanence.service';
+import { PermanenceModel } from '../../shared/models/permanence.model';
+import { PermanenceService } from '../../shared/services/permanence/permanence.service';
 import { Observable } from 'rxjs/Rx';
 
 

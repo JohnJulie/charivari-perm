@@ -1,4 +1,4 @@
-import { FamilyModel } from './family.model';
+import { FamilyModel } from '../shared/models/family.model';
 
 export interface ChildModel {
   id: number;
