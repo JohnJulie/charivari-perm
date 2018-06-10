@@ -1,9 +1,9 @@
 
-  <h2 mdDialogTitle>Choisir la permanence</h2>
-  <div md-dialog-content>
-    <div class="perm-container" fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let perm of permanencesToReplace">
-      <div fxLayout="column" fxLayoutAlign="center center" (click)="closeDialog(perm)">
-        De {{perm.startDate | date: 'shortTime'}} à {{perm.endDate | date: 'shortTime'}}
+  <h2 class="title-dialog">Choisir la permanence</h2>
+  <div class="dialog-content">
+    <div class="perm-container" *ngFor="let perm of permanencesToReplace">
+      <div class="perm-infos" (click)="closeDialog(perm)">
+        De {{perm.startDate | date: 'shortTime':'':'fr'}} à {{perm.endDate | date: 'shortTime':'':'fr'}}
         <div>
           <img class="circle-img" src="{{perm.originalFamilyImage}}">
         </div>

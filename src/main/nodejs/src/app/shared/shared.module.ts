@@ -7,14 +7,20 @@ import { HttpClientModule } from '@angular/common/http';
 
 import * as fromComponents from '../shared/components';
 import * as fromServices from '../shared/services';
-import { MatGridListModule, MatToolbarModule } from '@angular/material';
+import { MatDialogModule, MatGridListModule, MatToolbarModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MyDatePickerModule } from 'mydatepicker';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
     MatToolbarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
+    FormsModule,
+    MyDatePickerModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ...fromComponents.components
@@ -25,7 +31,11 @@ import { MatGridListModule, MatToolbarModule } from '@angular/material';
   exports: [
     ...fromComponents.components,
     MatToolbarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
+    FormsModule,
+    MyDatePickerModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

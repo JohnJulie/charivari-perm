@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { PermanenceModel } from '../../shared/models/permanence.model';
-import { PermanenceService } from '../../shared/services/permanence/permanence.service';
-import { FamilyModel } from '../../shared/models/family.model';
-import { ActivatedRoute } from '@angular/router';
-import { IMyDpOptions } from 'mydatepicker';
+import { PermanenceModel } from '../../../shared/models/permanence.model';
+import { PermanenceService } from '../../../shared/services/permanence/permanence.service';
+import { FamilyModel } from '../../../shared/models/family.model';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { DialogComponent } from '../../components/dialog/dialog.component';
+import { DialogComponent } from '../../../components/dialog/dialog.component';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FamilyService } from '../../../shared/services/family/family.service';
 
 @Component({
   selector: 'app-replacement-permanences',
@@ -19,51 +18,38 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ReplacementPermanencesComponent implements OnInit {
 
   public replacements: any;
-  public families: Array<FamilyModel>;
-  public toReplaceDate: any;
-  public myDatePickerOptions: IMyDpOptions;
-  public choosePermanence: Array<any>;
-  public replacementForm: FormGroup;
+  public families: FamilyModel[];
+  public nobody: FamilyModel;
+  public choosePermanence: any[];
 
   constructor(
     private permanenceService: PermanenceService,
-    private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private familyService: FamilyService,
+    private router: Router,
     public dialog: MatDialog
   ) { }
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(
-      (data: Array<FamilyModel>) => {
-        this.families = data['families'];
-      }, error => console.log('resolve family error:', error)
+    this.getFamilies();
+  }
+
+  private getFamilies() {
+    this.familyService.getFamilies().subscribe(
+      families => {
+        this.families = families;
+        this.nobody = _.find(this.families, ['id', 31]);
+        this.getReplacements();
+      }
     );
-    this.myDatePickerOptions = {
-      // other options...
-      dateFormat: 'dd/mm/yyyy',
-      openSelectorTopOfInput: true,
-      satHighlight: true,
-      disableWeekends: true,
-      showWeekNumbers: true,
-      editableDateField: false,
-      disableUntil: {year: moment().year(), month: moment().month() + 1, day: moment().date() - 1}
-    };
-    this.replacementForm = this.fb.group({
-      date: [null, Validators.required],
-      slot: [null, Validators.required]
-    });
-    this.toReplaceDate = { date: { year: 2018, month: 10, day: 9 } };
-    this.getReplacements();
   }
 
   private getReplacements() {
     this.permanenceService.getReplacements().subscribe(
-      (replacements: Array<PermanenceModel>) => {
+      (replacements: PermanenceModel[]) => {
         this.replacements = [];
         _.each(replacements, (replacement) => {
-          console.log('this.families:', this.families, replacement);
           replacement.originalFamilyImage = _.find(this.families, ['id', replacement.originalFamilyId]) ?
-            _.find(this.families, ['id', replacement.originalFamilyId]).image.url : 'assets/images/personne.png';
+            _.find(this.families, ['id', replacement.originalFamilyId]).image.url : this.nobody.image.url;
           if (replacement.originalFamilyId !== replacement.family.id) {
             this.replacements.push(replacement);
           }
@@ -73,19 +59,20 @@ export class ReplacementPermanencesComponent implements OnInit {
     );
   }
 
-  public searchPermanence() {
-    const dateFormDatepicker = this.replacementForm.value.date;
-    const date = moment(dateFormDatepicker.formatted, 'DD/MM/YYYY').format('YYYY-MM-DD');
-    console.log('date:', this.replacementForm.value.date, moment(dateFormDatepicker.formatted, 'DD/MM/YYYY'), moment(dateFormDatepicker.formatted, 'DD/MM/YYYY').format());
+  public onUpdate(event) {
+    this.router.navigate(['replacements/' + event.id]);
+  }
+
+  public onSearch(event) {
     this.permanenceService.getPermanenceBySlot(
-      date,
-      this.replacementForm.value.slot
+      event[0],
+      event[1]
     ).subscribe(
-      (result: Array<any>) => {
+      (result: any[]) => {
         if (result.length === 1) {
           const permToReplace = result[0];
           if (!_.find(this.replacements, ['id', permToReplace.id])) {
-            permToReplace.family = _.find(this.families, ['id', 31]);
+            permToReplace.family = this.nobody;
             this.permanenceService.updatePermanence(permToReplace).subscribe(
               () => {
                 permToReplace.originalFamilyImage = _.find(this.families, ['id', permToReplace.originalFamilyId]) ?

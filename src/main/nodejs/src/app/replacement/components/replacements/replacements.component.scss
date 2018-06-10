@@ -15,15 +15,49 @@ $dark-color: #000;
     }
   }
 
+  .title-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    margin-bottom: 15px;
+    padding: 0 20px;
+    > div {
+      font-weight: bold;
+      color: $dark-color;
+    }
+  }
+
   .family-container {
-    height: 70vh;
+    height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow-y: overlay;
-    padding: 0 20px;
+    overflow-y: auto;
+
     .content {
       height: 100%;
+
+      .replacement-table {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-content: stretch;
+
+
+
+        .replacement-list {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-content: center;
+          align-items: center;
+
+          padding-right: 10px;
+          padding-left: 10px;
+        }
+      }
+
     }
 
     > div {
@@ -33,13 +67,6 @@ $dark-color: #000;
     }
     .toreplace {
       background-color: lightpink;
-    }
-    .replacement-list {
-      padding-right: 10px;
-      padding-left: 10px;
-    }
-    .title-list {
-      margin-bottom: 15px;
     }
     .circle-img {
       height: 75px;
@@ -64,6 +91,13 @@ $dark-color: #000;
     width: 100%;
     border-top: solid #000000 2px;
     padding: 20px;
+
+    .add-replacement-form {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-content: center;
+    }
 
     h2 {
       font-size: 1.1em;

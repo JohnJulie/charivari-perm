@@ -1,8 +1,33 @@
 $widthSidebar: 200px;
 $dark-color: #000;
 
-.container {
-  padding-left: #{$widthSidebar + 25px};
+.dialog-content {
+  height: 125px;
+  display: flex;
+  width: 100%;
+
+  .perm-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+
+    .perm-infos {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.title-dialog {
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 /deep/ .cdk-global-overlay-wrapper {
@@ -14,28 +39,12 @@ $dark-color: #000;
   background-color: #ffffff;
 }
 
-.mat-dialog-content {
-  height: 125px;
-  display: flex;
-  width: 100%;
-}
-
-.mat-dialog-title {
-  text-align: center;
-  font-size: 1.1em;
-  font-weight: bold;
-}
-
-.perm-container {
-  width: 100%;
-}
-
 .circle-img {
   height: 75px;
   width: 75px;
   border-radius: 50%;
   border: solid 2px $dark-color;
-  color: $dark-color;;
+  color: $dark-color;
   padding: 10px;
   background-color: #ffffff;
 }

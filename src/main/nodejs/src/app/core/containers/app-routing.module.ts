@@ -5,6 +5,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'permanence' },
   { path: 'permanence', loadChildren: '../../home/home.module#HomeModule' },
   { path: 'planning', loadChildren: '../../planning/planning.module#PlanningModule' },
+  { path: 'replacements', loadChildren: '../../replacement/replacement.module#ReplacementModule' }
 ];
 
 @NgModule({

@@ -9,7 +9,7 @@ import { PermanenceModel } from '../../shared/models/permanence.model';
 })
 export class DialogComponent implements OnInit {
 
-  public permanencesToReplace: Array<any>;
+  public permanencesToReplace: any[];
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -17,7 +17,6 @@ export class DialogComponent implements OnInit {
 
   ngOnInit() {
     this.permanencesToReplace = this.data.permanences;
-    console.log('dialog:', this.permanencesToReplace);
   }
 
   closeDialog(toReplace) {

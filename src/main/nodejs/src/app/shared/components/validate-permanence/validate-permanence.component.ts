@@ -25,7 +25,9 @@ export class ValidatePermanenceComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.havePermanence = !_.isEmpty(this.currentPermanences);
-    console.log('currentPermanences:', this.currentPermanences);
+    if (this.havePermanence) {
+      this.setDate();
+    }
   }
 
   ngOnChanges() {
