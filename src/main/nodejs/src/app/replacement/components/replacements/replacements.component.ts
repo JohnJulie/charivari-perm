@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import * as moment from 'moment';
 import { IMyDpOptions } from 'mydatepicker';
 import { PermanenceModel } from '../../../shared/models/permanence.model';
+
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-replacements',
@@ -14,7 +14,7 @@ export class ReplacementsComponent implements OnInit {
 
   @Input() replacements: any;
   @Input() choosePermanence: Array<any>;
-  @Output() search: EventEmitter<PermanenceModel> = new EventEmitter();
+  @Output() search: EventEmitter<any[]> = new EventEmitter();
   @Output() update: EventEmitter<PermanenceModel> = new EventEmitter();
 
   public myDatePickerOptions: IMyDpOptions;

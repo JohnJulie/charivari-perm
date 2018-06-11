@@ -4,23 +4,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-
-import { PlanningRoutingModule } from './planning-routing.module';
+import { CounterRoutingModule } from './counter-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
-import * as fromContainers from '../planning/containers';
+import * as fromContainers from '../counter/containers';
+import * as fromComponents from '../counter/components';
 
 @NgModule({
   imports: [
     CommonModule,
-    PlanningRoutingModule,
+    CounterRoutingModule,
     HttpClientModule,
     SharedModule
   ],
   declarations: [
-    ...fromContainers.containers
+    ...fromContainers.containers,
+    ...fromComponents.components
   ],
   providers: [
   ]
 })
-export class PlanningModule { }
+export class CounterModule { }

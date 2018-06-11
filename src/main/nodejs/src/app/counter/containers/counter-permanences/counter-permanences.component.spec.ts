@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ParametersComponent } from './parameters.component';
+import { CounterPermanencesComponent } from './counter-permanences.component';
 
-describe('ParametersComponent', () => {
-  let component: ParametersComponent;
-  let fixture: ComponentFixture<ParametersComponent>;
+describe('CounterPermanencesComponent', () => {
+  let component: CounterPermanencesComponent;
+  let fixture: ComponentFixture<CounterPermanencesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ParametersComponent ]
+      declarations: [ CounterPermanencesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ParametersComponent);
+    fixture = TestBed.createComponent(CounterPermanencesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

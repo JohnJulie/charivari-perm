@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { PermanenceService } from '../../shared/services/permanence/permanence.service';
+import { PermanenceService } from '../../../shared/services/permanence/permanence.service';
 
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-parameters',
-  templateUrl: './parameters.component.html',
-  styleUrls: ['./parameters.component.scss']
+  selector: 'app-parameters-permanences',
+  templateUrl: './parameters-permanences.component.html',
+  styleUrls: ['./parameters-permanences.component.scss']
 })
-export class ParametersComponent implements OnInit {
+export class ParametersPermanencesComponent implements OnInit {
 
   public monthToClose;
-  public selectedMonth;
 
   constructor(
     private permanenceService: PermanenceService
@@ -30,11 +29,10 @@ export class ParametersComponent implements OnInit {
     );
   }
 
-  public validateMonth() {
-    this.permanenceService.validateMonth(this.selectedMonth.format('YYYY-MM-DD')).subscribe(
+  public onCloseMonth(month) {
+    this.permanenceService.validateMonth(month.format('YYYY-MM-DD')).subscribe(
       (res) => {
-        _.remove(this.monthToClose, this.selectedMonth);
-        this.selectedMonth = null;
+        _.remove(this.monthToClose, month);
       }
     );
   }

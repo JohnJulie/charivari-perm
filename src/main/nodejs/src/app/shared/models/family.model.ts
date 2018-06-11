@@ -1,4 +1,4 @@
-import { ImageModel } from '../../models/image.model';
+import { ImageModel } from './image.model';
 /**
  * Created by juliepel on 19/09/2017.
  */

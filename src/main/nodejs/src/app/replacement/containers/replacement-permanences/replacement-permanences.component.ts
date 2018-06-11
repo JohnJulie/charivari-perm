@@ -4,7 +4,7 @@ import { PermanenceService } from '../../../shared/services/permanence/permanenc
 import { FamilyModel } from '../../../shared/models/family.model';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { DialogComponent } from '../../../components/dialog/dialog.component';
+import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';

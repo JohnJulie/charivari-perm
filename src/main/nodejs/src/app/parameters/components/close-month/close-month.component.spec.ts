@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ValidatePermanenceComponent } from './validate-permanence.component';
+import { CloseMonthComponent } from './close-month.component';
 
-describe('ValidatePermanenceComponent', () => {
-  let component: ValidatePermanenceComponent;
-  let fixture: ComponentFixture<ValidatePermanenceComponent>;
+describe('CloseMonthComponent', () => {
+  let component: CloseMonthComponent;
+  let fixture: ComponentFixture<CloseMonthComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ValidatePermanenceComponent ]
+      declarations: [ CloseMonthComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ValidatePermanenceComponent);
+    fixture = TestBed.createComponent(CloseMonthComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

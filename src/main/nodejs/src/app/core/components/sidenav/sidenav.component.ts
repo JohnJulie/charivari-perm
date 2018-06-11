@@ -8,16 +8,9 @@ import { CurrentStateService } from '../../../services/shared-data/current-state
 })
 export class SidenavComponent implements OnInit {
 
-  public activateMenu: number;
-
   constructor() { }
 
   ngOnInit() {
-    this.activateMenu = 0;
-  }
-
-  public setActivateTab (url: string, index: number) {
-    this.activateMenu = index;
   }
 
 }

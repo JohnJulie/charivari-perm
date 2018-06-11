@@ -4,23 +4,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { ParametersRoutingModule } from './parameters-routing.module';
 
-import { PlanningRoutingModule } from './planning-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
-import * as fromContainers from '../planning/containers';
+import * as fromContainers from '../parameters/containers';
+import * as fromComponents from '../parameters/components';
+
 
 @NgModule({
   imports: [
     CommonModule,
-    PlanningRoutingModule,
+    ParametersRoutingModule,
     HttpClientModule,
     SharedModule
   ],
   declarations: [
-    ...fromContainers.containers
+    ...fromContainers.containers,
+    ...fromComponents.components
   ],
   providers: [
   ]
 })
-export class PlanningModule { }
+export class ParametersModule { }

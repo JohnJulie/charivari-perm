@@ -6,7 +6,7 @@
 	  <div [routerLink]="'/permanence'" routerLinkActive="current">Permanences</div>
 	  <div [routerLink]="'/planning'" routerLinkActive="current">Planning</div>
 	  <div [routerLink]="'/replacements'" routerLinkActive="current">Remplacements</div>
-	  <div [ngClass]="{'current': activateMenu === 3}" (click)="setActivateTab('counter', 3)" [routerLink]="'/counter'">Compteurs</div>
-	  <div [ngClass]="{'current': activateMenu === 4}" (click)="setActivateTab('parameters', 4)" [routerLink]="'/parameters'">Paramètres</div>
+	  <div [routerLink]="'/counter'" routerLinkActive="current">Compteurs</div>
+	  <div [routerLink]="'/parameters'" routerLinkActive="current">Paramètres</div>
   </div>
 </mat-toolbar>

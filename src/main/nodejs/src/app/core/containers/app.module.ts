@@ -3,7 +3,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 
-import { DialogComponent } from '../../components/dialog/dialog.component';
+import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 
@@ -16,7 +16,6 @@ registerLocaleData(localeFr);
 @NgModule({
   declarations: [
     AppComponent,
-    DialogComponent,
     ...fromComponents.components
   ],
   imports: [
@@ -27,7 +26,6 @@ registerLocaleData(localeFr);
   ],
   providers: [
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [DialogComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

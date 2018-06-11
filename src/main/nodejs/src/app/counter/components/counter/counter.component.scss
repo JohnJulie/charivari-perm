@@ -63,6 +63,15 @@ $dark-color: #000;
     font-weight: bold;
     color: $dark-color;
   }
+
+  .family-count {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+  }
+
   .circle-img {
     height: 75px;
     width: 75px;

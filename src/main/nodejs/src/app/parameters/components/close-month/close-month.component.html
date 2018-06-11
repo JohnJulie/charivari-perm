@@ -2,16 +2,16 @@
   <div class="title-container">
     <h2>Gestion des permanences</h2>
   </div>
-  <div class="admin-container">
+  <div *ngIf="monthToClose" class="admin-container">
     <h3>Validation des permanences</h3>
     <div>
       <label>Choisir le mois:</label>
       <select [(ngModel)]="selectedMonth">
         <option *ngFor="let date of monthToClose" [ngValue]="date">
-          {{date | date: 'LLLL yyyy':'fr'}}
+          {{date | date: 'LLLL yyyy':'':'fr'}}
         </option>
       </select>
-      <button (click)="validateMonth()">Clôturer le mois</button>
+      <button (click)="closeMonth()">Clôturer le mois</button>
     </div>
   </div>
 </div>
