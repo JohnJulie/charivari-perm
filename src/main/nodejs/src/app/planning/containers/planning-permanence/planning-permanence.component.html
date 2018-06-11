@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="title-container">
+    <h2>Planning des permanences</h2>
+  </div>
+  <div class="replacement-container">
+    <div class="date-container" fxLayout="row" fxLayoutAlign="space-around center">
+      <button class="btn btn-now" (click)="getWeekPermanence(nowWeek)">Semaine en cours</button>
+
+      <button class="fa fa-arrow-left fa-2x btn btn-prev btn-block" (click)="getWeekPermanence(currentWeek - 1)"></button>
+      <div class="actual-date">Du {{ currentMonday }} au {{ currentSunday }}</div>
+      <button class="fa fa-arrow-right fa-2x btn btn-prev btn-block" (click)="getWeekPermanence(currentWeek + 1)"></button>
+    </div>
+    <div class="family-container">
+      <div class="slot" *ngFor="let permanence of permanences">
+        <div> {{ permanence.label }}</div>
+        <div class="day-1" *ngFor="let perm of permanence.perms">
+          <div class="day-2" *ngFor="let p of perm.families">
+            <div (click)="goToPerm(p)" class="relative">
+              <img class="circle-img" [ngClass]="(p.family.id === p.originalFamilyId) ? '' : 'replacement'" src="{{p.family.image.url}}">
+              <div class="fa fa-check fa-2x check" *ngIf="p.status === 'DONE'"></div>
+              <!--<div class="fa fa-check fa-4x" *ngIf="currentPermanence.status === 'DONE'"></div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="date-container">
+    <div class="actual-date">{{ startDate | date: 'EEEE d MMMM':'':'fr'}}</div>
+    <div class="actual-hours">De {{ startDate | date: 'shortTime':'':'fr'}} à {{ endDate | date: 'shortTime':'':'fr'}}</div>
+  </div>
+  <div *ngIf="families && nobody" class="family-container">
+    <div class="nobody" (click)="setFamilyToPermanence(nobody)">
+      <img class="circle-img" src="{{nobody.image.url}}">
+      <div class="legend-circle">{{nobody.label}}</div>
+    </div>
+    <div class="family-grid">
+      <div class="families" *ngFor="let family of families" (click)="setFamilyToPermanence(family)">
+        <img class="circle-img" src="{{family.image.url}}">
+        <div class="legend-circle">{{family.label}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

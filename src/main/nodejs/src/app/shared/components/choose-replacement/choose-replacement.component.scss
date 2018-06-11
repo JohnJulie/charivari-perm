@@ -1,0 +1,86 @@
+$widthSidebar: 200px;
+$dark-color: #000;
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.familygrid {
+  width: 100%;
+}
+
+.date-container {
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: $dark-color;
+  .actual-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+    text-align: center;
+    margin: 0 0 10px 0;
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  .actual-hours {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+}
+
+.family-container {
+  height: 60vh;
+  //display: flex;
+  //align-items: center;
+  //justify-content: center;
+  padding-bottom: 80px;
+  margin-top: 30px;
+  .nobody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .family-grid {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: start;
+
+    > * {
+      flex-basis: calc(20% - 2%);
+      margin: 10px 1% 0 1%;
+      width: 20%;
+      height: 15%;
+      text-align: center;
+    }
+  }
+  > div {
+    width: 100%;
+    font-weight: bold;
+    color: $dark-color;
+  }
+  .circle-img {
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    border: solid 3px $dark-color;
+    color: $dark-color;;
+    padding: 10px;
+  }
+
+  .legend-circle {
+    margin-top: 10px;
+    font-size: 0.8em;
+    text-align: center;
+  }
+}

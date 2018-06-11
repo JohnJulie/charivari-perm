@@ -1,0 +1,49 @@
+$widthSidebar: 200px;
+$heightMenu: 70px;
+$dark-color: #000;
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: $heightMenu;
+  width: 100%;
+  vertical-align: middle;
+  background-color: #d1ecfa;
+
+  .menu {
+  	display: flex;
+  	width: 100%;
+  	flex-direction: row;
+  	align-items: center;
+  	justify-content: center;
+  	div {
+	    text-align: center;
+	    padding: 10px 0;
+	    padding-left: 10px;
+	    padding-right: 10px;
+	    font-size: 1.2em;
+	    &:focus {
+	      outline: none;
+	    }
+	  }
+  }
+
+  .current {
+  	border-bottom: #000000 solid;
+  }
+
+
+}
+
+.logo {
+	margin-top: 52px;
+	.circle-img {
+	    height: 100%;
+	    width: 100%;
+	    border-radius: 50%;
+	    border: solid 2px $dark-color;
+	    color: $dark-color;
+	  }
+}
