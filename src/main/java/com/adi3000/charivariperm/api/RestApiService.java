@@ -15,9 +15,11 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Component;
 
+import com.adi3000.charivariperm.model.dataobject.Account;
 import com.adi3000.charivariperm.model.dataobject.Family;
 import com.adi3000.charivariperm.model.dataobject.Holidays;
 import com.adi3000.charivariperm.model.dataobject.Permanence;
+import com.adi3000.charivariperm.model.service.AccountService;
 import com.adi3000.charivariperm.model.service.FamilyService;
 import com.adi3000.charivariperm.model.service.impl.HolidaysService;
 import com.adi3000.charivariperm.model.service.impl.PermanenceService;
@@ -25,7 +27,9 @@ import com.adi3000.charivariperm.model.service.impl.PermanenceService;
 @Component
 @Path("/")
 public class RestApiService {
-	
+
+	@Inject
+	private AccountService accountService;
 	@Inject
 	private FamilyService familyService;
 	@Inject
@@ -136,6 +140,20 @@ public class RestApiService {
 	@Produces(value={MediaType.APPLICATION_JSON})
 	public List<Permanence> getPermCountByFamily(@PathParam("familyId") Long familyId){
 		return permanenceService.getPermCountByFamily(familyId);
+	}
+	
+	@POST
+	@Path("/account")
+	@Produces(value={MediaType.APPLICATION_JSON})
+	public void saveAccount(Account account){
+		accountService.saveAccount(account);
+	}
+	
+	@POST
+	@Path("/connexion")
+	@Produces(value={MediaType.APPLICATION_JSON})
+	public Account connexion(String login, String password){
+		return accountService.connectByLogin(login, password);
 	}
 	
 }
