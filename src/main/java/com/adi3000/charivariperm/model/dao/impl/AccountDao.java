@@ -28,7 +28,7 @@ public class AccountDao extends AbstractDAO<Account>  implements com.adi3000.cha
 	public Account getByLoginPassword(String login, String password) {
 		Criteria req = getSession().createCriteria(Account.class)
     			.add(
-	    				Restrictions.or(
+	    				Restrictions.and(
 							Restrictions.eq("login", login),
 							Restrictions.eq("password", password)
 	    				)

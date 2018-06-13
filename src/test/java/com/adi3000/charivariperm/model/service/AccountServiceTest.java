@@ -85,7 +85,7 @@ public class AccountServiceTest {
 		
 		System.out.println("---no account---");
 		Account noAccount = this.accountService.connectByLogin("JohnJulie", "pwdTest");
-		assertNull(noAccount);
+		assertNotEquals(account, noAccount);
 	}
 	
 	@Test

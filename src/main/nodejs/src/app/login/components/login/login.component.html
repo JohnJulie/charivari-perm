@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="title-container">
+    <h2>Connexion</h2>
+  </div>
+  <form [formGroup]="loginForm">
+    <div class="login">
+      <div class="login-field">
+        <label for="username">Identifiant</label>
+        <input id="username" type="text" name="username" formControlName="username">
+      </div>
+      <div class="login-field">
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" name="password" formControlName="password">
+      </div>
+      <small class="error" *ngIf="isLogged === false">L'identifiant ou le mot de passe est incorrect.</small>
+      <button type="submit" (click)="connexion()">Se Connecter</button>
+    </div>
+  </form>
+</div>

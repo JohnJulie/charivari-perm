@@ -100,6 +100,7 @@
 		</addColumn>
 	</changeSet>
 	<changeSet id="charivari-perm-1.0-02.5-add-is-open-column" author="juliejohn">
+	<validCheckSum>7:b295ffbbbd6c6cf9ebf0d9f8aa399297</validCheckSum>
 		<addColumn tableName="PERMANENCE">
 			<column type="boolean" name="IS_OPEN"></column>
 		</addColumn>

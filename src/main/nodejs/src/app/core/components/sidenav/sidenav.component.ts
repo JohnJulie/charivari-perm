@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrentStateService } from '../../../services/shared-data/current-state.service';
+import { Router } from '@angular/router';
+import { StorageService } from '../../../shared/services/storage/storage.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -8,9 +9,17 @@ import { CurrentStateService } from '../../../services/shared-data/current-state
 })
 export class SidenavComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private storageService: StorageService
+  ) { }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.storageService.clear();
+    this.router.navigate(['']);
   }
 
 }

@@ -19,6 +19,7 @@ import com.adi3000.charivariperm.model.dataobject.Account;
 import com.adi3000.charivariperm.model.dataobject.Family;
 import com.adi3000.charivariperm.model.dataobject.Holidays;
 import com.adi3000.charivariperm.model.dataobject.Permanence;
+import com.adi3000.charivariperm.model.dto.Authentification;
 import com.adi3000.charivariperm.model.service.AccountService;
 import com.adi3000.charivariperm.model.service.FamilyService;
 import com.adi3000.charivariperm.model.service.impl.HolidaysService;
@@ -143,17 +144,17 @@ public class RestApiService {
 	}
 	
 	@POST
-	@Path("/account")
+	@Path("account")
 	@Produces(value={MediaType.APPLICATION_JSON})
 	public void saveAccount(Account account){
 		accountService.saveAccount(account);
 	}
 	
 	@POST
-	@Path("/connexion")
+	@Path("connexion")
 	@Produces(value={MediaType.APPLICATION_JSON})
-	public Account connexion(String login, String password){
-		return accountService.connectByLogin(login, password);
+	public Account connexion(Authentification auth){
+		return accountService.connectByLogin(auth.getLogin(), auth.getPassword());
 	}
 	
 }
