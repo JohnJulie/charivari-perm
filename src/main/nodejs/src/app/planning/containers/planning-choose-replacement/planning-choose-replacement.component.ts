@@ -6,6 +6,7 @@ import { FamilyService } from '../../../shared/services/family/family.service';
 import { FamilyModel } from '../../../shared/models/family.model';
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-planning-choose-replacement',
@@ -17,6 +18,7 @@ export class PlanningChooseReplacementComponent implements OnInit {
   public families: FamilyModel[];
   public nobody: FamilyModel;
   public permanence: PermanenceModel;
+  public nobodyId = environment.nobody;
 
   constructor(
     private familyService: FamilyService,
@@ -43,8 +45,8 @@ export class PlanningChooseReplacementComponent implements OnInit {
   getFamilies() {
     this.familyService.getFamilies().subscribe(
       families => {
-        this.nobody = _.find(families, ['id', 31]);
-        this.families = _.filter(families, (family) => { return family.id !== 31; });
+        this.nobody = _.find(families, ['id', this.nobodyId]);
+        this.families = _.filter(families, (family) => { return family.id !== this.nobodyId; });
       }
     );
   }

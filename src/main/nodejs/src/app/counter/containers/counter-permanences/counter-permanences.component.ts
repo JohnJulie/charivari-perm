@@ -5,6 +5,8 @@ import { FamilyService } from '../../../shared/services/family/family.service';
 
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import { PermanenceStatus } from '../../../shared/models/permanence-status.model';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-counter-permanences',
@@ -15,6 +17,7 @@ export class CounterPermanencesComponent implements OnInit {
 
   public familyCount: any[];
   public families: FamilyModel[];
+  public nobodyId = environment.nobody;
 
   constructor(
     private permanenceService: PermanenceService,
@@ -29,7 +32,7 @@ export class CounterPermanencesComponent implements OnInit {
     this.familyService.getFamilies().subscribe(
       families => {
         this.families = _.chain(families)
-          .filter((family) => { return family.id !== 31 })
+          .filter((family) => { return family.id !== this.nobodyId })
           .orderBy(['label'], ['asc'])
           .value();
         console.log('this.families:', this.families);
@@ -37,7 +40,7 @@ export class CounterPermanencesComponent implements OnInit {
         _.each(this.families, (family) => {
           this.permanenceService.getCountPermByFamily(family.id).subscribe(
             perms => {
-              const donePerms = _.filter(perms, ['status', 'DONE']);
+              const donePerms = _.filter(perms, ['status', PermanenceStatus.done]);
               let donePermsMinutes = 0;
               _.each(donePerms, (perm) => {
                 donePermsMinutes += moment(perm.endDate).diff(moment(perm.startDate), 'minutes');
