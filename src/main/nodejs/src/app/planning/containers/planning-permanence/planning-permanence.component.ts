@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PermanenceService } from '../../../shared/services/permanence/permanence.service';
 import * as moment from 'moment';
 import * as _ from 'lodash';
-import { PermanenceModel } from '../../../shared/models/permanence.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { StorageService } from '../../../shared/services/storage/storage.service';
+import { AccountType } from '../../../shared/models/account-type.model';
+import { PermanenceStatus } from '../../../shared/models/permanence-status.model';
 
 @Component({
   selector: 'app-planning-permanence',
@@ -17,17 +19,18 @@ export class PlanningPermanenceComponent implements OnInit {
   public currentSunday: string;
   public nowWeek: number;
   public permanences: any;
-  public permanenceId: string;
+  public isAdmin: boolean;
 
   constructor(
     private permanenceService: PermanenceService,
+    private storageService: StorageService,
     private router: Router
   ) { }
 
   ngOnInit() {
-
+    this.isAdmin = this.storageService.read('cpu').type === AccountType.admin;
+    console.log('isAdmin:', this.isAdmin);
     this.nowWeek = moment().week();
-    _.each(this.permanences, perm => perm = new Array());
     this.currentWeek = this.nowWeek;
     this.getWeekPermanence(this.currentWeek);
   }
@@ -75,7 +78,7 @@ export class PlanningPermanenceComponent implements OnInit {
   }
 
   public goToPerm(perm) {
-    if (perm.status !== 'DONE') {
+    if (this.isAdmin || perm.status !== PermanenceStatus.done) {
       this.router.navigate(['/planning/' + perm.id]);
     }
   }

@@ -5,6 +5,7 @@ import { PermanenceModel } from '../../../shared/models/permanence.model';
 
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import { PermanenceStatus } from '../../../shared/models/permanence-status.model';
 
 @Component({
   selector: 'app-planning-validation',
@@ -40,10 +41,10 @@ export class PlanningValidationComponent implements OnInit {
     const permanence: PermanenceModel = event;
     if (moment(permanence.endDate).isSameOrBefore(moment()) ||
       (moment(permanence.startDate).isSameOrBefore(moment()) && moment(permanence.endDate).isSameOrAfter(moment()))) {
-      permanence.status = 'DONE';
+      permanence.status = PermanenceStatus.done;
       this.permanenceService.updatePermanence(permanence).subscribe(
         () => {
-          _.find(this.currentPermanences, ['id', permanence.id]).status = 'DONE';
+          _.find(this.currentPermanences, ['id', permanence.id]).status = PermanenceStatus.done;
           this.router.navigate(['/planning']);
         }
       );

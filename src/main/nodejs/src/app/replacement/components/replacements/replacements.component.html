@@ -12,7 +12,7 @@
   <div class="family-container">
     <div class="content">
       <div class="replacement-table">
-        <div class="replacement-list" [ngClass]="replacement.family.id == 31 ? 'toreplace' : ''" *ngFor="let replacement of replacements">
+        <div class="replacement-list" [ngClass]="replacement.family.id == nobodyId ? 'toreplace' : ''" *ngFor="let replacement of replacements">
           <div>
             <img class="circle-img" src="{{replacement.originalFamilyImage}}">
           </div>

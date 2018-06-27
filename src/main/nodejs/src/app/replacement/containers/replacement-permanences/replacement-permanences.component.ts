@@ -9,6 +9,7 @@ import { DialogComponent } from '../../../shared/components/dialog/dialog.compon
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { FamilyService } from '../../../shared/services/family/family.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-replacement-permanences',
@@ -21,6 +22,7 @@ export class ReplacementPermanencesComponent implements OnInit {
   public families: FamilyModel[];
   public nobody: FamilyModel;
   public choosePermanence: any[];
+  public nobodyId = environment.nobody;
 
   constructor(
     private permanenceService: PermanenceService,
@@ -37,7 +39,7 @@ export class ReplacementPermanencesComponent implements OnInit {
     this.familyService.getFamilies().subscribe(
       families => {
         this.families = families;
-        this.nobody = _.find(this.families, ['id', 31]);
+        this.nobody = _.find(this.families, ['id', this.nobodyId]);
         this.getReplacements();
       }
     );
@@ -94,7 +96,7 @@ export class ReplacementPermanencesComponent implements OnInit {
             (toReplace) => {
               const permToReplace = _.omit(toReplace, ['originalFamilyImage']);
               if (!_.find(this.replacements, ['id', permToReplace.id])) {
-                permToReplace.family = _.find(this.families, ['id', 31]);
+                permToReplace.family = _.find(this.families, ['id', this.nobodyId]);
                 this.permanenceService.updatePermanence(permToReplace).subscribe(
                   () => {
                     permToReplace.originalFamilyImage = _.find(this.families, ['id', permToReplace.originalFamilyId]).image.url;

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { StorageService } from '../../services/storage/storage.service';
+import { AccountType } from '../../models/account-type.model';
 
 @Component({
   selector: 'app-validate-permanence',
@@ -20,10 +22,15 @@ export class ValidatePermanenceComponent implements OnInit, OnChanges {
   public startDate: any;
   public endDate: any;
   public havePermanence: boolean;
+  public isAdmin: boolean;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private storageService: StorageService
+  ) { }
 
   ngOnInit() {
+    this.isAdmin = this.storageService.read('cpu').type === AccountType.admin;
     this.havePermanence = !_.isEmpty(this.currentPermanences);
     if (this.havePermanence) {
       this.setDate();

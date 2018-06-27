@@ -100,6 +100,7 @@
 		</addColumn>
 	</changeSet>
 	<changeSet id="charivari-perm-1.0-02.5-add-is-open-column" author="juliejohn">
+	<validCheckSum>7:b295ffbbbd6c6cf9ebf0d9f8aa399297</validCheckSum>
 		<addColumn tableName="PERMANENCE">
 			<column type="boolean" name="IS_OPEN"></column>
 		</addColumn>
@@ -122,5 +123,15 @@
 		<addColumn tableName="FAMILY">
 			<column type="date" name="END_DATE_CONTRACT"></column>
 		</addColumn>
+	</changeSet>
+	<changeSet id="charivari-perm-1.0-02.7-add-account-table" author="juliejohn">
+		<createTable tableName="ACCOUNT">
+			<column type="integer" name="ACCOUNT_ID" autoIncrement="true"></column>
+			<column type="varchar(255)" name="LOGIN"></column>
+			<column type="varchar(255)" name="MAIL"></column>
+			<column type="varchar(255)" name="PASSWORD"></column>
+			<column type="integer" name="TYPE"></column>
+		</createTable>
+		<addPrimaryKey columnNames="ACCOUNT_ID" constraintName="PK_ACCOUNT_ID" tableName="ACCOUNT" />
 	</changeSet>
 </databaseChangeLog>

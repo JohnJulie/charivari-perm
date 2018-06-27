@@ -24,7 +24,7 @@
             <!--<div class="legend-circle">{{perm.family.label}}</div>-->
           </div>
           <!--<div *ngIf="perm.status !== 'DONE'" [routerLink]="['/permanence/' + perm.id + '/replacement']" fxLayout="column" fxLayoutAlign="space-around center">-->
-          <div *ngIf="perm.status !== 'DONE'" (click)="chooseReplacement(perm)" fxLayout="column" fxLayoutAlign="space-around center">
+          <div *ngIf="isAdmin || perm.status !== 'DONE'" (click)="chooseReplacement(perm)" fxLayout="column" fxLayoutAlign="space-around center">
             <img class="circle-img" src="assets/images/remplacement.svg">
             <!--<div class="legend-circle">Remplacement</div>-->
           </div>

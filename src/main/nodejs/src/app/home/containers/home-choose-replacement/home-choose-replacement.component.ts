@@ -6,6 +6,7 @@ import { PermanenceService } from '../../../shared/services/permanence/permanenc
 import { FamilyService } from '../../../shared/services/family/family.service';
 
 import * as _ from 'lodash';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-home-choose-replacement',
@@ -17,6 +18,7 @@ export class HomeChooseReplacementComponent implements OnInit {
   public families: FamilyModel[];
   public nobody: FamilyModel;
   public permanence: PermanenceModel;
+  public nobodyId = environment.nobody;
 
   constructor(
     private familyService: FamilyService,
@@ -43,8 +45,8 @@ export class HomeChooseReplacementComponent implements OnInit {
   getFamilies() {
     this.familyService.getFamilies().subscribe(
       families => {
-        this.nobody = _.find(families, ['id', 31]);
-        this.families = _.filter(families, (family) => { return family.id !== 31; });
+        this.nobody = _.find(families, ['id', this.nobodyId]);
+        this.families = _.filter(families, (family) => { return family.id !== this.nobodyId; });
       }
     );
   }

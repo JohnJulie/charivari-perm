@@ -17,7 +17,7 @@
           <div class="day-2" *ngFor="let p of perm.families">
             <div (click)="goToPerm(p)" class="relative">
               <img class="circle-img" [ngClass]="(p.family.id === p.originalFamilyId) ? '' : 'replacement'" src="{{p.family.image.url}}">
-              <div class="fa fa-check fa-2x check" *ngIf="p.status === 'DONE'"></div>
+              <div class="fa fa-check fa-2x check" *ngIf="isAdmin || p.status === 'DONE'"></div>
               <!--<div class="fa fa-check fa-4x" *ngIf="currentPermanence.status === 'DONE'"></div>-->
             </div>
           </div>

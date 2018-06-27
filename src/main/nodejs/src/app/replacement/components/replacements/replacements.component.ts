@@ -4,6 +4,7 @@ import { IMyDpOptions } from 'mydatepicker';
 import { PermanenceModel } from '../../../shared/models/permanence.model';
 
 import * as moment from 'moment';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-replacements',
@@ -19,6 +20,7 @@ export class ReplacementsComponent implements OnInit {
 
   public myDatePickerOptions: IMyDpOptions;
   public replacementForm: FormGroup;
+  public nobodyId = environment.nobody;
 
   constructor(private fb: FormBuilder) { }
 
