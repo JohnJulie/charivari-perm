@@ -17,6 +17,6 @@ export class AccountService {
     const headers = new HttpHeaders({
       'Content-type': 'application/json'
     });
-    return this.http.post<Account>(this.apiUrl + 'connexion', authent, { headers: headers });
+    return this.http.post<Account>(this.apiUrl + '/connexion', authent, { headers: headers });
   }
 }

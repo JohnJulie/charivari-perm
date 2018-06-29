@@ -15,14 +15,14 @@ export class PermanenceService {
       const headers = new HttpHeaders({
         'Content-type': 'application/json'
       });
-      return this.http.get<PermanenceModel[]>(this.apiUrl + 'permanence/now', { headers: headers });
+      return this.http.get<PermanenceModel[]>(this.apiUrl + '/permanence/now', { headers: headers });
     }
 
     getPermanence(id): Observable<PermanenceModel> {
       const headers = new HttpHeaders({
         'Content-type': 'application/json'
       });
-      return this.http.get<PermanenceModel>(this.apiUrl + 'permanence/' + id, { headers: headers });
+      return this.http.get<PermanenceModel>(this.apiUrl + '/permanence/' + id, { headers: headers });
     }
 
     updatePermanence(permanence) {
@@ -30,29 +30,29 @@ export class PermanenceService {
         'Content-type': 'application/json'
       });
       console.log('permanence 555:', permanence);
-      console.log(this.apiUrl + 'permanence/update');
-      return this.http.put(this.apiUrl + 'permanence/update', permanence, { headers: headers });
+      console.log(this.apiUrl + '/permanence/update');
+      return this.http.put(this.apiUrl + '/permanence/update', permanence, { headers: headers });
     }
 
     getWeekPermanence(fromDate, toDate): Observable<PermanenceModel[]> {
       const headers = new HttpHeaders({
         'Content-type': 'application/json'
       });
-      return this.http.get<PermanenceModel[]>(this.apiUrl + 'permanence/from/' + fromDate + '/to/' + toDate, { headers: headers });
+      return this.http.get<PermanenceModel[]>(this.apiUrl + '/permanence/from/' + fromDate + '/to/' + toDate, { headers: headers });
     }
 
     getPermanenceBySlot(date, slot) {
       const headers = new HttpHeaders({
         'Content-type': 'application/json'
       });
-      return this.http.get(this.apiUrl + 'permanence/date/' + date + '/slot/' + slot, { headers: headers });
+      return this.http.get(this.apiUrl + '/permanence/date/' + date + '/slot/' + slot, { headers: headers });
     }
 
     getReplacements(): Observable<PermanenceModel[]> {
       const headers = new HttpHeaders({
         'Content-type': 'application/json'
       });
-      return this.http.get<PermanenceModel[]>(this.apiUrl + 'permanence/replacements', { headers: headers });
+      return this.http.get<PermanenceModel[]>(this.apiUrl + '/permanence/replacements', { headers: headers });
     }
 
     validateMonth(date) {
@@ -60,21 +60,21 @@ export class PermanenceService {
         'Content-type': 'application/json'
       });
       console.log('validateMonth:', date);
-      console.log(this.apiUrl + 'permanence/close');
-      return this.http.put(this.apiUrl + 'permanence/close', date, { headers: headers });
+      console.log(this.apiUrl + '/permanence/close');
+      return this.http.put(this.apiUrl + '/permanence/close', date, { headers: headers });
     }
 
     getMonthToValidate() {
       const headers = new HttpHeaders({
         'Content-type': 'application/json'
       });
-      return this.http.get(this.apiUrl + 'permanence/tovalidate', { headers: headers });
+      return this.http.get(this.apiUrl + '/permanence/tovalidate', { headers: headers });
     }
 
     getCountPermByFamily(familyId) {
       const headers = new HttpHeaders({
         'Content-type': 'application/json'
       });
-      return this.http.get(this.apiUrl + 'count/' + familyId, { headers: headers });
+      return this.http.get(this.apiUrl + '/count/' + familyId, { headers: headers });
 }
 }

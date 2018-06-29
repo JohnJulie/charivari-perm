@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/charivari-perm/rest/',
+  apiUrl: 'rest',
   nobody: 31
 };
