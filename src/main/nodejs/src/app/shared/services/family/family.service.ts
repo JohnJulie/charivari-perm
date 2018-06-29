@@ -15,7 +15,7 @@ export class FamilyService {
     const headers = new HttpHeaders({
       'Content-type': 'application/json'
     });
-    return this.http.get<FamilyModel[]>(this.apiUrl + 'families', { headers: headers });
+    return this.http.get<FamilyModel[]>(this.apiUrl + '/families', { headers: headers });
   }
 
 }

@@ -49,4 +49,34 @@
 		<filter-name>CorsFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+		<servlet>
+		<servlet-name>StaticServlet</servlet-name>
+		<jsp-file>/index.jsp</jsp-file>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>StaticServlet</servlet-name>
+		<url-pattern>/login/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StaticServlet</servlet-name>
+		<url-pattern>/permanence/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StaticServlet</servlet-name>
+		<url-pattern>/planning/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StaticServlet</servlet-name>
+		<url-pattern>/replacements/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StaticServlet</servlet-name>
+		<url-pattern>/counter/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StaticServlet</servlet-name>
+		<url-pattern>/parameters/*</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

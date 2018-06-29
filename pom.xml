@@ -261,8 +261,20 @@
 				</executions>
 				<configuration>
 					<nodeJsDirectory>${project.basedir}/bin/nodejs</nodeJsDirectory>
-					<nodeJsVersion>6.11.3</nodeJsVersion>
-					<npmVersion>3.10.10</npmVersion>
+					<nodeJsVersion>10.5.0</nodeJsVersion>
+					<npmVersion>6.1.0</npmVersion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>${project.basedir}/src/main/nodejs/dist</directory>
+						</resource>
+					</webResources>
 				</configuration>
 			</plugin>
 		</plugins>

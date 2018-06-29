@@ -11,3 +11,4 @@
 # e2e
 /src/main/nodejs/e2e/*.js
 /src/main/nodejs/e2e/*.map
+/src/main/nodejs/dist
