@@ -15,7 +15,7 @@
 	
 	<bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-        <property name="url" value="jdbc:postgresql://adi-server.local:7733/charivari-perm" />
+        <property name="url" value="jdbc:postgresql://adi-server:7733/charivari-perm" />
         <property name="username" value="charivari-perm" />
         <property name="password" value="charivari-perm" />
 	</bean>
