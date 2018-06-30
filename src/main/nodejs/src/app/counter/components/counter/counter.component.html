@@ -1,6 +1,6 @@
 <div class="container">
   <div class="title-container">
-    <h2>Décompte des permanences</h2>
+    <h2>D&eacute;compte des permanences</h2>
   </div>
   <div class="family-container" *ngIf="familyCount && families" (window:resize)="onResize($event)">
     <mat-grid-list class="familygrid" [cols]="colNumber" [rowHeight]="140">
@@ -10,7 +10,7 @@
         [rowspan]="1">
         <div class="family-count">
           <div>
-            <img class="circle-img" src="{{grid.family.image.url}}">
+            <img class="circle-img" src="assets/images/{{grid.family.image.url}}">
           </div>
           <div class="legend-circle bold">{{grid.count}}</div>
           <div class="legend-circle">{{grid.family.label}}</div>

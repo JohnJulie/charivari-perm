@@ -3,9 +3,9 @@
   <div class="dialog-content">
     <div class="perm-container" *ngFor="let perm of permanencesToReplace">
       <div class="perm-infos" (click)="closeDialog(perm)">
-        De {{perm.startDate | date: 'shortTime':'':'fr'}} Ã  {{perm.endDate | date: 'shortTime':'':'fr'}}
+        De {{perm.startDate | date: 'shortTime':'':'fr'}} &agrave;  {{perm.endDate | date: 'shortTime':'':'fr'}}
         <div>
-          <img class="circle-img" src="{{perm.originalFamilyImage}}">
+          <img class="circle-img" src="assets/images/{{perm.originalFamilyImage}}">
         </div>
       </div>
     </div>

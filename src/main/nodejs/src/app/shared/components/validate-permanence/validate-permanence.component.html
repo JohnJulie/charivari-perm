@@ -11,14 +11,14 @@
       <div *ngFor="let perm of currentPermanences">
         <div class="titlePerm" fxLayout="column" fxLayoutAlign="space-around center">
           <span *ngIf="perm.family.id === perm.originalFamilyId">Permanence de {{perm.family.label}}:</span>
-          <span *ngIf="perm.family.id !== perm.originalFamilyId">Remplacé par {{perm.family.label}}:</span>
-          <span class="hour"> De {{perm.startDate | date: 'shortTime':'':'fr'}} à {{perm.endDate | date: 'shortTime':'':'fr'}}</span>
+          <span *ngIf="perm.family.id !== perm.originalFamilyId">Remplac&eacute; par {{perm.family.label}}:</span>
+          <span class="hour"> De {{perm.startDate | date: 'shortTime':'':'fr'}} &agrave; {{perm.endDate | date: 'shortTime':'':'fr'}}</span>
         </div>
 
         <div class="choose" fxLayout="row" fxLayoutAlign="center center">
           <div>
             <div class="relative" (click)="checkPermanence(perm)">
-              <img class="circle-img" src="{{perm.family.image.url}}">
+              <img class="circle-img" src="assets/images/{{perm.family.image.url}}">
               <div class="fa fa-check fa-4x check" *ngIf="perm.status === 'DONE'"></div>
             </div>
             <!--<div class="legend-circle">{{perm.family.label}}</div>-->

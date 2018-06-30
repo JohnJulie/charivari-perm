@@ -1,11 +1,11 @@
 <div class="container">
   <div class="title-container">
-    <h2>Remplacements à venir</h2>
+    <h2>Remplacements &agrave; venir</h2>
   </div>
   <div class="title-list">
     <div>Perm' de</div>
     <div>Date</div>
-    <div>Créneau</div>
+    <div>Cr&eacute;neau</div>
     <div>Remplacer par</div>
     <div>Modifier</div>
   </div>
@@ -14,12 +14,12 @@
       <div class="replacement-table">
         <div class="replacement-list" [ngClass]="replacement.family.id == nobodyId ? 'toreplace' : ''" *ngFor="let replacement of replacements">
           <div>
-            <img class="circle-img" src="{{replacement.originalFamilyImage}}">
+            <img class="circle-img" src="assets/images/{{replacement.originalFamilyImage}}">
           </div>
           <div>{{ replacement.startDate | date: 'dd/MM/yyyy':'':'fr'}}</div>
-          <div>De {{replacement.startDate | date: 'shortTime':'':'fr'}} à {{replacement.endDate | date: 'shortTime':'':'fr'}}</div>
+          <div>De {{replacement.startDate | date: 'shortTime':'':'fr'}} &agrave; {{replacement.endDate | date: 'shortTime':'':'fr'}}</div>
           <div>
-            <img class="circle-img" src="{{replacement.family.image.url}}">
+            <img class="circle-img" src="assets/images/{{replacement.family.image.url}}">
           </div>
           <div class="fa fa-pencil-square-o fa-2x" (click)="updatePermanence(replacement)"></div>
         </div>
@@ -33,10 +33,10 @@
         <h2>Nouvelle demande:</h2>
         <my-date-picker name="date" [placeholder]="'Choisir une date'" class="datepicker" formControlName="date" [locale]="'fr'" [options]="myDatePickerOptions"></my-date-picker>
         <select name="slot" formControlName="slot" class="select-slot">
-          <option value=null>Choisir un créneau</option>
-          <option value="0">De 07:45 à 10:45</option>
-          <option value="1">De 10:00 à 13:00</option>
-          <option value="2">De 15:30 à 18:30</option>
+          <option value=null>Choisir un cr&eacute;neau</option>
+          <option value="0">De 07:45 &agrave; 10:45</option>
+          <option value="1">De 10:00 &agrave; 13:00</option>
+          <option value="2">De 15:30 &agrave; 18:30</option>
         </select>
         <button class="btn-validate" (click)="searchPermanence()" [disabled]="!replacementForm.valid">Valider</button>
       </div>
