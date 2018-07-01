@@ -61,17 +61,16 @@ export class PlanningPermanenceComponent implements OnInit {
             const startHour = moment(perm.startDate).format('HH:mm');
             const endHour = moment(perm.endDate).format('HH:mm');
             if (index < 5 && index >= 0 ) {
-              if (startHour === '07:45' || endHour === '10:45') {
+              if (moment(endHour, 'HH:mm').isBetween(moment('07:45', 'HH:mm'), moment('10:45', 'HH:mm'), null, '[]')) {
                 this.permanences[index].perms[0].families.push(perm);
-              } else if (startHour === '10:00' || endHour === '13:00') {
+              } else if (moment(endHour, 'HH:mm').isBetween(moment('10:00', 'HH:mm'), moment('13:00', 'HH:mm'), null, '[]')) {
                 this.permanences[index].perms[1].families.push(perm);
-              } else if (startHour === '15:30' || endHour === '18:30') {
-                this.permanences[index].perms[2].families.push(perm);
+              } else if (moment(endHour, 'HH:mm').isBetween(moment('15:30', 'HH:mm'), moment('18:30', 'HH:mm'), null, '[]')) {
+                this.permanences[index].perms[2].families.push(perm); 
               }
             }
           }
         );
-
       }
     );
 
