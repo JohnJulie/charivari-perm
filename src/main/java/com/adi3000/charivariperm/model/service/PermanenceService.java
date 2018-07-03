@@ -32,7 +32,7 @@ public interface PermanenceService {
 	
 	void generatePermanencesFamily(Long schedulingId);
 	
-	List<Permanence> getReplacement();
+	List<Permanence> getReplacement(Long nobodyId);
 	
 	void validateMonthPermanences(LocalDate date);
 	

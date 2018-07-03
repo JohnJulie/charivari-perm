@@ -46,15 +46,14 @@ export class ReplacementPermanencesComponent implements OnInit {
   }
 
   private getReplacements() {
-    this.permanenceService.getReplacements().subscribe(
+    this.permanenceService.getReplacements(this.nobodyId).subscribe(
       (replacements: PermanenceModel[]) => {
         this.replacements = [];
+        console.log('replacementss:', replacements); 
         _.each(replacements, (replacement) => {
           replacement.originalFamilyImage = _.find(this.families, ['id', replacement.originalFamilyId]) ?
             _.find(this.families, ['id', replacement.originalFamilyId]).image.url : this.nobody.image.url;
-          if (replacement.originalFamilyId !== replacement.family.id) {
-            this.replacements.push(replacement);
-          }
+          this.replacements.push(replacement);
         });
         this.replacements = _.orderBy(this.replacements, ['startDate', 'endStart'], ['asc', 'asc']);
       }

@@ -173,8 +173,8 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     }
     
     @TransactionalReadOnly
-    public List<Permanence> getReplacement() {
-    	return dao.getReplacementPermanence();
+    public List<Permanence> getReplacement(Long nobodyId) {
+    	return dao.getReplacementPermanence(nobodyId);
     }
     
     @TransactionalReadOnly

@@ -115,10 +115,10 @@ public class RestApiService {
 	}
 	
 	@GET
-	@Path("/permanence/replacements")
+	@Path("/permanence/replacements/{nobodyId}")
 	@Produces(value={MediaType.APPLICATION_JSON})
-	public List<Permanence> getPermanenceByDates(){
-		return permanenceService.getReplacement();
+	public List<Permanence> getPermanenceByDates(@PathParam("nobodyId") Long nobodyId){
+		return permanenceService.getReplacement(nobodyId);
 	}
 	
 	@PUT
