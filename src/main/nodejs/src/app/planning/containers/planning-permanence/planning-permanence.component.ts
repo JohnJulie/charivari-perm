@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { StorageService } from '../../../shared/services/storage/storage.service';
 import { AccountType } from '../../../shared/models/account-type.model';
 import { PermanenceStatus } from '../../../shared/models/permanence-status.model';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-planning-permanence',
@@ -20,6 +21,9 @@ export class PlanningPermanenceComponent implements OnInit {
   public nowWeek: number;
   public permanences: any;
   public isAdmin: boolean;
+  public nobodyId = environment.nobody;
+  public startYear = environment.startYear;
+  public endYear = environment.endYear;
 
   constructor(
     private permanenceService: PermanenceService,
@@ -29,7 +33,6 @@ export class PlanningPermanenceComponent implements OnInit {
 
   ngOnInit() {
     this.isAdmin = this.storageService.read('cpu').type === AccountType.admin;
-    console.log('isAdmin:', this.isAdmin);
     this.nowWeek = moment().week();
     this.currentWeek = this.nowWeek;
     this.getWeekPermanence(this.currentWeek);

@@ -7,5 +7,7 @@ export const environment = {
   production: false,
   apiUrl: 'rest',
   nobody: 1,
-  pros: 19
+  pros: 19,
+  startYear: '02/07/2018',
+  endYear: '29/07/2018'
 };
