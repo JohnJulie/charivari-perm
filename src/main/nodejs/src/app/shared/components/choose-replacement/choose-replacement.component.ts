@@ -14,6 +14,7 @@ export class ChooseReplacementComponent implements OnInit, OnChanges {
   @Input() families: FamilyModel[];
   @Input() permanence: PermanenceModel;
   @Input() nobody: FamilyModel;
+  @Input() pros: FamilyModel;
   @Output() update: EventEmitter<FamilyModel> = new EventEmitter();
   public startDate: any;
   public endDate: any;
@@ -23,6 +24,7 @@ export class ChooseReplacementComponent implements OnInit, OnChanges {
   ngOnInit() {
     if (this.permanence) {
       this.setDate();
+      console.log('families:', this.families, this.pros);
     }
   }
 

@@ -17,8 +17,10 @@ export class HomeChooseReplacementComponent implements OnInit {
 
   public families: FamilyModel[];
   public nobody: FamilyModel;
+  public pros: FamilyModel;
   public permanence: PermanenceModel;
   public nobodyId = environment.nobody;
+  public prosId = environment.pros;
 
   constructor(
     private familyService: FamilyService,
@@ -46,7 +48,8 @@ export class HomeChooseReplacementComponent implements OnInit {
     this.familyService.getFamilies().subscribe(
       families => {
         this.nobody = _.find(families, ['id', this.nobodyId]);
-        this.families = _.filter(families, (family) => { return family.id !== this.nobodyId; });
+        this.pros = _.find(families, ['id', this.prosId]);
+        this.families = _.filter(families, (family) => { return family.id !== (this.nobodyId && this.prosId); });
       }
     );
   }

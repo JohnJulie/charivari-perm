@@ -3,17 +3,23 @@
     <div class="actual-date">{{ startDate | date: 'EEEE d MMMM':'':'fr'}}</div>
     <div class="actual-hours">De {{ startDate | date: 'shortTime':'':'fr'}} &agrave; {{ endDate | date: 'shortTime':'':'fr'}}</div>
   </div>
-  <div *ngIf="families && nobody" class="family-container">
-    <div class="nobody" (click)="setFamilyToPermanence(nobody)">
-      <img class="circle-img" src="assets/images/{{nobody.image.url}}">
-      <div class="legend-circle">{{nobody.label}}</div>
+  <div *ngIf="families && nobody && pros" class="family-container">
+    <div class="not-family">
+      <div class="nobody" (click)="setFamilyToPermanence(nobody)">
+        <img class="circle-img" src="assets/images/{{nobody.image.url}}">
+        <div class="legend-circle">{{nobody.label}}</div>
+      </div>
+      <div class="nobody" (click)="setFamilyToPermanence(pros)">
+        <img class="circle-img" src="assets/images/{{pros.image.url}}">
+        <div class="legend-circle">{{pros.label}}</div>
+      </div>
     </div>
     <div class="family-grid">
       <div class="families" *ngFor="let family of families" (click)="setFamilyToPermanence(family)">
         <img class="circle-img" src="assets/images/{{family.image.url}}">
         <div class="legend-circle">{{family.label}}</div>
       </div>
-    </div>
+    </div> 
   </div>
 </div>
 

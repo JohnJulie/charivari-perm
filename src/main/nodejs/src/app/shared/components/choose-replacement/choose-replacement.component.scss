@@ -40,16 +40,13 @@ $dark-color: #000;
 
 .family-container {
   height: 60vh;
-  //display: flex;
-  //align-items: center;
-  //justify-content: center;
   padding-bottom: 80px;
   margin-top: 30px;
-  .nobody {
+  .not-family {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
   }
   .family-grid {
     display: flex;

@@ -18,6 +18,7 @@ export class CounterPermanencesComponent implements OnInit {
   public familyCount: any[];
   public families: FamilyModel[];
   public nobodyId = environment.nobody;
+  public prosId = environment.pros;
 
   constructor(
     private permanenceService: PermanenceService,
@@ -32,10 +33,10 @@ export class CounterPermanencesComponent implements OnInit {
     this.familyService.getFamilies().subscribe(
       families => {
         this.families = _.chain(families)
-          .filter((family) => { return family.id !== this.nobodyId })
+          .filter((family) => { return (family.id !== this.nobodyId) })
+          .filter((family) => { return (family.id !== this.prosId) })
           .orderBy(['label'], ['asc'])
           .value();
-        console.log('this.families:', this.families);
         const counterFamilies = [];
         _.each(this.families, (family) => {
           this.permanenceService.getCountPermByFamily(family.id).subscribe(

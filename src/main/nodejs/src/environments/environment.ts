@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   apiUrl: 'rest',
-  nobody: 1
+  nobody: 1,
+  pros: 19
 };
