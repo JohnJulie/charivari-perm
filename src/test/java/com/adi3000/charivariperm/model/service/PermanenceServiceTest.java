@@ -295,8 +295,8 @@ public class PermanenceServiceTest {
 		
 		permanence.setFamily(family2);
 		this.permanenceService.updatePermanence(permanence);
-		
-		List<Permanence> permanences = this.permanenceService.getReplacement();
+		Long nobodyId = (long) 1;
+		List<Permanence> permanences = this.permanenceService.getReplacement(nobodyId);
 		System.out.print("Size:");
 		System.out.println(permanences.size());
 		assertEquals(permanences.size(), 1);
