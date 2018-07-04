@@ -41,10 +41,9 @@ export class PlanningValidationComponent implements OnInit {
     const permanence: PermanenceModel = event;
     if (moment(permanence.endDate).isSameOrBefore(moment()) ||
       (moment(permanence.startDate).isSameOrBefore(moment()) && moment(permanence.endDate).isSameOrAfter(moment()))) {
-      permanence.status = PermanenceStatus.done;
       this.permanenceService.updatePermanence(permanence).subscribe(
         () => {
-          _.find(this.currentPermanences, ['id', permanence.id]).status = PermanenceStatus.done;
+          _.find(this.currentPermanences, ['id', permanence.id]).status = permanence.status;
           this.router.navigate(['/planning']);
         }
       );

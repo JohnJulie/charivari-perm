@@ -38,7 +38,6 @@ export class HomeValidationComponent implements OnInit {
     this.permanenceService.getCurrentPermanence().subscribe(
       (result: PermanenceModel[]) => {
         this.currentPermanences = result;
-        console.log('this.currentPermanences:', this.currentPermanences);
         if (!_.isEmpty(this.currentPermanences)) {
           const currentPermanences = _.orderBy(this.currentPermanences, ['startDate'], ['desc']);
           this.currentPermanence = currentPermanences[0];
@@ -51,10 +50,9 @@ export class HomeValidationComponent implements OnInit {
     const permanence: PermanenceModel = event;
     if (moment(permanence.endDate).isSameOrBefore(moment()) ||
       (moment(permanence.startDate).isSameOrBefore(moment()) && moment(permanence.endDate).isSameOrAfter(moment()))) {
-      permanence.status = PermanenceStatus.done;
       this.permanenceService.updatePermanence(permanence).subscribe(
         () => {
-          _.find(this.currentPermanences, ['id', permanence.id]).status = PermanenceStatus.done;
+          _.find(this.currentPermanences, ['id', permanence.id]).status = permanence.status;
         }
       );
     }

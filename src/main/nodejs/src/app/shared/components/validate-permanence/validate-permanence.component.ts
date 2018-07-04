@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import { StorageService } from '../../services/storage/storage.service';
 import { AccountType } from '../../models/account-type.model';
+import { PermanenceStatus } from '../../../shared/models/permanence-status.model';
 
 @Component({
   selector: 'app-validate-permanence',
@@ -50,6 +51,15 @@ export class ValidatePermanenceComponent implements OnInit, OnChanges {
   }
 
   public checkPermanence(permanence: PermanenceModel) {
+    if (this.isAdmin) {
+      if (permanence.status === PermanenceStatus.done) {
+        permanence.status = permanence.originalFamilyId === permanence.family.id ? PermanenceStatus.notConfirmed : PermanenceStatus.replacement;
+      } else {
+        permanence.status = PermanenceStatus.done;
+      }
+    } else {
+      permanence.status = PermanenceStatus.done;
+    }
     this.validate.emit(permanence);
   }
 
