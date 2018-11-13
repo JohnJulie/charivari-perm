@@ -41,7 +41,7 @@ export class CounterPermanencesComponent implements OnInit {
         _.each(this.families, (family) => {
           this.permanenceService.getCountPermByFamily(family.id).subscribe(
             perms => {
-              const donePerms = _.filter(perms, ['status', PermanenceStatus.done]);
+              const donePerms = _.filter(perms, (perm) => { return (perm.status === PermanenceStatus.done && perm.family.id === family.id)});
               let donePermsMinutes = 0;
               _.each(donePerms, (perm) => {
                 donePermsMinutes += moment(perm.endDate).diff(moment(perm.startDate), 'minutes');
