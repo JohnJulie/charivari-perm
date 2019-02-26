@@ -12,6 +12,8 @@ public interface PermanenceService {
 	
 	long savePermanence(Permanence permanence);
 	
+	long flyingPermanence(Long nobodyFamilyId, Long familyId, LocalDateTime startDate);
+	
 	List<Permanence> findAllPermanences();
 	
 	List<Permanence> findAllOpenedPermanences();

@@ -55,6 +55,19 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
 		}
         return id;
     }
+	
+	@TransactionalUpdate
+    public long flyingPermanence(Long nobodyFamilyId, Long familyId, LocalDateTime startDate) {
+		Family family = this.familyService.findById(familyId);
+		Permanence perm = new Permanence();
+		perm.setOriginalFamilyId(nobodyFamilyId);
+		perm.setFamily(family);
+		perm.setStatus(PermanenceStatus.REPLACEMENT);
+		perm.setIsOpen(true);
+		perm.setStartDate(CharivariUtil.getDateFromLocalDateTime(startDate));
+		perm.setEndDate(CharivariUtil.getDateFromLocalDateTime(startDate.plusMinutes(180)));
+		return this.savePermanence(perm);
+    }
  
 	@TransactionalReadOnly
     public List<Permanence> findAllPermanences() {

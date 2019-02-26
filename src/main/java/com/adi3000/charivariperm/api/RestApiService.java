@@ -99,6 +99,21 @@ public class RestApiService {
 	}
 	
 	@POST
+	@Path("/permanence/save")
+	@Produces(value={MediaType.APPLICATION_JSON})
+	public void savePermanence(Permanence permanence){
+		permanenceService.savePermanence(permanence);
+	}
+	
+	@POST
+	@Path("/permanence/flying/{nobodyId}/family/{familyId}/at/{fromDate}")
+	@Produces(value={MediaType.APPLICATION_JSON})
+	public void setFlyingPermanance(@PathParam("nobodyId") long nobodyId, @PathParam("familyId") long familyId, @PathParam("fromDate") String fromDate){
+		LocalDateTime startDate = LocalDateTime.parse(fromDate);
+		permanenceService.flyingPermanence(nobodyId, familyId, startDate);
+	}
+	
+	@POST
 	@Path("/holidays/from/{fromDate}/to/{toDate}")
 	@Produces(value={MediaType.APPLICATION_JSON})
 	public void saveHolidays(@PathParam("fromDate") String fromDate, @PathParam("toDate") String toDate){

@@ -41,6 +41,7 @@ public class PermanenceServiceTest {
 	@Inject
 	private transient FamilyService familyService;
 	private Family myFamilyTest;
+	private Family nobodyTest;
 	@Inject
 	private transient HolidaysService holidaysService;
 	private Holidays winterHolidays;
@@ -84,6 +85,16 @@ public class PermanenceServiceTest {
 		this.myFamilyTest.setEndDateContract(CharivariUtil.getDateFromLocalDateTime(endtDateContract));
 		this.myFamilyTest.setId(this.familyService.saveFamily(this.myFamilyTest));
 		System.out.print(this.myFamilyTest.getId());
+		
+		this.nobodyTest = new Family();
+		this.nobodyTest.setLabel("Personne");
+		this.nobodyTest.setImage(this.myImageTest);
+		LocalDateTime startDateContract2 = LocalDate.of(2018, 8, 29).atTime(7, 45);
+		this.nobodyTest.setStartDateContract(CharivariUtil.getDateFromLocalDateTime(startDateContract2));
+		LocalDateTime endtDateContract2 = LocalDate.of(2019, 6, 1).atTime(18, 30);
+		this.nobodyTest.setEndDateContract(CharivariUtil.getDateFromLocalDateTime(endtDateContract2));
+		this.nobodyTest.setId(this.familyService.saveFamily(this.nobodyTest));
+		System.out.print(this.nobodyTest.getId());
 		
 		this.myPermanenceTest = new Permanence();
 		this.myPermanenceTest.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 8, 29).atTime(7, 45)));
@@ -162,6 +173,18 @@ public class PermanenceServiceTest {
 		permanence.setStatus(PermanenceStatus.DONE);
 		
 		long idPerm = this.permanenceService.savePermanence(permanence);
+		assertNotNull(idPerm);
+	}
+	
+	@Test
+	public void testFlyingPermanence() {
+		System.out.println("---testFlyingPermanence---");
+		
+		long idPerm = this.permanenceService.flyingPermanence(
+				this.nobodyTest.getId(),
+				this.myFamilyTest.getId(),
+				LocalDate.of(2019, 2, 22).atTime(15, 30)
+		);
 		assertNotNull(idPerm);
 	}
 	
