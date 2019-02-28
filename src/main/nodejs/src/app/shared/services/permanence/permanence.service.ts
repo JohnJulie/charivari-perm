@@ -53,6 +53,13 @@ export class PermanenceService {
     return this.http.get<PermanenceModel[]>(this.apiUrl + '/permanence/replacements/' + nobodyId, { headers: headers });
   }
 
+  setFlyingPerm(nobodyId, familyId, startDate) {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json'
+    });
+    return this.http.post(this.apiUrl + '/permanence/flying/' + nobodyId + '/family/' + familyId + '/at/' + startDate, { headers: headers });
+  }
+
   validateMonth(date) {
     const headers = new HttpHeaders({
       'Content-type': 'application/json'

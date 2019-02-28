@@ -21,6 +21,7 @@ export class PlanningChooseReplacementComponent implements OnInit {
   public permanence: PermanenceModel;
   public nobodyId = environment.nobody;
   public prosId = environment.pros;
+  public isFlyingPerm = false;
 
   constructor(
     private familyService: FamilyService,
@@ -36,12 +37,29 @@ export class PlanningChooseReplacementComponent implements OnInit {
 
   getPermanence() {
      const permanenceId = this.activatedRoute.snapshot.paramMap.get('id');
+     const permanenceDate = this.activatedRoute.snapshot.paramMap.get('date');
 
-    this.permanenceService.getPermanence(permanenceId).subscribe(
-      result => {
-        this.permanence = result;
-      }
-    );
+    if (permanenceId) {
+      this.permanenceService.getPermanence(permanenceId).subscribe(
+        result => {
+          this.permanence = result;
+          console.log('this.permanence:', this.permanence);
+        }
+      );
+    }
+
+    if (permanenceDate) {
+      this.isFlyingPerm = true;
+      this.permanence = {
+        id: 0,
+        originalFamilyId: this.nobodyId,
+        startDate: permanenceDate,
+        endDate: moment(Number(permanenceDate)).add(3, 'hours').valueOf().toString(),
+        status: 'NOT_CONFIRMED',
+        family: null,
+        isOpen: true
+      };
+    }
   }
 
   getFamilies() {
@@ -57,11 +75,19 @@ export class PlanningChooseReplacementComponent implements OnInit {
   onChooseReplacement(family: FamilyModel) {
     const permanence = this.permanence;
     permanence.family = family;
-    permanence.status = 'REPLACEMENT';
-    this.permanenceService.updatePermanence(permanence).subscribe(
-      //todo: if perm
-      () => this.router.navigate(['/planning'])
-    );
+    if (!this.isFlyingPerm) {
+      permanence.status = 'REPLACEMENT';
+      this.permanenceService.updatePermanence(permanence).subscribe(
+        //todo: if perm
+        () => this.router.navigate(['/planning'])
+      );
+    } else {
+      this.permanenceService.setFlyingPerm(this.nobodyId, family.id, this.permanence.startDate).subscribe(
+        //todo: if perm
+        () => this.router.navigate(['/planning'])
+      );
+    }
+    
   }
 
 }

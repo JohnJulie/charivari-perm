@@ -32,10 +32,10 @@ export class PlanningPermanenceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    moment.locale('fr');
     this.isAdmin = this.storageService.read('cpu').type === AccountType.admin;
-    this.nowWeek = moment().week();
-    this.currentWeek = this.nowWeek;
-    this.getWeekPermanence(this.currentWeek);
+    this.nowWeek = moment().isoWeek();
+    this.getWeekPermanence(this.nowWeek);
   }
 
   public reinitPermanences() {
@@ -51,10 +51,11 @@ export class PlanningPermanenceComponent implements OnInit {
   public getWeekPermanence(whichWeek) {
     this.reinitPermanences();
     this.currentWeek = whichWeek;
-    const startDate = moment().weeks(whichWeek).weekday(1).format('YYYY-MM-DD');
-    this.currentMonday = moment().weeks(whichWeek).weekday(1).format('DD/MM/YYYY');
-    const endDate = moment().weeks(whichWeek).weekday(7).format('YYYY-MM-DD');
-    this.currentSunday = moment().weeks(whichWeek).weekday(7).format('DD/MM/YYYY');
+    const startDate = moment().weeks(whichWeek).weekday(0).format('YYYY-MM-DD');
+    this.currentMonday = moment().weeks(whichWeek).weekday(0).format('DD/MM/YYYY');
+    const endDate = moment().weeks(whichWeek).weekday(4).format('YYYY-MM-DD');
+    this.currentSunday = moment().weeks(whichWeek).weekday(4).format('DD/MM/YYYY');
+    
     this.permanenceService.getWeekPermanence(startDate, endDate).subscribe(
       (result) => {
         console.log('result:', result);
@@ -83,5 +84,9 @@ export class PlanningPermanenceComponent implements OnInit {
     if (this.isAdmin || perm.status !== PermanenceStatus.done) {
       this.router.navigate(['/planning/' + perm.id]);
     }
+  }
+
+  public goToFlyingPerm(perm) {
+  	this.router.navigate(['/planning/' + perm.families[0].startDate +  '/flying-perm']);
   }
 }

@@ -119,6 +119,10 @@ $dark-color: #000;
     &.replacement {
       border: none;
     }
+    &.flying-perm {
+      border: dashed 2px $dark-color;
+      padding-top: 15px;
+    }
   }
 
 

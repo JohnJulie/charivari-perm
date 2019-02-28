@@ -1,7 +1,9 @@
 package com.adi3000.charivariperm.api;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -109,7 +111,8 @@ public class RestApiService {
 	@Path("/permanence/flying/{nobodyId}/family/{familyId}/at/{fromDate}")
 	@Produces(value={MediaType.APPLICATION_JSON})
 	public void setFlyingPermanance(@PathParam("nobodyId") long nobodyId, @PathParam("familyId") long familyId, @PathParam("fromDate") String fromDate){
-		LocalDateTime startDate = LocalDateTime.parse(fromDate);
+		Instant instant = Instant.ofEpochMilli(Long.parseLong(fromDate));
+	    LocalDateTime startDate = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
 		permanenceService.flyingPermanence(nobodyId, familyId, startDate);
 	}
 	

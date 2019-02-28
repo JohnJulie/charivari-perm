@@ -16,6 +16,7 @@ export class ChooseReplacementComponent implements OnInit, OnChanges {
   @Input() nobody: FamilyModel;
   @Input() pros: FamilyModel;
   @Output() update: EventEmitter<FamilyModel> = new EventEmitter();
+  public day: string;
   public startDate: any;
   public endDate: any;
 
@@ -24,7 +25,6 @@ export class ChooseReplacementComponent implements OnInit, OnChanges {
   ngOnInit() {
     if (this.permanence) {
       this.setDate();
-      console.log('families:', this.families, this.pros);
     }
   }
 
@@ -35,6 +35,8 @@ export class ChooseReplacementComponent implements OnInit, OnChanges {
   }
 
   public setDate() {
+    moment.locale('fr');
+    this.day = this.permanence.startDate ? moment(_.toString(this.permanence.startDate), 'x').format('dddd D MMMM') : '';
     this.startDate = moment(_.toString(this.permanence.startDate), 'x');
     this.endDate = moment(_.toString(this.permanence.endDate), 'x');
   }

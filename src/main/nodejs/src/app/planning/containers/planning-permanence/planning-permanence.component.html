@@ -21,6 +21,11 @@
               <!--<div class="fa fa-check fa-4x" *ngIf="currentPermanence.status === 'DONE'"></div>-->
             </div> 
           </div>
+          <div *ngIf="perm.families.length === 1">
+            <div (click)="goToFlyingPerm(perm)" class="relative">
+              <i class="fa fa-plus fa-4x circle-img flying-perm"></i>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -20,6 +20,7 @@ export class ValidatePermanenceComponent implements OnInit, OnChanges {
   @Output() validate: EventEmitter<PermanenceModel> = new EventEmitter();
   @Output() replace: EventEmitter<PermanenceModel> = new EventEmitter();
 
+  public day: string;
   public startDate: any;
   public endDate: any;
   public havePermanence: boolean;
@@ -46,6 +47,8 @@ export class ValidatePermanenceComponent implements OnInit, OnChanges {
   }
 
   public setDate() {
+    moment.locale('fr');
+    this.day = this.currentPermanences[0].startDate ? moment(_.toString(this.currentPermanences[0].startDate), 'x').format('dddd D MMMM') : '';
     this.startDate = moment(_.toString(this.currentPermanences[0].startDate), 'x');
     this.endDate = moment(_.toString(this.currentPermanences[0].endDate), 'x');
   }

@@ -10,7 +10,8 @@ import { PlanningChooseReplacementComponent } from './containers/planning-choose
 const routes: Routes = [
   { path: '', component: PlanningPermanenceComponent },
   { path: ':id', component: PlanningValidationComponent },
-  { path: ':id/replacement', component: PlanningChooseReplacementComponent }
+  { path: ':id/replacement', component: PlanningChooseReplacementComponent },
+  { path: ':date/flying-perm', component: PlanningChooseReplacementComponent }
 ];
 
 @NgModule({
