@@ -126,6 +126,21 @@ public class PermanenceDao extends AbstractDAO<Permanence>  implements com.adi30
 		return permanences;
     }
     
+    public List<Permanence> getNoValidatePermanence() {
+    	Date now = CharivariUtil.getDateFromLocalDateTime(LocalDateTime.now());
+    	Criteria req = getSession().createCriteria(Permanence.class)
+    			.add(
+    					Restrictions.and(
+    							Restrictions.ne("status", PermanenceStatus.DONE),
+    							Restrictions.le("endDate", now)
+    	    				)
+    				);
+    	@SuppressWarnings("unchecked")
+		List<Permanence> permanences = (List<Permanence>)req.list();
+		
+		return permanences;
+    }
+    
     public List<Permanence> getOpenedPermanences() {
     	Criteria req = getSession().createCriteria(Permanence.class)
     			.add(

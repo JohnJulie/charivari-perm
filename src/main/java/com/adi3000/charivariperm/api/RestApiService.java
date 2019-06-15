@@ -139,6 +139,13 @@ public class RestApiService {
 		return permanenceService.getReplacement(nobodyId);
 	}
 	
+	@GET
+	@Path("/permanence/notvalidate")
+	@Produces(value={MediaType.APPLICATION_JSON})
+	public List<Permanence> getPermanenceNotValidate(){
+		return permanenceService.getNoValidatePermanence();
+	}
+	
 	@PUT
 	@Path("/permanence/close")
 	@Produces(value= {MediaType.APPLICATION_JSON})

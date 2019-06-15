@@ -24,6 +24,8 @@ public interface PermanenceDao extends DAO<Permanence> {
 	
 	public List<Permanence> getReplacementPermanence(Long nobodyId);
 	
+	public List<Permanence> getNoValidatePermanence();
+	
 	public List<Permanence> getPermanenceBySlot(Date startDate, Date endDate);
 	
 	public List<Permanence> getOpenedPermanences();

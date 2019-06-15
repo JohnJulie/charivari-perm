@@ -189,6 +189,11 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     public List<Permanence> getReplacement(Long nobodyId) {
     	return dao.getReplacementPermanence(nobodyId);
     }
+
+    @TransactionalReadOnly
+    public List<Permanence> getNoValidatePermanence() {
+    	return dao.getNoValidatePermanence();
+    }
     
     @TransactionalReadOnly
     public List<Permanence> getPermanenceToReplace(LocalDate dateToReplace, String slot) {

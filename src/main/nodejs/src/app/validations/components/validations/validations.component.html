@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="title-container">
+    <h2>Permanences &agrave; valider</h2>
+  </div>
+  <div class="title-list">
+    <div>Perm' de</div>
+    <div>Date</div>
+    <div>Cr&eacute;neau</div>
+  </div>
+  <div class="family-container">
+    <div class="content">
+      <div class="replacement-table">
+        <div class="replacement-list" *ngFor="let permanence of permanences" (click)="updatePermanence(permanence)">
+          <div class="family-detail">
+            <img [ngClass]="permanence.family.id == nobodyId ? 'circle-img-replacement' : 'circle-img'" src="assets/images/{{permanence.originalFamilyImage}}">
+          </div>
+          <div>{{permanence.startDate | date: 'dd/MM/yyyy':'':'fr'}}</div>
+          <div>De {{permanence.startDate | date: 'shortTime':'':'fr'}} &agrave; {{permanence.endDate | date: 'shortTime':'':'fr'}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

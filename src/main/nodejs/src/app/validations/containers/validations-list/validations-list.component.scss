@@ -1,0 +1,124 @@
+$widthSidebar: 200px;
+$dark-color: #000;
+
+.container {
+  .title-container {
+    height: 15vh;
+    position: relative;
+    h2 {
+      position: absolute;
+      top: 50%; left: 50%; /* à 50%/50% du parent référent */
+      transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+      font-size: 1.5em;
+      font-weight: bold;
+
+    }
+  }
+
+  .family-container {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: overlay;
+    padding: 0 20px;
+
+    .content {
+      height: 100%;
+
+      .replacement-table {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-content: stretch;
+
+        .title-list {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-content: center;
+          margin-bottom: 15px;
+        }
+
+        .replacement-list {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-content: center;
+          align-items: center;
+
+          padding-right: 10px;
+          padding-left: 10px;
+        }
+      }
+
+    }
+
+    > div {
+      width: 100%;
+      font-weight: bold;
+      color: $dark-color;
+    }
+    .toreplace {
+      background-color: lightpink;
+    }
+    .circle-img {
+      height: 75px;
+      width: 75px;
+      border-radius: 50%;
+      border: solid 2px $dark-color;
+      color: $dark-color;;
+      padding: 10px;
+      background-color: #ffffff;
+    }
+
+    .legend-circle {
+      margin-top: 10px;
+      font-size: 1.5em;
+    }
+  }
+
+  .add-replacement {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: solid #000000 2px;
+    padding: 20px;
+
+    .add-replacement-form {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-content: center;
+    }
+
+    h2 {
+      font-size: 1.1em;
+    }
+    .datepicker {
+      width: 200px;
+    }
+    select {
+      font-size: 1.1em;
+    }
+    .select-slot {
+      top: auto;
+      bottom: 100%;
+      border: 1px solid #CCC;
+      border-radius: 4px;
+      height: 34px;
+      padding-left: 10px;
+      color: #555;
+    }
+
+    .btn-validate {
+      border-radius: 4px;
+      padding: 6px 20px;
+      background-color: #d1fadf;
+      border: solid #CCC 1px;
+      height: 34px;
+      font-size: 1.1em;
+    }
+  }
+}

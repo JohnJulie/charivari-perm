@@ -1,0 +1,6 @@
+<app-validate-permanence
+  [currentPermanences]="currentPermanences"
+  [showCurrentButton]="false"
+  (validate)="onCheckPermanence($event)"
+  (replace)="onChooseReplacement($event)"
+></app-validate-permanence>

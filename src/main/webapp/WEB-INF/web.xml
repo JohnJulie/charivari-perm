@@ -72,6 +72,10 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>StaticServlet</servlet-name>
+		<url-pattern>/validations/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StaticServlet</servlet-name>
 		<url-pattern>/counter/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>

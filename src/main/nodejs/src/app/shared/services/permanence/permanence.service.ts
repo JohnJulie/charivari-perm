@@ -53,6 +53,13 @@ export class PermanenceService {
     return this.http.get<PermanenceModel[]>(this.apiUrl + '/permanence/replacements/' + nobodyId, { headers: headers });
   }
 
+  getValidations(): Observable<PermanenceModel[]> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json'
+    });
+    return this.http.get<PermanenceModel[]>(this.apiUrl + '/permanence/notvalidate', { headers: headers });
+  }
+
   setFlyingPerm(nobodyId, familyId, startDate) {
     const headers = new HttpHeaders({
       'Content-type': 'application/json'

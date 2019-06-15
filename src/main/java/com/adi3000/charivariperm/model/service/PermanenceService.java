@@ -36,6 +36,8 @@ public interface PermanenceService {
 	
 	List<Permanence> getReplacement(Long nobodyId);
 	
+	List<Permanence> getNoValidatePermanence();
+	
 	void validateMonthPermanences(LocalDate date);
 	
 	List<LocalDate> getNotClosedPermanences();
