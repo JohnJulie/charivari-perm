@@ -13,6 +13,10 @@
         <div class="replacement-list" *ngFor="let permanence of permanences" (click)="updatePermanence(permanence)">
           <div class="family-detail">
             <img [ngClass]="permanence.family.id == nobodyId ? 'circle-img-replacement' : 'circle-img'" src="assets/images/{{permanence.originalFamilyImage}}">
+            <div *ngIf="permanence.family.id !== permanence.originalFamilyId" class="circle-replacement">
+              <div class="fa fa-arrow-right"></div>
+              <img [ngClass]="permanence.family.id == nobodyId ? 'circle-img-replacement' : 'circle-img'" src="assets/images/{{permanence.family.image.url}}">
+            </div>
           </div>
           <div>{{permanence.startDate | date: 'dd/MM/yyyy':'':'fr'}}</div>
           <div>De {{permanence.startDate | date: 'shortTime':'':'fr'}} &agrave; {{permanence.endDate | date: 'shortTime':'':'fr'}}</div>

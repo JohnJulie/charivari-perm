@@ -30,7 +30,7 @@ export class ValidationsListComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { console.log('a');
     this.getFamilies();
   }
 
@@ -39,6 +39,7 @@ export class ValidationsListComponent implements OnInit {
       families => {
         this.families = families;
         this.nobody = _.find(this.families, ['id', this.nobodyId]);
+        console.log('plop');
         this.getPermanenceToValidate();
       }
     );
@@ -48,7 +49,11 @@ export class ValidationsListComponent implements OnInit {
     this.permanenceService.getValidations().subscribe(
       (permanences: PermanenceModel[]) => {
         this.permanencesToValidate = [];
+        console.log('permes:', permanences);
         _.each(permanences, (permanence) => {
+          if (permanence.family.id === 26) {
+            console.log('romy:', permanence);
+          }
           permanence.originalFamilyImage = _.find(this.families, ['id', permanence.originalFamilyId]) ?
             _.find(this.families, ['id', permanence.originalFamilyId]).image.url : this.nobody.image.url;
           this.permanencesToValidate.push(permanence);
