@@ -2,12 +2,13 @@ package com.adi3000.charivariperm.model.dao.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.springframework.stereotype.Repository;
 
 import com.adi3000.charivariperm.model.dataobject.Family;
@@ -15,6 +16,8 @@ import com.adi3000.charivariperm.model.dataobject.Permanence;
 import com.adi3000.charivariperm.model.enumeration.PermanenceStatus;
 import com.adi3000.common.CharivariUtil;
 import com.adi3000.common.orm.dao.AbstractDAO;
+
+import static sun.security.krb5.Confounder.intValue;
 
 @Repository("permanenceDao")
 public class PermanenceDao extends AbstractDAO<Permanence>  implements com.adi3000.charivariperm.model.dao.PermanenceDao {
@@ -153,7 +156,21 @@ public class PermanenceDao extends AbstractDAO<Permanence>  implements com.adi30
 		
 		return permanences;
     }
-    
+
+    public Permanence getLastPermanencesByFamily(Family family) {
+		Criteria req = getSession().createCriteria(Permanence.class)
+			.add(Restrictions.and(
+						Restrictions.eq("family.id", family.getId()),
+						Restrictions.eq("status", PermanenceStatus.NOT_CONFIRMED),
+						Restrictions.ge("startDate", family.getStartDateContract())
+					)
+			)
+			.addOrder(Order.desc("startDate")).setMaxResults(1);
+
+		Permanence permanence = (Permanence)req.uniqueResult();
+		return permanence;
+	}
+
     public List<Permanence> getPermanencesByFamily(Family family) {
     	Date now = CharivariUtil.getDateFromLocalDateTime(LocalDateTime.now());
     	Criteria req = getSession().createCriteria(Permanence.class)
@@ -178,5 +195,30 @@ public class PermanenceDao extends AbstractDAO<Permanence>  implements com.adi30
 		List<Permanence> permanences = (List<Permanence>)req.list();
 		
 		return permanences;
-    }	
+    }
+
+
+    public Integer countPermanences(Family family, LocalDateTime since, LocalDateTime to, PermanenceStatus status){
+		Date sinceDate = CharivariUtil.getDateFromLocalDateTime(since);
+		Date toDate = CharivariUtil.getDateFromLocalDateTime(to);
+
+		List<Criterion> restrictions = new ArrayList<>();
+		restrictions.add(Restrictions.eq("family.id", family.getId()));
+		if(status != null){
+			restrictions.add(Restrictions.eq("status", status));
+		}
+		if(sinceDate != null){
+			restrictions.add(Restrictions.eq("startDate", sinceDate));
+		}
+		if(to != null){
+			restrictions.add(Restrictions.eq("startDate", to));
+		}
+
+		Criteria req = getSession().createCriteria(Permanence.class)
+				.add(Restrictions.disjunction()
+						.add(Restrictions.and(restrictions.toArray(new Criterion[restrictions.size()])))
+				);
+
+		return ((Number)(req.setProjection(Projections.rowCount()).uniqueResult())).intValue();
+	}
 }

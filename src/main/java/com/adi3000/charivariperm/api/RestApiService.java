@@ -5,16 +5,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+import com.adi3000.charivariperm.model.enumeration.PermanenceStatus;
 import org.springframework.stereotype.Component;
 
 import com.adi3000.charivariperm.model.dataobject.Account;
@@ -93,29 +90,63 @@ public class RestApiService {
 		permanenceService.updatePermanence(permanence);
 	}
 	
-	@GET
-	@Path("/holidays")
-	@Produces(value={MediaType.APPLICATION_JSON})
-	public List<Holidays> getHolidays(){
-		return holidaysService.findAllHolidays();
-	}
-	
+
 	@POST
 	@Path("/permanence/save")
 	@Produces(value={MediaType.APPLICATION_JSON})
 	public void savePermanence(Permanence permanence){
 		permanenceService.savePermanence(permanence);
 	}
-	
-	@POST
-	@Path("/permanence/flying/{nobodyId}/family/{familyId}/at/{fromDate}")
+
+	@GET
+	@Path("/permanence/replacements/{nobodyId}")
 	@Produces(value={MediaType.APPLICATION_JSON})
-	public void setFlyingPermanance(@PathParam("nobodyId") long nobodyId, @PathParam("familyId") long familyId, @PathParam("fromDate") String fromDate){
-		Instant instant = Instant.ofEpochMilli(Long.parseLong(fromDate));
-	    LocalDateTime startDate = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
-		permanenceService.flyingPermanence(nobodyId, familyId, startDate);
+	public List<Permanence> getPermanenceByDates(@PathParam("nobodyId") Long nobodyId){
+		return permanenceService.getReplacement(nobodyId);
 	}
-	
+
+	@GET
+	@Path("/permanence/notvalidate")
+	@Produces(value={MediaType.APPLICATION_JSON})
+	public List<Permanence> getPermanenceNotValidate(){
+		return permanenceService.getNoValidatePermanence();
+	}
+
+	@PUT
+	@Path("/permanence/close")
+	@Produces(value= {MediaType.APPLICATION_JSON})
+	public void closePermanences(String date) {
+		LocalDate startDate = LocalDate.parse(date);
+		permanenceService.validateMonthPermanences(startDate);
+	}
+	@GET
+	@Path("/permanence/{family}/count")
+	@Produces(value= {MediaType.APPLICATION_JSON})
+	public void countPermanences(@PathParam("family") Long familyId,
+								 @QueryParam("since") String since,
+								 @QueryParam("to") String to,
+								 @QueryParam("status")PermanenceStatus status) {
+		LocalDateTime sinceDate = since != null ? LocalDateTime.parse(since) : null;
+		LocalDateTime toDate = to != null ? LocalDateTime.parse(to) : null;
+		permanenceService.countPermanences(familyId, sinceDate, toDate, status);
+	}
+
+	@GET
+	@Path("permanence/tovalidate")
+	@Produces(value= {MediaType.APPLICATION_JSON})
+	public List<LocalDate> getMonthToValidate() {
+		return permanenceService.getNotClosedPermanences();
+	}
+
+
+
+	@GET
+	@Path("/holidays")
+	@Produces(value={MediaType.APPLICATION_JSON})
+	public List<Holidays> getHolidays(){
+		return holidaysService.findAllHolidays();
+	}
+
 	@POST
 	@Path("/holidays/from/{fromDate}/to/{toDate}")
 	@Produces(value={MediaType.APPLICATION_JSON})
@@ -124,43 +155,14 @@ public class RestApiService {
 		LocalDateTime endDate = LocalDate.parse(toDate).atTime(23, 59, 59);
 		holidaysService.generateHolidaysFromDates(startDate, endDate);
 	}
-	
+
 	@POST
 	@Path("/permanence/generate/{schedulingId}")
 	@Produces(value={MediaType.APPLICATION_JSON})
 	public void generatePermanenceByScheduling(@PathParam("schedulingId") Long schedulingId){
 		permanenceService.generatePermanencesFamily(schedulingId);
 	}
-	
-	@GET
-	@Path("/permanence/replacements/{nobodyId}")
-	@Produces(value={MediaType.APPLICATION_JSON})
-	public List<Permanence> getPermanenceByDates(@PathParam("nobodyId") Long nobodyId){
-		return permanenceService.getReplacement(nobodyId);
-	}
-	
-	@GET
-	@Path("/permanence/notvalidate")
-	@Produces(value={MediaType.APPLICATION_JSON})
-	public List<Permanence> getPermanenceNotValidate(){
-		return permanenceService.getNoValidatePermanence();
-	}
-	
-	@PUT
-	@Path("/permanence/close")
-	@Produces(value= {MediaType.APPLICATION_JSON})
-	public void closePermanences(String date) {
-		LocalDate startDate = LocalDate.parse(date);
-		permanenceService.validateMonthPermanences(startDate);
-	}
-	
-	@GET
-	@Path("permanence/tovalidate")
-	@Produces(value= {MediaType.APPLICATION_JSON})
-	public List<LocalDate> getMonthToValidate() {
-		return permanenceService.getNotClosedPermanences();
-	}
-	
+
 	@GET
 	@Path("count/{familyId}")
 	@Produces(value={MediaType.APPLICATION_JSON})

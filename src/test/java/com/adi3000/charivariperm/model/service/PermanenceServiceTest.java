@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -353,5 +354,36 @@ public class PermanenceServiceTest {
 		Permanence permanenceToTest = this.permanenceService.findById(permanenceId);
 		
 		assertEquals(permanenceToTest.getIsOpen(), false);
+	}
+
+	@Test
+	public void testCreateAdditionalPermanence(){
+		Family family2 = new Family();
+		family2.setLabel("Elea, Blandine, Amir");
+		family2.setStartDateContract(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 1, 1).atTime(10, 00)));
+		family2.setEndDateContract(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2018, 1, 1).atTime(10, 00)));
+		family2.setId(familyService.saveFamily(family2));
+		family2.setImage(this.myImageTest);
+
+
+		Scheduling scheduling = new Scheduling();
+		scheduling.setFamily(family2);
+		scheduling.setFrequency(7);
+		scheduling.setStartHour(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2017, 1, 1).atTime(10, 00)));
+		scheduling.setDuration(180);
+		schedulingService.saveScheduling(scheduling);
+
+
+		Permanence permanence = new Permanence();
+		permanence.setStartDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2018, 1, 12).atTime(10, 00)));
+		permanence.setEndDate(CharivariUtil.getDateFromLocalDateTime(LocalDate.of(2018, 1, 12).atTime(13, 00)));
+		permanence.setFamily(family2);
+		permanence.setOriginalFamilyId(family2.getId());
+		permanence.setStatus(PermanenceStatus.NOT_CONFIRMED);
+		permanence.setIsOpen(true);
+		this.permanenceService.savePermanence(permanence);
+
+		permanenceService.createAdditionalPermanence(family2);
+
 	}
 }

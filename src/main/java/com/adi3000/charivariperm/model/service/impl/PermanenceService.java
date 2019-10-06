@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
+import com.adi3000.charivariperm.model.dao.impl.FamilyDao;
 import org.springframework.format.datetime.joda.LocalDateParser;
 import org.springframework.stereotype.Service;
 
@@ -131,6 +132,7 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
     	Family family = this.familyService.findById(scheduling.getFamily().getId());
     	LocalDateTime endPermanence = CharivariUtil.getLocalDateTimeFromDate(family.getEndDateContract());
     	LocalDateTime lastDate = CharivariUtil.getLocalDateTimeFromDate(scheduling.getStartHour());
+    	//FIXME use generatePermanence instead of this loop
     	while (endPermanence.isAfter(lastDate)) {
     		boolean onHolidays = false;
     		for(Holidays holiday : holidays ) {
@@ -225,11 +227,73 @@ public class PermanenceService implements com.adi3000.charivariperm.model.servic
 			updatePermanence(permanence);
 		}
     }
-    
-    @TransactionalReadOnly
+
+
+    @TransactionalUpdate
+	public void createAdditionalPermanence(Family family){
+		Permanence permanence = dao.getLastPermanencesByFamily(family);
+		Scheduling scheduling = schedulingService.findByFamily(family);
+		LocalDateTime lastPermanenceDate = CharivariUtil.getLocalDateTimeFromDate(permanence.getStartDate());
+		LocalDateTime endOfContract = CharivariUtil.getLocalDateTimeFromDate(family.getEndDateContract());
+
+		Permanence additionalPermanence = generatePermanence(family, scheduling, lastPermanenceDate);
+		if(lastPermanenceDate.isAfter(endOfContract)){
+			additionalPermanence.setStatus(PermanenceStatus.OVERDUE);
+		}
+		try {
+			dao.save(additionalPermanence);
+		} catch (DAOException e) {
+			//TODO Auto-generate code
+			e.printStackTrace();
+		}
+	}
+
+
+	@TransactionalUpdate
+	public void deleteLastPermanence(Family family){
+		Permanence permanence = dao.getLastPermanencesByFamily(family);
+		try {
+			dao.delete(permanence);
+		} catch (DAOException e) {
+			//TODO Auto-generate code
+			e.printStackTrace();
+		}
+	}
+
+	@TransactionalReadOnly
+	public Integer countPermanences(Long familyId, LocalDateTime since, LocalDateTime to, PermanenceStatus status){
+		Family family = familyService.findById(familyId);
+		return dao.countPermanences(family, since, to, status);
+	}
+
+
+	@TransactionalReadOnly
     public List<Permanence> getPermCountByFamily(Long familyId) {
     	Family family = this.familyService.findById(familyId);
     	return dao.getPermanencesByFamily(family);
     }
+
+
+    private Permanence generatePermanence(Family family, Scheduling scheduling, LocalDateTime lastPermanenceDate){
+			boolean onHolidays = false;
+			List<Holidays> holidays = this.holidaysService.findAllHolidays();
+			LocalDateTime nextPermanenceDate = lastPermanenceDate.plusDays(scheduling.getFrequency());
+			LocalDateTime startHoliday = null;
+			LocalDateTime endHoliday = null;
+			Permanence perm = new Permanence();
+			perm.setFamily(family);
+			perm.setStatus(PermanenceStatus.NOT_CONFIRMED);
+			perm.setIsOpen(true);
+			for(Holidays holiday : holidays ) {
+				startHoliday = CharivariUtil.getLocalDateTimeFromDate(holiday.getStartDate());
+				endHoliday = CharivariUtil.getLocalDateTimeFromDate(holiday.getEndDate());
+				while (nextPermanenceDate.isAfter(startHoliday) && nextPermanenceDate.isBefore(endHoliday)) {
+					nextPermanenceDate = nextPermanenceDate.plusDays(scheduling.getFrequency());
+				}
+			}
+			perm.setStartDate(CharivariUtil.getDateFromLocalDateTime(nextPermanenceDate));
+			perm.setEndDate(CharivariUtil.getDateFromLocalDateTime(nextPermanenceDate.plusMinutes(scheduling.getDuration())));
+			return perm;
+	}
     
 }

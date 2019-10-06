@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.adi3000.charivariperm.model.dataobject.Family;
 import org.springframework.stereotype.Service;
 
 import com.adi3000.charivariperm.model.dao.impl.SchedulingDao;
@@ -68,4 +69,10 @@ public class SchedulingService implements com.adi3000.charivariperm.model.servic
 			e.printStackTrace();
 		}
     }
+
+    @TransactionalReadOnly
+    public Scheduling findByFamily(Family family){
+	    return dao.findByFamily(family);
+    }
+
 }
