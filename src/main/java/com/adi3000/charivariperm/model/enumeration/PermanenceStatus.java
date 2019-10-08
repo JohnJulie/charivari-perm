@@ -5,7 +5,9 @@ public enum PermanenceStatus {
 	REPLACEMENT(1, "Remplacement"),
 	CANCEL(2, "Pas de remplacement"),
 	NOT_CONFIRMED(3, "A confirmer"),
-	HELP(4, "Demande de remplacement");
+	HELP(4, "Demande de remplacement"),
+	IMPROVISED(5, "Improvisee"),
+	OVERDUE(6, "Depassement");
 	
 	private final int num;
 	private final String label;

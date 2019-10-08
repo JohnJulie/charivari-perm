@@ -13,3 +13,4 @@
 /src/main/nodejs/e2e/*.map
 /src/main/nodejs/dist
 /.metadata/
+*.iml
